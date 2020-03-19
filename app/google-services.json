@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "754409799929",
+    "firebase_url": "https://doodhbhandaar-vendor-b301f.firebaseio.com",
+    "project_id": "doodhbhandaar-vendor-b301f",
+    "storage_bucket": "doodhbhandaar-vendor-b301f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754409799929:android:7992fda316a0fbaa9de228",
+        "android_client_info": {
+          "package_name": "com.doodhbhandaarvendor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "754409799929-ppke6tqk63iq0gk4jdrqkiulemc7ohss.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.doodhbhandaarvendor",
+            "certificate_hash": "14f4cf5e8df6120630cfcb43acd56b741f9b0aaf"
+          }
+        },
+        {
+          "client_id": "754409799929-ngmojkr8l7bv6449apl3vuvv7799hboj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMUlR_ESzfv6c3H10cjgyGnWomCk8KQ3M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "754409799929-ngmojkr8l7bv6449apl3vuvv7799hboj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
