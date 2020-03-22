@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2873f0"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:padding="4dp"
+            android:src="@drawable/db"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="User Name"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="email Id"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:text="Mobile No"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/edit"
+            android:layout_gravity="end"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
+
+            />
+
+    </LinearLayout>
+
+</FrameLayout>

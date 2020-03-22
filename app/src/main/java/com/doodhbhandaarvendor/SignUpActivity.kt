@@ -18,11 +18,21 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
         auth = FirebaseAuth.getInstance()
 
+        supportActionBar?.hide()
+
         btn_SignUp.setOnClickListener {
             signUpUser()
         }
+        txt_SignIn.setOnClickListener {
+            signInUser()
+        }
 
+    }
 
+    private fun signInUser() {
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private fun signUpUser() {

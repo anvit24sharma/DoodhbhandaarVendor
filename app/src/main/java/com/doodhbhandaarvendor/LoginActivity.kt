@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Patterns
 
 import android.widget.Toast
+import com.doodhbhandaarvendor.Constants.Companion.PRODUCTS_TABLE
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -18,6 +19,8 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.et_password
 
@@ -30,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
 
         var currentUser :FirebaseUser? =null
         private lateinit var auth: FirebaseAuth
-
+        lateinit var productsDR :DatabaseReference
     }
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
@@ -42,12 +45,19 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         auth = FirebaseAuth.getInstance()
 
+        productsDR = FirebaseDatabase.getInstance().getReference(PRODUCTS_TABLE)
+
+        supportActionBar?.hide()
+
         txt_SignUp.setOnClickListener {
             startActivity((Intent(this, SignUpActivity::class.java)))
             finish()
         }
         btn_login.setOnClickListener {
             validate()
+        }
+        txt_forgot_password.setOnClickListener {
+            forgotPassword()
         }
 
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -61,6 +71,13 @@ class LoginActivity : AppCompatActivity() {
         btn_google_signIn.setOnClickListener {
             signInGoogle()
         }
+    }
+
+    private fun forgotPassword() {
+
+        startActivity(Intent(this, ForgotPasswordActivity::class.java))
+        finish()
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     //Google signin.
