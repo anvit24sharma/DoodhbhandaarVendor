@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000">
+    <LinearLayout
+        android:id="@+id/ll_orderNo"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#F8F7FD"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/txt_orderNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="4dp"
+            android:text="ORDER NO:"
+            android:textAllCaps="true"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/orderNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="4dp"
+            android:text="ORDER NO:"
+            android:textColor="#000000"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/orderDetails"
+            android:gravity="end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="4dp"
+            android:text="Order Details"
+            android:textStyle="bold"
+            android:padding="4dp"
+            android:layout_marginEnd="5dp"
+            android:textColor="#4A235A"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_below="@+id/ll_orderNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#ffffff"
+        android:padding="6dp">
+
+        <ImageView
+            android:id="@+id/img_product"
+            android:layout_width="120dp"
+            android:layout_height="140dp"
+            android:layout_margin="6dp"
+            android:src="@drawable/db" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_productName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="15dp"
+                android:text="Product Name"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/rs"
+                    android:layout_marginTop="10dp"
+                    />
+            <TextView
+                android:id="@+id/tv_totalPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="10dp"
+                android:text="Price"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:text="|"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"/>-->
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="|Qty:"
+                android:textSize="16sp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="10dp"/>
+                <TextView
+                    android:id="@+id/tv_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textSize="16sp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_productStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Status"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="10dp"
+                    android:text="("
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+
+                <TextView
+                    android:id="@+id/tv_productStatusDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date"
+                    android:textSize="16sp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="10dp"/>
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="date"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:layout_marginStart="2dp"-->
+<!--                    android:layout_marginTop="10dp"/>-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text=","-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:layout_marginStart="2dp"-->
+<!--                    android:layout_marginTop="10dp"/>-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="year"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:layout_marginStart="2dp"-->
+<!--                    android:layout_marginTop="10dp"/>-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=")"
+                    android:textSize="16sp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
