@@ -1,4 +1,4 @@
-package com.doodhbhandaarvendor
+package com.doodhbhandaarvendor.auth
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.util.Patterns
 
 import android.widget.Toast
-import com.doodhbhandaarvendor.Constants.Companion.PRODUCTS_TABLE
+import com.doodhbhandaarvendor.utils.Constants.Companion.PRODUCTS_TABLE
+import com.doodhbhandaarvendor.R
+import com.doodhbhandaarvendor.ui.MainActivity
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -27,7 +29,8 @@ import kotlinx.android.synthetic.main.activity_login.et_password
 class LoginActivity : AppCompatActivity() {
 
     companion object {
-        fun getLaunchIntent(from:Context)=Intent(from,MainActivity::class.java).apply {
+        fun getLaunchIntent(from:Context)=Intent(from,
+            MainActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         }
 
@@ -122,7 +125,7 @@ class LoginActivity : AppCompatActivity() {
 
     public override fun onStart() {
         super.onStart()
-        currentUser= auth.currentUser
+        currentUser = auth.currentUser
         updateUI(currentUser)
     }
 
@@ -131,7 +134,11 @@ class LoginActivity : AppCompatActivity() {
         if (currentUser != null) {
             //if email is verified
             if (currentUser.isEmailVerified) {
-                startActivity(getLaunchIntent(this))
+                startActivity(
+                    getLaunchIntent(
+                        this
+                    )
+                )
                 finish()
             }
             else {
@@ -165,7 +172,11 @@ class LoginActivity : AppCompatActivity() {
 
         auth.signInWithCredential(credential).addOnCompleteListener {
             if(it.isSuccessful) {
-                this.startActivity (getLaunchIntent(this))
+                this.startActivity (
+                    getLaunchIntent(
+                        this
+                    )
+                )
             } else {
                 Toast.makeText(this,"Google sign in failed" + it.exception.toString(),Toast.LENGTH_LONG).show()
             }

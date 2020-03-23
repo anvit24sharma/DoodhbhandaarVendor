@@ -13,19 +13,19 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ProfileActivity"/>
-        <activity android:name=".OrderPlacedActivity" />
-        <activity android:name=".CartActivity" />
-        <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".ui.OrderPlacedActivity" />
+        <activity android:name=".ui.CartActivity" />
+        <activity android:name=".auth.ResetPasswordActivity" />
+        <activity android:name=".auth.ForgotPasswordActivity" />
+        <activity android:name=".auth.SignUpActivity" />
+        <activity android:name=".auth.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".ui.MainActivity" />
     </application>
 
 </manifest>

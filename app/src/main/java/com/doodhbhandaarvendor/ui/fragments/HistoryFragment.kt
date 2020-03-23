@@ -1,7 +1,5 @@
-package com.doodhbhandaarvendor
+package com.doodhbhandaarvendor.ui.fragments
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.doodhbhandaarvendor.adapter.HistoryAdapter
+import com.doodhbhandaarvendor.model.HistoryModel
+import com.doodhbhandaarvendor.R
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -27,11 +28,15 @@ class HistoryFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         historyAdapter = history.let {
-            HistoryAdapter(context, it, object : HistoryAdapter.OnItemClickListener {
-                override fun onItemClick(position: Int, view: View) {
+            HistoryAdapter(
+                context,
+                it,
+                object :
+                    HistoryAdapter.OnItemClickListener {
+                    override fun onItemClick(position: Int, view: View) {
 
-                }
-            })
+                    }
+                })
         }
         rv_product.apply {
             adapter = historyAdapter

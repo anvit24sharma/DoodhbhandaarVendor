@@ -1,4 +1,4 @@
-package com.doodhbhandaarvendor
+package com.doodhbhandaarvendor.adapter
 
 
 import androidx.fragment.app.Fragment

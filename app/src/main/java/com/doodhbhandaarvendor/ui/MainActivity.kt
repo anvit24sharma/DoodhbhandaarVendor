@@ -1,13 +1,20 @@
-package com.doodhbhandaarvendor
+package com.doodhbhandaarvendor.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import androidx.viewpager.widget.ViewPager
+import com.doodhbhandaarvendor.R
+import com.doodhbhandaarvendor.adapter.ViewPagerAdapter
+import com.doodhbhandaarvendor.ui.fragments.HistoryFragment
+import com.doodhbhandaarvendor.ui.fragments.HomeFragment
+import com.doodhbhandaarvendor.ui.fragments.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,11 +23,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        supportActionBar?.hide()
-
 
         menu_bottom.get(0).isSelected =true
-
         menu_bottom.setOnItemSelectedListener {  
             when (it) {
                 R.id.home -> viewpager.currentItem = 0
@@ -53,6 +57,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = ViewPagerAdapter(supportFragmentManager)
         val homeFragment = HomeFragment()
@@ -62,6 +67,19 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = adapter
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.view_cart -> {
+                startActivity(Intent(this,CartActivity::class.java))
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }
 

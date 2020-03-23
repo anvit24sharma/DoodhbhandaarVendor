@@ -1,4 +1,4 @@
-package com.doodhbhandaarvendor
+package com.doodhbhandaarvendor.utils
 
 class Constants{
     companion object{

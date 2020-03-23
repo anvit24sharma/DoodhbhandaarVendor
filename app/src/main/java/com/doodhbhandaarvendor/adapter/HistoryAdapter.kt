@@ -1,15 +1,16 @@
-package com.doodhbhandaarvendor
+package com.doodhbhandaarvendor.adapter
 
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.doodhbhandaarvendor.R
+import com.doodhbhandaarvendor.model.HistoryModel
 
 
-@Suppress("UNCHECKED_CAST")
 class HistoryAdapter(
     private var mContext: Context?,
     private var product: ArrayList<HistoryModel>,
@@ -37,7 +38,7 @@ class HistoryAdapter(
         private val imgProduct = itemView.findViewById<TextView>(R.id.img_product)
         private val tvProductName = itemView.findViewById<TextView>(R.id.tv_productName)
         private val tvTotalPrice = itemView.findViewById<TextView>(R.id.tv_totalPrice)
-        private val tvTotalQuantity = itemView.findViewById<TextView>(R.id.tv_totalQuantity)
+        //private val tvTotalQuantity = itemView.findViewById<TextView>(R.id.tv_totalQuantity)
         private val tvProductStatus = itemView.findViewById<TextView>(R.id.tv_productStatus)
         private val tvProductStatusDate = itemView.findViewById<TextView>(R.id.tv_productStatusDate)
 
