@@ -14,6 +14,7 @@ import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.adapter.ProductAdapter
 import com.doodhbhandaarvendor.auth.LoginActivity.Companion.productsDR
 import com.doodhbhandaarvendor.model.ProductModel
+import com.doodhbhandaarvendor.model.VariantModel
 import com.doodhbhandaarvendor.ui.CartActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -96,9 +97,9 @@ class HomeFragment : Fragment() {
 
                 productList.clear()
                 for (snap in snapShot.children){
-                    val variantsList = ArrayList<String>()
+                    val variantsList = ArrayList<VariantModel>()
                     snap.child("variants").children.forEach {
-                        variantsList.add(it.getValue().toString())
+                        variantsList.add(VariantModel(it.value.toString(),0))
                     }
                    val productModel = ProductModel(
                        snap.child("product_name").getValue().toString(),

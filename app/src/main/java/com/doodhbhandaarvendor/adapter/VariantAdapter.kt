@@ -5,14 +5,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.doodhbhandaarvendor.R
+import com.doodhbhandaarvendor.model.VariantModel
 
 
 class VariantAdapter(
     private var mContext: Context?,
-    private var variants: ArrayList<String>,
+    private var variants: ArrayList<VariantModel>,
     private var mListener: OnItemClickListener
 ) : RecyclerView.Adapter<VariantAdapter.ViewHolder>() {
 
@@ -32,23 +34,28 @@ class VariantAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-
         private val tvVariantName= itemView.findViewById<TextView>(R.id.tv_half_kg)
+        private val ibAdd= itemView.findViewById<ImageButton>(R.id.ib_add)
+        private val ibRemove= itemView.findViewById<ImageButton>(R.id.ib_remove)
+        private val tvQty= itemView.findViewById<TextView>(R.id.tv_qty)
+
+        fun setData(variant: VariantModel, position: Int) {
+            tvVariantName.text = variant.variantName
+            tvQty.text = variant.qty.toString()
 
 
+            ibAdd.setOnClickListener {
+                mListener.onAddClick(position,it)
+            }
 
-        fun setData(variantName: String, position: Int) {
-            tvVariantName.text = variantName
-
-
+            ibRemove.setOnClickListener {
+                mListener.onSubtractClick(position,it)
+            }
         }
-
-
-
-
     }
     interface OnItemClickListener {
         fun onAddClick(position: Int, view: View)
+        fun onSubtractClick(position: Int, view: View)
     }
 
 }
