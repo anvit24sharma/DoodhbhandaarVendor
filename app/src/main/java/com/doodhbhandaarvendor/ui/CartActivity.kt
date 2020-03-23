@@ -24,16 +24,17 @@ class CartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
 
-
-
-        btn_place_order.setOnClickListener {
-            startActivity(Intent(this, OrderPlacedActivity::class.java))
+        btn_confirm_order.setOnClickListener {
+            val intent =Intent(this,OrderPlacedActivity::class.java)
+            //intent.putExtra("CartList", cartProductList)
+            //intent.putExtra("TotalCost", totalOrderCost.value.toString())
+            startActivity(intent)
         }
         totalOrderCost.value = 0.0
         initRecyclerView()
 
         totalOrderCost.observe( this, Observer {
-            btn_place_order.text = getString(R.string.place_order, it.toString())
+            btn_confirm_order.text = getString(R.string.confirm_order, it.toString())
         })
     }
 

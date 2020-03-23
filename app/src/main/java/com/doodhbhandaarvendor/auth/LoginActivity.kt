@@ -2,29 +2,22 @@ package com.doodhbhandaarvendor.auth
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
-
 import android.widget.Toast
-import com.doodhbhandaarvendor.utils.Constants.Companion.PRODUCTS_TABLE
+import androidx.appcompat.app.AppCompatActivity
 import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.ui.MainActivity
-
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.et_password
 
 class LoginActivity : AppCompatActivity() {
 
@@ -36,7 +29,8 @@ class LoginActivity : AppCompatActivity() {
 
         var currentUser :FirebaseUser? =null
         private lateinit var auth: FirebaseAuth
-        lateinit var productsDR :DatabaseReference
+
+
     }
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
@@ -47,8 +41,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         auth = FirebaseAuth.getInstance()
-
-        productsDR = FirebaseDatabase.getInstance().getReference(PRODUCTS_TABLE)
 
         supportActionBar?.hide()
 

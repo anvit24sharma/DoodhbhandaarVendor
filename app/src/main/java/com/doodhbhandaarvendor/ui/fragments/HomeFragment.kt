@@ -12,13 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.adapter.ProductAdapter
-import com.doodhbhandaarvendor.auth.LoginActivity.Companion.productsDR
 import com.doodhbhandaarvendor.model.ProductModel
 import com.doodhbhandaarvendor.model.VariantModel
 import com.doodhbhandaarvendor.ui.CartActivity
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
+import com.doodhbhandaarvendor.utils.Constants
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -29,6 +27,9 @@ class HomeFragment : Fragment() {
     companion object {
         val productList = ArrayList<ProductModel>()
         val cartProductList = ArrayList<ProductModel>()
+
+        lateinit var productsDR : DatabaseReference
+        lateinit var orderDR : DatabaseReference
     }
 
     override fun onCreateView(
@@ -41,6 +42,10 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        productsDR = FirebaseDatabase.getInstance().getReference(Constants.PRODUCTS_TABLE)
+        orderDR = FirebaseDatabase.getInstance().getReference(Constants.ORDER_TABLE)
+
         getProducts()
         initRecyclerView()
         initClicks()
