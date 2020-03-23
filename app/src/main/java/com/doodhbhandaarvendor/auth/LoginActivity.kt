@@ -2,12 +2,14 @@ package com.doodhbhandaarvendor.auth
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.ui.MainActivity
+import com.doodhbhandaarvendor.utils.Constants
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -17,6 +19,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -29,8 +32,8 @@ class LoginActivity : AppCompatActivity() {
 
         var currentUser :FirebaseUser? =null
         private lateinit var auth: FirebaseAuth
-
-
+        lateinit var usersDR :DatabaseReference
+        lateinit var prefs :SharedPreferences
     }
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
@@ -42,6 +45,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         auth = FirebaseAuth.getInstance()
 
+        prefs = getSharedPreferences("Db Vendor", Context.MODE_PRIVATE)
+        usersDR = FirebaseDatabase.getInstance().getReference("Users")
         supportActionBar?.hide()
 
         txt_SignUp.setOnClickListener {
@@ -164,11 +169,31 @@ class LoginActivity : AppCompatActivity() {
 
         auth.signInWithCredential(credential).addOnCompleteListener {
             if(it.isSuccessful) {
-                this.startActivity (
-                    getLaunchIntent(
-                        this
-                    )
-                )
+                val user: FirebaseUser? = auth.currentUser
+                usersDR.addValueEventListener(object :ValueEventListener{
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+
+                    override fun onDataChange(datasnapShot: DataSnapshot) {
+                        if(datasnapShot.child(user?.uid!!).exists()){
+                            val editor = prefs.edit()
+                            editor.putString(Constants.NAME,datasnapShot.child(user.uid).child("name").getValue().toString())
+                            editor.putString(Constants.PHONE_NUMBER,datasnapShot.child(user.uid).child("phone_number").getValue().toString())
+                            editor.putString(Constants.EMAIL,datasnapShot.child(user.uid).child("email").getValue().toString())
+                            editor.putString(Constants.ADDRESS,datasnapShot.child(user.uid).child("address").getValue().toString())
+                            editor.putString(Constants.USER_ID,user.uid)
+                            editor.apply()
+                            startActivity(Intent(applicationContext, MainActivity::class.java))
+                            finish()
+                        }
+                        else {
+                            //start user Details Activity
+                        }
+                    }
+
+                })
+
             } else {
                 Toast.makeText(this,"Google sign in failed" + it.exception.toString(),Toast.LENGTH_LONG).show()
             }

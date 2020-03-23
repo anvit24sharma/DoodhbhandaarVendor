@@ -1,12 +1,21 @@
 package com.doodhbhandaarvendor.auth
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.doodhbhandaarvendor.R
+import com.doodhbhandaarvendor.auth.LoginActivity.Companion.prefs
+import com.doodhbhandaarvendor.auth.LoginActivity.Companion.usersDR
+import com.doodhbhandaarvendor.model.UserModel
 import com.doodhbhandaarvendor.ui.MainActivity
+import com.doodhbhandaarvendor.utils.Constants.Companion.ADDRESS
+import com.doodhbhandaarvendor.utils.Constants.Companion.EMAIL
+import com.doodhbhandaarvendor.utils.Constants.Companion.NAME
+import com.doodhbhandaarvendor.utils.Constants.Companion.PHONE_NUMBER
+import com.doodhbhandaarvendor.utils.Constants.Companion.USER_ID
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -37,37 +46,47 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun signUpUser() {
-        //email is empty
         if (et_email.text.toString().isEmpty()) {
             et_email.error = "Please enter email"
             et_email.requestFocus()
             return
         }
-        //enteremail is not valid
         if (!Patterns.EMAIL_ADDRESS.matcher(et_email.text.toString()).matches()) {
             et_email.error = "Please enter valid email"
             et_email.requestFocus()
             return
         }
-        //if password is empty
         if (et_password.text.toString().isEmpty()) {
             et_password.error = "Please enter password"
             et_password.requestFocus()
             return
         }
-        //if no error then register the user
         auth.createUserWithEmailAndPassword(et_email.text.toString(), et_password.text.toString())
             .addOnCompleteListener { task ->
-                //if user is created
                 if (task.isSuccessful) {
-                    //check that email is verified
                     val user: FirebaseUser? = auth.currentUser
-                    user?.sendEmailVerification()
-                        ?.addOnCompleteListener { task ->
-                            //sign up activity to main activity
-                            startActivity(Intent(this, MainActivity::class.java))
-                            finish()
-                        }
+                            val userId = user?.uid
+                            val userModel = UserModel(et_name.text.toString(),
+                                et_mobile_no.text.toString(),
+                                et_delivery_address.text.toString(),
+                                et_email.text.toString(),
+                                userId!!)
+                            usersDR.child(userId).setValue(user).addOnCompleteListener(
+                                OnCompleteListener {
+                                    if(it.isSuccessful){
+                                        val editor = prefs.edit()
+                                        editor.putString(NAME,userModel.name)
+                                        editor.putString(PHONE_NUMBER,userModel.phone_number)
+                                        editor.putString(EMAIL,userModel.email)
+                                        editor.putString(ADDRESS,userModel.address)
+                                        editor.putString(USER_ID,userModel.userId)
+                                        editor.apply()
+                                        startActivity(Intent(this, MainActivity::class.java))
+                                        finish()
+                                    }
+                                })
+
+
                 } else {
                     Toast.makeText(baseContext, "Sign Up Failed.", Toast.LENGTH_SHORT).show()
                 }

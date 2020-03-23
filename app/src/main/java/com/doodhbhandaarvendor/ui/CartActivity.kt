@@ -26,8 +26,6 @@ class CartActivity : AppCompatActivity() {
 
         btn_confirm_order.setOnClickListener {
             val intent =Intent(this,OrderPlacedActivity::class.java)
-            //intent.putExtra("CartList", cartProductList)
-            //intent.putExtra("TotalCost", totalOrderCost.value.toString())
             startActivity(intent)
         }
         totalOrderCost.value = 0.0
