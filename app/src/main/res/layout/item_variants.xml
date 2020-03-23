@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp">
+
+    <RelativeLayout
+        android:id="@+id/half_kg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:padding="4dp"
+        android:elevation="5dp">
+
+        <ImageView
+            android:id="@+id/radio_btn_half_kg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/radio_btn"
+            android:tint="#5dade2"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_half_kg"
+            android:layout_toRightOf="@+id/radio_btn_half_kg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Half kg"
+            android:elevation="5dp"
+            android:textSize="16sp"
+            android:layout_marginStart="4dp"
+            android:textStyle="bold"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_half_kg"
+            android:gravity="end"
+            android:elevation="5dp"
+            android:layout_marginEnd="10dp">
+
+            <ImageButton
+                android:id="@+id/half_kg_remove"
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:layout_toRightOf="@+id/half_kg_tv"
+                android:src="@drawable/remove"
+                android:background="@drawable/add_remove_btn"
+                android:textSize="14sp"/>
+
+            <Button
+                android:id="@+id/half_kg_quantity"
+                android:layout_width="35dp"
+                android:layout_height="25dp"
+                android:text="0"
+                android:layout_toRightOf="@+id/half_kg_remove"
+                android:background="@drawable/add_remove_btn"
+                android:textSize="14sp"/>
+
+            <ImageButton
+                android:id="@+id/half_kg_add"
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:layout_toEndOf="@+id/half_kg_quantity"
+                android:src="@drawable/add"
+                android:background="@drawable/add_remove_btn"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
