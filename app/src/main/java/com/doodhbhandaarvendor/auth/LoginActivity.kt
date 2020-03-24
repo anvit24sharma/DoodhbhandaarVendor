@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.ui.MainActivity
 import com.doodhbhandaarvendor.utils.Constants
+import com.doodhbhandaarvendor.utils.Constants.Companion.NAME
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -21,8 +22,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.et_email
-import kotlinx.android.synthetic.main.activity_user_detail.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -83,7 +82,6 @@ class LoginActivity : AppCompatActivity() {
 
         startActivity(Intent(this, ForgotPasswordActivity::class.java))
         finish()
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     //Google signin.
@@ -136,19 +134,17 @@ class LoginActivity : AppCompatActivity() {
         //if current user is not null than login successfully
         if (currentUser != null) {
             //if email is verified
-            if (currentUser.isEmailVerified) {
-                startActivity(
-                    getLaunchIntent(
-                        this
-                    )
-                )
-                finish()
+            if (prefs.getString(NAME, "") != null ) {
+                startActivity(Intent(this@LoginActivity, UserDetailActivity::class.java))
+                 finish()
             } else {
-                Toast.makeText(baseContext, "Please verify your email.", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
         }
+        }
 
-    }
+
 
     //the selected google account is retrieved and sen to firebase for authentication
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
