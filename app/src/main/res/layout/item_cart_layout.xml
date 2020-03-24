@@ -2,17 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#f0f0f0"
     xmlns:tools="http://schemas.android.com/tools">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:background="#ffffff"
+    >
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_product_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_marginStart="4dp"
+        android:padding="4dp"
         android:text="Product Name"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
+        android:background="#ffffff"
+        android:textColor="#000000"
         android:textSize="18sp"
-        android:id="@+id/tv_product_name"/>
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_variants"
@@ -22,16 +30,29 @@
         tools:listitem="@layout/item_variants"
         android:layout_below="@id/tv_product_name"/>
 
-
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Product Cost"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:textSize="18sp"
         android:id="@+id/tv_product_cost"
-        android:layout_below="@id/rv_variants"/>
+        android:layout_below="@id/rv_variants"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bill Amount:Rs.%s"
+        android:textStyle="italic"
+        android:textColor="#ff7d18"
+        android:textSize="16sp"
+        android:layout_marginTop="2dp"
+        android:padding="6dp"
+        android:gravity="center"
+      />
+    <View
+        android:id="@+id/view"
+        android:layout_below="@+id/tv_product_cost"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="#b1b1b1"/>
 
+
+</RelativeLayout>
 
 </RelativeLayout>
