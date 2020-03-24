@@ -1,70 +1,383 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="#F8F7FD">
+
+    <LinearLayout
+        android:id="@+id/ll_calender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:orientation="horizontal"
+        android:padding="6dp"
+        android:scrollbars="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/calender_box"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Month" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="1" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="2dp"
+            android:background="@drawable/calender_box"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Month" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="2" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="2dp"
+            android:background="@drawable/calender_box"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Month" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="3" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="2dp"
+            android:background="@drawable/calender_box"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Month" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="4" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:background="@drawable/calender_box"
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Month" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="5" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="2dp"
+            android:background="@drawable/calender_box"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Month" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="6" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="2dp"
+            android:background="@drawable/calender_box"
+            android:elevation="4dp"
+
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Month" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="7" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/et_date"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_calender"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Today" />
+
+    <LinearLayout
+        android:id="@+id/to_pay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Today"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_above="@+id/ll_payment_option"
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:padding="6dp">
 
-    <RadioGroup
-        android:id="@+id/rg_payment"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:background="#fff"
+            android:padding="6dp"
+            android:text="To Pay"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+
+            android:id="@+id/tv_totalPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:background="#fff"
+            android:gravity="end"
+            android:padding="6dp"
+            android:text="Rs.%s"
+            android:textColor="#000"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/to_pay"
+        android:layout_margin="3dp"
+        android:background="#3a3a3a" />
+
+    <LinearLayout
+        android:id="@+id/ll_payment_option"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_constraintTop_toBottomOf="@id/et_date"
-        >
+        android:layout_above="@+id/ll_delivery_address"
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:padding="6dp">
 
-        <RadioButton
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cash"/>
+            android:layout_marginStart="4dp"
+            android:background="#fff"
+            android:padding="6dp"
+            android:text="Payment Mode"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-        <RadioButton
+        <RadioGroup
+            android:id="@+id/rg_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:padding="6dp"
+
+
+            >
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:text="Cash" />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:text="Online" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/ll_payment_option"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="3dp"
+        android:background="#3a3a3a" />
+
+    <LinearLayout
+        android:id="@+id/ll_delivery_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_place_order"
+        android:layout_marginTop="40dp"
+        android:background="#fff"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            android:src="@drawable/location" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Online"/>
+            android:layout_margin="4dp"
+            android:background="#fff"
+            android:orientation="vertical"
+            android:padding="8dp">
 
 
-    </RadioGroup>
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:background="#fff"
+                android:padding="8dp"
+                android:text="Deliver to"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/rg_payment"
-        android:text="Bangalore"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"/>
+            <TextView
+                android:id="@+id/tv_address_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:background="#fff"
+                android:padding="8dp"
+                android:text="Delivery Address"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_totalPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_address"
-        android:text="₹ 110"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"/>
+        <TextView
+            android:id="@+id/tv_address_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:background="#fff"
+            android:gravity="end"
+            android:padding="4dp"
+            android:text="Change Address"
+            android:textColor="#ff7d18"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_place_order"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/my_btn"
         android:text="@string/place_order"
         android:textAllCaps="false"
         android:textColor="#ffffff"
         android:textSize="16sp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
