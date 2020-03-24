@@ -1,219 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btn_place_order"
+        android:id="@+id/rv_cart"
+        tools:itemCount="2"
+        tools:listitem="@layout/item_cart_layout"/>
+
+
+
+    <Button
+        android:id="@+id/btn_confirm_order"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select the Quantity"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:textStyle="italic"
-        android:layout_marginTop="20dp"
-        android:textColor="#5dade2"
-        android:textSize="18sp"
-        android:padding="8dp"/>
-
-    <RelativeLayout
-        android:id="@+id/half_kg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp"
-        android:padding="4dp"
-        android:elevation="5dp"
-        >
-
-        <ImageView
-            android:id="@+id/radio_btn_half_kg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/radio_btn"
-            android:tint="#5dade2"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            />
-
-        <TextView
-            android:id="@+id/half_kg_tv"
-            android:layout_toRightOf="@+id/radio_btn_half_kg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Half kg"
-            android:elevation="5dp"
-            android:textSize="16sp"
-            android:layout_marginStart="4dp"
-            android:textStyle="bold"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/half_kg_tv"
-            android:gravity="end"
-            android:elevation="5dp"
-            android:layout_marginEnd="10dp">
-            <ImageButton
-
-
-                android:id="@+id/half_kg_remove"
-                android:layout_width="30dp"
-                android:layout_height="25dp"
-                android:layout_toRightOf="@+id/half_kg_tv"
-                android:src="@drawable/remove"
-                android:background="@drawable/add_remove_btn"
-                android:textSize="14sp"/>
-            <Button
-                android:id="@+id/half_kg_quantity"
-                android:layout_width="35dp"
-                android:layout_height="25dp"
-                android:text="0"
-                android:layout_toRightOf="@+id/half_kg_remove"
-                android:background="@drawable/add_remove_btn"
-                android:textSize="14sp"/>
-
-            <ImageButton
-                android:id="@+id/half_kg_add"
-                android:layout_width="30dp"
-                android:layout_height="25dp"
-                android:layout_toRightOf="@+id/half_kg_quantity"
-                android:src="@drawable/add"
-                android:background="@drawable/add_remove_btn"
-                android:textSize="14sp"/>
-        </LinearLayout>
-
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/one_kg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:elevation="5dp"
-        android:orientation="horizontal"
-        android:padding="4dp">
-
-        <ImageView
-            android:id="@+id/radio_btn_one_kg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/radio_btn"
-            android:tint="#5dade2" />
-
-        <TextView
-            android:id="@+id/one_kg_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_toRightOf="@+id/radio_btn_one_kg"
-            android:elevation="5dp"
-            android:text="One kg"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_toRightOf="@id/one_kg_tv"
-            android:elevation="5dp"
-            android:gravity="end">
-
-            <ImageButton
-
-                android:id="@+id/one_kg_remove"
-                android:layout_width="30dp"
-                android:layout_height="25dp"
-                android:layout_toRightOf="@+id/one_kg_tv"
-                android:background="@drawable/add_remove_btn"
-                android:src="@drawable/remove"
-                android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/one_kg_quantity"
-                android:layout_width="35dp"
-                android:layout_height="25dp"
-                android:layout_toRightOf="@+id/one_kg_remove"
-                android:background="@drawable/add_remove_btn"
-                android:text="0"
-                android:textSize="14sp" />
-
-            <ImageButton
-                android:id="@+id/one_kg_add"
-                android:layout_width="30dp"
-                android:layout_height="25dp"
-                android:layout_toRightOf="@+id/one_kg_quantity"
-                android:background="@drawable/add_remove_btn"
-                android:src="@drawable/add"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:orientation="horizontal"
-        android:padding="4dp">
-
-        <View
-            android:id="@+id/view_line"
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:tint="#3a3a3a" />
-        <TextView
-            android:id="@+id/tv_totalQuantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_below="@id/view_line"
-            android:text="Total Quantity:"
-            android:layout_marginStart="4dp"
-            android:textColor="#EC7063 "
-            android:textSize="16sp"
-            android:textStyle="normal" />
-        <TextView
-            android:id="@+id/total_Quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_toRightOf="@id/tv_totalQuantity"
-            android:text="0"
-            android:layout_marginStart="2dp"
-            android:textSize="16sp"
-            android:textStyle="normal" />
-        <TextView
-            android:id="@+id/tv_total_kg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_toRightOf="@id/total_Quantity"
-            android:text="Kg"
-            android:layout_marginStart="3dp"
-            android:textSize="16sp"
-            android:textStyle="normal" />
-
-    </RelativeLayout>
-
-
-        <Button
-            android:id="@+id/btn_place_order"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/my_btn"
-            android:text="Place Order"
-            android:textAllCaps="false"
-            android:textColor="#ffffff"
-            android:textSize="16sp" />
-    </RelativeLayout>
-
-
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/my_btn"
+        android:text="@string/place_order"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
+</RelativeLayout>

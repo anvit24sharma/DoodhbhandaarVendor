@@ -1,15 +1,18 @@
-package com.doodhbhandaarvendor
+package com.doodhbhandaarvendor.adapter
 
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.doodhbhandaarvendor.R
+import com.doodhbhandaarvendor.model.ProductModel
 
 
-@Suppress("UNCHECKED_CAST")
 class ProductAdapter(
     private var mContext: Context?,
     private var product: ArrayList<ProductModel>,
@@ -45,12 +48,18 @@ class ProductAdapter(
         fun setData(productModel: ProductModel, position: Int) {
             tvProductName.text = productModel.product_name
             tvPricePerKg.text = productModel.product_cost
+
+            btnAdd.setOnClickListener {
+                mListener.onAddClick(position,it)
+            }
         }
+
+
+
 
         }
     interface OnItemClickListener {
-        fun onItemClick(position: Int, view: View)
-
+        fun onAddClick(position: Int, view: View)
     }
 
 }
