@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8F7FD"
-    tools:context=".auth.SignUpActivity">
+    tools:context=".auth.UserDetailActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,6 +12,7 @@
         android:layout_gravity="center"
         android:background="#F8F7FD"
         android:orientation="vertical">
+
 
         <ImageView
             android:layout_width="wrap_content"
@@ -33,7 +34,7 @@
             android:background="#F8F7FD"
             android:gravity="center"
             android:padding="20dp"
-            android:text="Sign Up"
+            android:text="Enter Details"
             android:textSize="24sp"
             android:textColor="#5dade2"
             android:textStyle="bold" />
@@ -87,8 +88,8 @@
                 android:padding="6dp"
                 android:src="@drawable/email" />
 
-            <EditText
-                android:id="@+id/et_email"
+            <TextView
+                android:id="@+id/tv_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
@@ -138,10 +139,10 @@
             android:layout_height="45dp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:layout_marginTop="10dp"
-
             android:background="#ffffff"
             android:elevation="5dp"
+            android:layout_marginTop="10dp"
+
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -165,88 +166,22 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_password"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginTop="10dp"
-
-            android:background="#ffffff"
-            android:elevation="5dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:padding="6dp"
-                android:src="@drawable/password" />
-
-            <EditText
-                android:id="@+id/et_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:padding="6dp"
-                android:textColor="#000000"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/ll_confirm_password"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginTop="10dp"
-
-            android:background="#ffffff"
-            android:elevation="5dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:padding="6dp"
-                android:src="@drawable/password" />
-
-            <EditText
-                android:id="@+id/et_confirm_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:hint="Confirm Password"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:padding="6dp"
-                android:textColor="#000000"
-                android:textSize="14sp" />
-
-        </LinearLayout>
 
 
 
 
         <Button
-            android:id="@+id/btn_SignUp"
+            android:id="@+id/btn_Save"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginStart="65dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="65dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/my_btn"
             android:gravity="center"
             android:padding="8dp"
-            android:text="REGISTER"
+            android:text="Save"
             android:textColor="#ffffff"
             android:textSize="18sp">
 
@@ -259,7 +194,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
             android:gravity="center"
             android:text="Already have an account?Sign In"
             android:textColor="#000000"

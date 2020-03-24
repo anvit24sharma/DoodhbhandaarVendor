@@ -21,24 +21,28 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.et_email
+import kotlinx.android.synthetic.main.activity_user_detail.*
 
 class LoginActivity : AppCompatActivity() {
 
     companion object {
-        fun getLaunchIntent(from:Context)=Intent(from,
-            MainActivity::class.java).apply {
+        fun getLaunchIntent(from: Context) = Intent(
+            from,
+            MainActivity::class.java
+        ).apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         }
 
-        var currentUser :FirebaseUser? =null
+        var currentUser: FirebaseUser? = null
         private lateinit var auth: FirebaseAuth
-        lateinit var usersDR :DatabaseReference
-        lateinit var prefs :SharedPreferences
+        lateinit var usersDR: DatabaseReference
+        lateinit var prefs: SharedPreferences
     }
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
-    lateinit var gso:GoogleSignInOptions
-    private val RC_SIGN_IN:Int = 1
+    lateinit var gso: GoogleSignInOptions
+    private val RC_SIGN_IN: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,12 +69,14 @@ class LoginActivity : AppCompatActivity() {
             .requestEmail()
             .build()
 
-        mGoogleSignInClient= GoogleSignIn.getClient(this,gso)
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
         //Google signin button click.
         btn_google_signIn.setOnClickListener {
             signInGoogle()
         }
+
+
     }
 
     private fun forgotPassword() {
@@ -137,8 +143,7 @@ class LoginActivity : AppCompatActivity() {
                     )
                 )
                 finish()
-            }
-            else {
+            } else {
                 Toast.makeText(baseContext, "Please verify your email.", Toast.LENGTH_SHORT).show()
             }
         }
@@ -150,59 +155,80 @@ class LoginActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         //user selected account
-        if(requestCode==RC_SIGN_IN)
-        {
-            val task:Task<GoogleSignInAccount> =GoogleSignIn.getSignedInAccountFromIntent(data)
+        if (requestCode == RC_SIGN_IN) {
+            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                val account=task.getResult(ApiException::class.java)
-                if(account!= null)
+                val account = task.getResult(ApiException::class.java)
+                if (account != null)
                     authWithGoogle(account)
-            }
-            catch (e:ApiException){
-                Toast.makeText(this,"Google sign in failed "+ e.toString(),Toast.LENGTH_LONG).show()
+            } catch (e: ApiException) {
+                Toast.makeText(this, "Google sign in failed " + e.toString(), Toast.LENGTH_LONG)
+                    .show()
             }
         }
     }
 
     private fun authWithGoogle(account: GoogleSignInAccount) {
-        val credential=GoogleAuthProvider.getCredential(account.idToken,null)
+        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
 
         auth.signInWithCredential(credential).addOnCompleteListener {
-            if(it.isSuccessful) {
+            if (it.isSuccessful) {
                 val user: FirebaseUser? = auth.currentUser
-                usersDR.addValueEventListener(object :ValueEventListener{
+                usersDR.addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
 
                     }
 
                     override fun onDataChange(datasnapShot: DataSnapshot) {
-                        if(datasnapShot.child(user?.uid!!).exists()){
+                        if (datasnapShot.child(user?.uid!!).exists()) {
                             val editor = prefs.edit()
-                            editor.putString(Constants.NAME,datasnapShot.child(user.uid).child("name").getValue().toString())
-                            editor.putString(Constants.PHONE_NUMBER,datasnapShot.child(user.uid).child("phone_number").getValue().toString())
-                            editor.putString(Constants.EMAIL,datasnapShot.child(user.uid).child("email").getValue().toString())
-                            editor.putString(Constants.ADDRESS,datasnapShot.child(user.uid).child("address").getValue().toString())
-                            editor.putString(Constants.USER_ID,user.uid)
+                            editor.putString(
+                                Constants.NAME,
+                                datasnapShot.child(user.uid).child("name").getValue().toString()
+                            )
+                            editor.putString(
+                                Constants.PHONE_NUMBER,
+                                datasnapShot.child(user.uid).child("phone_number").getValue().toString()
+                            )
+                            editor.putString(
+                                Constants.EMAIL,
+                                datasnapShot.child(user.uid).child("email").getValue().toString()
+                            )
+                            editor.putString(
+                                Constants.ADDRESS,
+                                datasnapShot.child(user.uid).child("address").getValue().toString()
+                            )
+                            editor.putString(Constants.USER_ID, user.uid)
                             editor.apply()
                             startActivity(Intent(applicationContext, MainActivity::class.java))
                             finish()
-                        }
-                        else {
+                        } else {
                             //start user Details Activity
+                            startActivity(
+                                Intent(
+                                    applicationContext,
+                                    UserDetailActivity::class.java
+                                )
+                            )
+                            finish()
                         }
                     }
 
                 })
 
             } else {
-                Toast.makeText(this,"Google sign in failed" + it.exception.toString(),Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this,
+                    "Google sign in failed" + it.exception.toString(),
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
 
 
-        }
-
     }
+
+}
 
 
 
