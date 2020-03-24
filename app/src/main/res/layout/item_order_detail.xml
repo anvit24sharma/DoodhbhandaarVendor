@@ -6,7 +6,7 @@
     android:background="#fff"
     android:orientation="vertical"
     android:scrollbars="vertical"
- >
+    >
 
     <LinearLayout
         android:id="@+id/ll_orderNo"
@@ -39,37 +39,29 @@
 
 
 
-        <TextView
-            android:layout_below="@id/ll_orderNo"
-            android:id="@+id/orderDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:gravity="end"
-            android:padding="4dp"
-            android:text="Order Date"
-            android:textColor="#ff7d18"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/rv"
+    <TextView
+        android:id="@+id/orderDate"
+        android:layout_below="@id/ll_orderNo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/orderDate"
-    >
+        android:layout_marginEnd="5dp"
+        android:gravity="end"
+        android:padding="4dp"
+        android:text="Order Date"
+        android:textColor="#ff7d18"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_history"
+            android:layout_below="@+id/orderDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            tools:listitem="@layout/history_single_view" />
-    </FrameLayout>
+            tools:listitem="@layout/item_order_detail_name_qty" />
     <View
         android:id="@+id/view"
-        android:layout_below="@+id/rv"
+        android:layout_below="@+id/rv_history"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_margin="2dp"

@@ -12,7 +12,8 @@
         android:layout_above="@id/btn_place_order"
         android:id="@+id/rv_cart"
         tools:itemCount="2"
-        tools:listitem="@layout/item_cart_layout"/>
+        tools:listitem="@layout/item_cart_layout"
+        tools:ignore="NotSibling" />
 
 
 
