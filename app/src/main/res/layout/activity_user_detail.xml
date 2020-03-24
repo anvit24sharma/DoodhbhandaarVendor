@@ -88,8 +88,8 @@
                 android:padding="6dp"
                 android:src="@drawable/email" />
 
-            <TextView
-                android:id="@+id/tv_email"
+            <EditText
+                android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
