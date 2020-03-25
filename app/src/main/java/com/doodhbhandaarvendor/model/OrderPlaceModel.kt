@@ -8,7 +8,8 @@ data class OrderPlaceModel(
     var paymentMode :String,
     var orderDate :String,
     var status :String,
-    var totalCost :String
+    var totalCost :String,
+    var orderId :String
 ){}
 
 data class OrderPlaceProductModel(

@@ -39,6 +39,8 @@ class OrderPlacedActivity : AppCompatActivity() {
         }
 
         btn_place_order.setOnClickListener {
+            val orderId = orderDR.push().key.toString()
+
             val orderPlaceModel = OrderPlaceModel(orderPlaceProductModel,
                 prefs.getString(USER_ID,"")?:"",
                 tv_address.text.toString(),
@@ -46,9 +48,9 @@ class OrderPlacedActivity : AppCompatActivity() {
                 findViewById<RadioButton>(rg_payment.checkedRadioButtonId).text.toString(),
                 Date().toString(),
                 "order_pending",
-                tv_totalPrice.text.toString())
+                tv_totalPrice.text.toString(),
+                orderId)
 
-            val orderId = orderDR.push().key.toString()
             orderDR.child(orderId).setValue(orderPlaceModel)
 
         }
