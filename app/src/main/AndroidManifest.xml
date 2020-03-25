@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".auth.UserDetailActivity"></activity>
+        <activity android:name=".ui.OrderDetailsActivity"></activity>
+        <activity android:name=".auth.UserDetailActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ui.OrderPlacedActivity" />
         <activity android:name=".ui.CartActivity" />

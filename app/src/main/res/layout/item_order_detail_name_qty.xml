@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:padding="6dp"
+            android:padding="4dp"
             android:text="Product Name"
             android:background="#ffffff"
             android:textColor="#000000"
@@ -26,17 +26,16 @@
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/rv"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_name_date"
-        android:layout_margin="5dp"
-        android:padding="6dp">
-
+       >
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_history"
+            android:layout_below="@+id/ll_name_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            tools:listitem="@layout/history_quantity" />
+            tools:listitem="@layout/item_quantity_detail" />
     </FrameLayout>
 </RelativeLayout>
