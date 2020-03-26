@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
 
         android:layout_toRightOf="@+id/qty1"
-        android:text="*"
+        android:text="X"
         android:textSize="16sp" />
 
     <TextView

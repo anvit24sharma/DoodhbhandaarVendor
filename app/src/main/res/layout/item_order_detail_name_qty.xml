@@ -1,41 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <LinearLayout
-        android:id="@+id/ll_name_date"
+
+    <TextView
+        android:id="@+id/tv_productName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginStart="4dp"
+        android:background="#ffffff"
+        android:padding="4dp"
+        android:text="Product Name"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_productName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:padding="4dp"
-            android:text="Product Name"
-            android:background="#ffffff"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-
-    </LinearLayout>
-
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/rv"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_variants"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_name_date"
-       >
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_history"
-            android:layout_below="@+id/ll_name_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            tools:listitem="@layout/item_quantity_detail" />
-    </FrameLayout>
+        android:layout_below="@+id/tv_productName"
+        tools:listitem="@layout/item_quantity_detail" />
+
 </RelativeLayout>

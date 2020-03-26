@@ -8,6 +8,10 @@
     <string name="remove">Remove</string>
     <string name="place_order">Place Order</string>
     <string name="confirm_order">Confirm Order (₹ %s)</string>
+    <string name="order_date">Order Date : %s</string>
+    <string name="schedule_date">Schedule Date : %s</string>
+    <string name="date_s">( %s )</string>
+    <string name="bill_amount_s">Bill Amount: ₹ %s</string>
 
 
 </resources>

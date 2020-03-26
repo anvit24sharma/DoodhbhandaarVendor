@@ -134,7 +134,7 @@ class LoginActivity : AppCompatActivity() {
         //if current user is not null than login successfully
         if (currentUser != null) {
             //if email is verified
-            if (prefs.getString(NAME, "") != null ) {
+            if (prefs.getString(NAME, "") == null ) {
                 startActivity(Intent(this@LoginActivity, UserDetailActivity::class.java))
                  finish()
             } else {

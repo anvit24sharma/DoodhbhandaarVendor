@@ -10,6 +10,7 @@ import com.doodhbhandaarvendor.auth.LoginActivity.Companion.prefs
 import com.doodhbhandaarvendor.model.UserModel
 import com.doodhbhandaarvendor.ui.MainActivity
 import com.doodhbhandaarvendor.utils.Constants
+import com.doodhbhandaarvendor.utils.Constants.Companion.NAME
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -30,6 +31,11 @@ class UserDetailActivity : AppCompatActivity() {
         userEmail = user.email!!
 
         et_email.setText(userEmail)
+
+        if(prefs.getString(NAME,"")!=null){
+            startActivity(Intent(this,MainActivity::class.java))
+            finish()
+        }
 
         btn_Save.setOnClickListener {
             validateDetails()
