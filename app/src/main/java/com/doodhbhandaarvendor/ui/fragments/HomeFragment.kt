@@ -18,6 +18,7 @@ import com.doodhbhandaarvendor.ui.CartActivity
 import com.doodhbhandaarvendor.utils.Constants
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 
 class HomeFragment : Fragment() {
@@ -45,7 +46,7 @@ class HomeFragment : Fragment() {
 
         productsDR = FirebaseDatabase.getInstance().getReference(Constants.PRODUCTS_TABLE)
         orderDR = FirebaseDatabase.getInstance().getReference(Constants.ORDER_TABLE)
-
+        tv_count.text = "0"
         getProducts()
         initRecyclerView()
         initClicks()
@@ -53,7 +54,7 @@ class HomeFragment : Fragment() {
 
     private fun initClicks() {
 
-        btn_view_cart.setOnClickListener{
+        iv_cart.setOnClickListener{
             startActivity(Intent(context,CartActivity::class.java))
         }
     }
@@ -77,6 +78,8 @@ class HomeFragment : Fragment() {
                         cartProductList.remove(productList[position])
                         btn.text = getString(R.string.add)
                     }
+
+                    tv_count.text = cartProductList.size.toString()
 
 //                    if(cartProductList.isEmpty())
 //                        btn_view_cart.visibility = View.INVISIBLE
@@ -104,7 +107,7 @@ class HomeFragment : Fragment() {
                 for (snap in snapShot.children){
                     val variantsList = ArrayList<VariantModel>()
                     snap.child("variants").children.forEach {
-                        variantsList.add(VariantModel(it.value.toString(),0))
+                        variantsList.add(VariantModel(it.child("available").value as Boolean,it.child("variantName").value.toString(),0))
                     }
                    val productModel = ProductModel(
                        snap.child("product_name").getValue().toString(),

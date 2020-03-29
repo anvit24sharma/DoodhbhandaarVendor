@@ -1,10 +1,7 @@
 package com.doodhbhandaarvendor.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import androidx.viewpager.widget.ViewPager
@@ -24,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        supportActionBar?.hide()
         menu_bottom.get(0).isSelected =true
         menu_bottom.setOnItemSelectedListener {  
             when (it) {
@@ -67,19 +65,5 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = adapter
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when(item.itemId){
-            R.id.view_cart -> {
-                startActivity(Intent(this,CartActivity::class.java))
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
 }
 

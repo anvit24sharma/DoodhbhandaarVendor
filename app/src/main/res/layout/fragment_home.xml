@@ -4,12 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        tools:listitem="@layout/item" />
+        android:layout_below="@id/toolbar"
+        tools:listitem="@layout/item"
+        />
 
     <Button
         android:layout_width="match_parent"

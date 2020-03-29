@@ -53,6 +53,7 @@ class OrderPlacedActivity : AppCompatActivity() {
 
             orderDR.child(orderId).setValue(orderPlaceModel)
 
+
         }
 
     }

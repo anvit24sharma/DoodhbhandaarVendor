@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import com.doodhbhandaarvendor.ui.OrderDetailsActivity
 import com.doodhbhandaarvendor.utils.Constants.Companion.USER_ID
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 
 class HistoryFragment : Fragment() {
@@ -40,6 +42,8 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        tv_count.visibility = GONE
+        iv_cart.visibility = GONE
         userOrdersDR = FirebaseDatabase.getInstance().getReference("UserOrders")
         ordersDR = FirebaseDatabase.getInstance().getReference("Orders")
 
@@ -67,6 +71,7 @@ class HistoryFragment : Fragment() {
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
+                ordersIdList.clear()
                 snapshot.child(prefs.getString(USER_ID,"")?:"").children.forEach {
                     ordersIdList.add(it.getValue(String::class.java)!!)
                 }
@@ -84,9 +89,10 @@ class HistoryFragment : Fragment() {
             }
             override fun onDataChange(snapshot: DataSnapshot) {
 
+                pastOrderList.clear()
                 ordersIdList.forEach {
                     val  orderModel = snapshot.child(it).getValue(OrderPlaceModel::class.java)
-                    pastOrderList.add( orderModel?:OrderPlaceModel())
+                    pastOrderList.add( orderModel?: OrderPlaceModel())
                 }
                 historyAdapter.notifyDataSetChanged()
             }
