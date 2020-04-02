@@ -14,7 +14,6 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.OrderDetailsActivity"></activity>
         <activity android:name=".auth.UserDetailActivity" />
-        <activity android:name=".ProfileActivity" />
         <activity android:name=".ui.OrderPlacedActivity" />
         <activity android:name=".ui.CartActivity" />
         <activity android:name=".auth.ResetPasswordActivity" />
@@ -28,6 +27,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.MainActivity" />
+
+        <service
+            android:name=".notification.VendorFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

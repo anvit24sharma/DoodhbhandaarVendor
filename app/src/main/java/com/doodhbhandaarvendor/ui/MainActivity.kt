@@ -10,6 +10,8 @@ import com.doodhbhandaarvendor.adapter.ViewPagerAdapter
 import com.doodhbhandaarvendor.ui.fragments.HistoryFragment
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment
 import com.doodhbhandaarvendor.ui.fragments.ProfileFragment
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.iid.InstanceIdResult
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -30,7 +32,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.profile -> viewpager.currentItem = 2
             }
         }
-        
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener(this) {
+                instanceIdResult: InstanceIdResult ->
+                        val newToken = instanceIdResult.token
+                        Log.e("newToken", newToken)
+        }
 
         viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
