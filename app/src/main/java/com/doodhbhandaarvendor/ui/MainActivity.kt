@@ -1,10 +1,7 @@
 package com.doodhbhandaarvendor.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import androidx.lifecycle.MutableLiveData
@@ -15,6 +12,8 @@ import com.doodhbhandaarvendor.model.OrderPlaceModel
 import com.doodhbhandaarvendor.ui.fragments.HistoryFragment
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment
 import com.doodhbhandaarvendor.ui.fragments.ProfileFragment
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.iid.InstanceIdResult
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -28,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        supportActionBar?.hide()
         menu_bottom.get(0).isSelected =true
         menu_bottom.setOnItemSelectedListener {  
             when (it) {
@@ -36,7 +36,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.profile -> viewpager.currentItem = 2
             }
         }
-        
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener(this) {
+                instanceIdResult: InstanceIdResult ->
+                        val newToken = instanceIdResult.token
+                        Log.e("newToken", newToken)
+        }
 
         viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
@@ -71,19 +75,5 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = adapter
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when(item.itemId){
-            R.id.view_cart -> {
-                startActivity(Intent(this,CartActivity::class.java))
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
 }
 
