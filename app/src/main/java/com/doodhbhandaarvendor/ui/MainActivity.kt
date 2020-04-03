@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportActionBar?.hide()
+
         menu_bottom.get(0).isSelected =true
         menu_bottom.setOnItemSelectedListener {  
             when (it) {
@@ -73,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         adapter.addFragment(HistoryFragment())
         adapter.addFragment(ProfileFragment())
         viewPager.adapter = adapter
+        viewPager.offscreenPageLimit =3
     }
 
 }

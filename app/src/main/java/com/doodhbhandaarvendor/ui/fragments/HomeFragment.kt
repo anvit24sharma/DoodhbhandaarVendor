@@ -4,12 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.GridLayoutManager
 import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.adapter.ProductAdapter
 import com.doodhbhandaarvendor.model.ProductModel
@@ -44,6 +45,7 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        progress.visibility =VISIBLE
         productsDR = FirebaseDatabase.getInstance().getReference(Constants.PRODUCTS_TABLE)
         orderDR = FirebaseDatabase.getInstance().getReference(Constants.ORDER_TABLE)
         tv_count.text = "0"
@@ -55,7 +57,11 @@ class HomeFragment : Fragment() {
     private fun initClicks() {
 
         iv_cart.setOnClickListener{
-            startActivity(Intent(context,CartActivity::class.java))
+            if(cartProductList.isEmpty()){
+                Toast.makeText(context,"Cart is empty",Toast.LENGTH_SHORT).show()
+            }else {
+                startActivity(Intent(context, CartActivity::class.java))
+            }
         }
     }
 
@@ -81,16 +87,12 @@ class HomeFragment : Fragment() {
 
                     tv_count.text = cartProductList.size.toString()
 
-//                    if(cartProductList.isEmpty())
-//                        btn_view_cart.visibility = View.INVISIBLE
-//                    else
-//                        btn_view_cart.visibility = View.VISIBLE
                 }
             })
         }
         rv_product.apply {
             adapter = productAdapter
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            layoutManager = GridLayoutManager(context,2)
         }
     }
 
@@ -118,6 +120,7 @@ class HomeFragment : Fragment() {
                    )
                         productList.add(productModel)
                 }
+                progress.visibility = GONE
                 productAdapter.notifyDataSetChanged()
             }
 
