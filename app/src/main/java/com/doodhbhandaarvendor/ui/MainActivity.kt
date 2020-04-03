@@ -7,16 +7,20 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
+import androidx.lifecycle.MutableLiveData
 import androidx.viewpager.widget.ViewPager
 import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.adapter.ViewPagerAdapter
+import com.doodhbhandaarvendor.model.OrderPlaceModel
 import com.doodhbhandaarvendor.ui.fragments.HistoryFragment
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment
 import com.doodhbhandaarvendor.ui.fragments.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
+
 
     internal var prevMenuItem: Int? = null
 

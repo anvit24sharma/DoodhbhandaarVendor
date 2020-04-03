@@ -202,7 +202,6 @@
 
     <EditText
         android:id="@+id/et_date"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_calender"
@@ -210,6 +209,15 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:hint="Today" />
+    <EditText
+        android:id="@+id/et_instruction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_date"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Any Note(Instructions)" />
 
     <LinearLayout
         android:id="@+id/to_pay"

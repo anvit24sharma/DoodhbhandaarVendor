@@ -24,17 +24,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:padding="4dp"
+        android:layout_marginTop="8dp"
+        android:padding="10dp"
         android:background="#ffffff"
         android:gravity="center"
         android:text="Sign In"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textColor="@color/colorPrimary"/>
     <LinearLayout
         android:id="@+id/ll_email"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_below="@+id/cv_ll"
         android:layout_marginTop="20dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
@@ -47,6 +47,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:padding="6dp"
+            android:background="#ffffff"
             android:src="@drawable/email" />
 
         <EditText
@@ -79,6 +80,8 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:padding="6dp"
+            android:background="#ffffff"
+
             android:src="@drawable/password" />
 
         <EditText
@@ -103,6 +106,8 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="30dp"
         android:gravity="right"
+        android:background="#ffffff"
+
         android:padding="4dp"
         android:text="Forgot Password?"
         android:textColor="#ccc"
@@ -136,6 +141,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Or Login with"
+        android:background="#ffffff"
         android:gravity="center"
         android:padding="4dp"
         android:textColor="#3a3a3a"
@@ -162,13 +168,14 @@
     <TextView
         android:id="@+id/txt_SignUp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="Don't have an Account?Sign Up"
         android:textColor="#000000"
-        android:textSize="19sp"
+        android:background="#ffffff"
+        android:textSize="16sp"
         android:textStyle="italic" />
 
 </LinearLayout>
@@ -177,4 +184,4 @@
 
 
 
-    </LinearLayout>
+

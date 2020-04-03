@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:id="@+id/ll_name_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:scrollbars="vertical">
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="20dp"
+        android:id="@+id/circle"
+        android:src="@drawable/circle"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="6dp"/>
 
-        <TextView
-            android:id="@+id/tv_productName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:padding="4dp"
-            android:text="Product Name"
-            android:background="#ffffff"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-
-    </LinearLayout>
-
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/rv"
+    <TextView
+        android:id="@+id/tv_productName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_name_date"
-       >
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_history"
-            android:layout_below="@+id/ll_name_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            tools:listitem="@layout/item_quantity_detail" />
-    </FrameLayout>
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@+id/circle"
+        android:layout_alignParentTop="true"
+        android:text="Product Name"
+        android:background="#ffffff"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_variant"
+        android:layout_width="wrap_content"
+        android:padding="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_productName"
+        tools:listitem="@layout/item_quantity_detail" />
+
+
 </RelativeLayout>
