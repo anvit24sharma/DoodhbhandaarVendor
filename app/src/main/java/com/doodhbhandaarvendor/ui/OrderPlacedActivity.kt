@@ -28,10 +28,10 @@ class OrderPlacedActivity : AppCompatActivity() {
         initCalendarClicks()
 
         CartActivity.totalOrderCost.observe( this, androidx.lifecycle.Observer {
-            tv_totalPrice.text = it.toString()
+            tv_totalPrice.text = "₹" + it.toString()
         })
 
-        tv_address.text = prefs.getString(ADDRESS,"")?:""
+        tv_address_name.text = prefs.getString(ADDRESS,"")?:""
 
         cartProductList.forEach {
             val variants = ArrayList<VariantModel>()
@@ -43,6 +43,8 @@ class OrderPlacedActivity : AppCompatActivity() {
         }
 
         btn_place_order.setOnClickListener {
+
+          //  if(scheduleDate!="" &&)
             val orderId = orderDR.push().key.toString()
 
             val orderPlaceModel = OrderPlaceModel(orderPlaceProductModel,
