@@ -13,6 +13,9 @@ import com.doodhbhandaarvendor.model.ProductModel
 import com.doodhbhandaarvendor.ui.CartActivity.Companion.totalOrderCost
 
 
+
+
+
 class CartAdapter(
     private var mContext: Context?,
     private var product: ArrayList<ProductModel>,
@@ -46,14 +49,14 @@ class CartAdapter(
             productModel.variants.forEach {
                 totalCost += productModel.product_cost.split("/")[0].toInt() * it.variantName.toDouble() * it.qty
             }
-            tvProductCost.text = totalCost.toString()
+            tvProductCost.text = "₹" + totalCost.toString()
             totalOrderCost.value = totalOrderCost.value?.plus(totalCost)
 
             variantAdapter = productModel.let {
                 VariantAdapter(mContext, it.variants, object : VariantAdapter.OnItemClickListener {
                     override fun onAddClick(position: Int, view: View) {
                         totalCost += it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble()
-                        tvProductCost.text = totalCost.toString()
+                        tvProductCost.text = "₹" + totalCost.toString()
                         totalOrderCost.value = totalOrderCost.value?.plus( it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble())
                         it.variants[position].qty += 1
                         variantAdapter.notifyDataSetChanged()
@@ -64,7 +67,7 @@ class CartAdapter(
                             it.variants[position].qty -= 1
                             variantAdapter.notifyDataSetChanged()
                             totalCost -= it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble()
-                            tvProductCost.text = totalCost.toString()
+                            tvProductCost.text = "₹" + totalCost.toString()
                             totalOrderCost.value = totalOrderCost.value?.minus( it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble())
                         }
                     }

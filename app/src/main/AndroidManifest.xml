@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.OrderDetailsActivity"></activity>
+        <activity android:name=".ui.OrderDetailsActivity"/>
         <activity android:name=".auth.UserDetailActivity" />
         <activity android:name=".ui.OrderPlacedActivity" />
         <activity android:name=".ui.CartActivity" />
@@ -22,7 +22,6 @@
         <activity android:name=".auth.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

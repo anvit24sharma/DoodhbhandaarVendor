@@ -2,7 +2,9 @@ package com.doodhbhandaarvendor.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -24,9 +26,33 @@ class CartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
 
+        supportActionBar?.title = "Cart"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         btn_confirm_order.setOnClickListener {
-            val intent =Intent(this,OrderPlacedActivity::class.java)
-            startActivity(intent)
+
+            var allItemSelected =true
+            for (productModel in HomeFragment.cartProductList) {
+                var itemSelected = false
+                productModel.variants.forEach {
+                    if(it.qty >0){
+                        itemSelected =true
+                    }
+                }
+                if(!itemSelected) {
+                    allItemSelected = false
+                    break
+                }
+
+
+            }
+
+            if(totalOrderCost.value == 0.0 || !allItemSelected){
+                Toast.makeText(this,"Select Quantity for each Product",Toast.LENGTH_SHORT).show()
+            }else {
+                val intent = Intent(this, OrderPlacedActivity::class.java)
+                startActivity(intent)
+            }
         }
         totalOrderCost.value = 0.0
         initRecyclerView()
@@ -50,5 +76,13 @@ class CartActivity : AppCompatActivity() {
             }
         }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        if(item.itemId == android.R.id.home){
+            super.onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
+
+    }
 
 }

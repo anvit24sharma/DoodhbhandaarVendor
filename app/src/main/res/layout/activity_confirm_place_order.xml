@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:id="@+id/ll_calender"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:layout_marginTop="10dp"
@@ -17,14 +17,17 @@
         android:scrollbars="horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/llDate1"
+            android:layout_width="0dp"
             android:layout_height="50dp"
             android:background="@drawable/calender_box"
             android:elevation="4dp"
+            android:layout_weight="1"
             android:orientation="vertical"
             android:padding="6dp">
 
             <TextView
+                android:id="@+id/tvMonth1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -32,6 +35,7 @@
                 android:text="Month" />
 
             <TextView
+                android:id="@+id/tvDate1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -42,15 +46,18 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/llDate2"
+            android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="2dp"
+            android:layout_weight="1"
             android:background="@drawable/calender_box"
             android:elevation="4dp"
             android:orientation="vertical"
             android:padding="6dp">
 
             <TextView
+                android:id="@+id/tvMonth2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -58,6 +65,7 @@
                 android:text="Month" />
 
             <TextView
+                android:id="@+id/tvDate2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -68,15 +76,18 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/llDate3"
+            android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="2dp"
             android:background="@drawable/calender_box"
             android:elevation="4dp"
+            android:layout_weight="1"
             android:orientation="vertical"
             android:padding="6dp">
 
             <TextView
+                android:id="@+id/tvMonth3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -84,6 +95,7 @@
                 android:text="Month" />
 
             <TextView
+                android:id="@+id/tvDate3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -94,15 +106,18 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/llDate4"
+            android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="2dp"
             android:background="@drawable/calender_box"
             android:elevation="4dp"
+            android:layout_weight="1"
             android:orientation="vertical"
             android:padding="6dp">
 
             <TextView
+                android:id="@+id/tvMonth4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -110,6 +125,7 @@
                 android:text="Month" />
 
             <TextView
+                android:id="@+id/tvDate4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -120,15 +136,18 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/llDate5"
+            android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="2dp"
             android:layout_marginEnd="2dp"
+            android:layout_weight="1"
             android:background="@drawable/calender_box"
             android:orientation="vertical"
             android:padding="6dp">
 
             <TextView
+                android:id="@+id/tvMonth5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -136,6 +155,7 @@
                 android:text="Month" />
 
             <TextView
+                android:id="@+id/tvDate5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -146,15 +166,18 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/llDate6"
+            android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="2dp"
             android:background="@drawable/calender_box"
             android:elevation="4dp"
+            android:layout_weight="1"
             android:orientation="vertical"
             android:padding="6dp">
 
             <TextView
+                android:id="@+id/tvMonth6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -162,6 +185,7 @@
                 android:text="Month" />
 
             <TextView
+                android:id="@+id/tvDate6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -172,16 +196,18 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/llDate7"
+            android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="2dp"
             android:background="@drawable/calender_box"
             android:elevation="4dp"
-
+            android:layout_weight="1"
             android:orientation="vertical"
             android:padding="6dp">
 
             <TextView
+                android:id="@+id/tvMonth7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -189,6 +215,7 @@
                 android:text="Month" />
 
             <TextView
+                android:id="@+id/tvDate7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -200,16 +227,6 @@
 
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/et_date"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_calender"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:hint="Today" />
 
     <LinearLayout
         android:id="@+id/to_pay"
