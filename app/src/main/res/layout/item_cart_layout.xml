@@ -2,14 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#f0f0f0"
-    xmlns:tools="http://schemas.android.com/tools">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginTop="6dp"
-    android:background="#ffffff"
-    >
+    android:background="#ffffff">
+
     <TextView
         android:id="@+id/tv_product_name"
         android:layout_width="match_parent"
@@ -24,6 +20,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_variants"
+        android:layout_marginStart="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:itemCount="3"
@@ -48,11 +45,10 @@
         android:layout_below="@+id/tv_product_cost"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="#b1b1b1"/>
 
 
 </RelativeLayout>
 
-</RelativeLayout>
