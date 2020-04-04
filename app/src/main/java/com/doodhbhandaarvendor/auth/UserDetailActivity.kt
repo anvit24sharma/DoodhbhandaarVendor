@@ -10,7 +10,9 @@ import com.doodhbhandaarvendor.auth.LoginActivity.Companion.prefs
 import com.doodhbhandaarvendor.model.UserModel
 import com.doodhbhandaarvendor.ui.MainActivity
 import com.doodhbhandaarvendor.utils.Constants
+import com.doodhbhandaarvendor.utils.Constants.Companion.ADDRESS
 import com.doodhbhandaarvendor.utils.Constants.Companion.NAME
+import com.doodhbhandaarvendor.utils.Constants.Companion.PHONE_NUMBER
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -26,15 +28,20 @@ class UserDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user_detail)
         prefs = getSharedPreferences("Db Vendor", Context.MODE_PRIVATE)
 
+        val from = intent.getStringExtra("from")
         user = FirebaseAuth.getInstance().currentUser!!
         userId= user.uid
         userEmail = user.email!!
 
         et_email.setText(userEmail)
 
-        if(prefs.getString(NAME,"")!=null){
+        if(prefs.getString(NAME,"")!=null && from!="ProfileFragment"){
             startActivity(Intent(this,MainActivity::class.java))
             finish()
+        }else if(from == "ProfileFragment"){
+            et_mobile_no.setText(prefs.getString(PHONE_NUMBER,""))
+            et_name.setText(prefs.getString(NAME,""))
+            et_delivery_address.setText(prefs.getString(ADDRESS,""))
         }
 
         btn_Save.setOnClickListener {

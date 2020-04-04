@@ -27,6 +27,7 @@ class OrderPlacedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_place_order)
 
+
         initCalendar()
         initCalendarClicks()
 
@@ -45,15 +46,15 @@ class OrderPlacedActivity : AppCompatActivity() {
             orderPlaceProductModel.add(OrderPlaceProductModel(it.product_name,it.product_cost,variants))
         }
         var selectedMode =  ""
-        btn_place_order.setOnClickListener {
 
+
+        btn_place_order.setOnClickListener {
             selectedMode = if(rg_payment.checkedRadioButtonId != -1)
                 findViewById<RadioButton>(rg_payment.checkedRadioButtonId).text.toString()
             else
                 ""
 
             if(scheduleDate!="" &&  selectedMode!="" ) {
-
                 val orderId = orderDR.push().key.toString()
                 val orderPlaceModel = OrderPlaceModel(
                     orderPlaceProductModel,
