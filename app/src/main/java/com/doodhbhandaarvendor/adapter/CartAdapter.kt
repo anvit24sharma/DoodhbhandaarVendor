@@ -46,14 +46,17 @@ class CartAdapter(
         fun setData(productModel: ProductModel, position: Int) {
             tvProductName.text = productModel.product_name
             var totalCost =0.0
+            var unit = ArrayList<String>()
             productModel.variants.forEach {
                 totalCost += productModel.product_cost.split("/")[0].toInt() * it.variantName.toDouble() * it.qty
+                unit.add(productModel.product_cost.split("/")[1])
             }
+
             tvProductCost.text = "₹" + totalCost.toString()
             totalOrderCost.value = totalOrderCost.value?.plus(totalCost)
 
             variantAdapter = productModel.let {
-                VariantAdapter(mContext, it.variants, object : VariantAdapter.OnItemClickListener {
+                VariantAdapter(mContext,unit, it.variants, object : VariantAdapter.OnItemClickListener {
                     override fun onAddClick(position: Int, view: View) {
                         totalCost += it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble()
                         tvProductCost.text = "₹" + totalCost.toString()

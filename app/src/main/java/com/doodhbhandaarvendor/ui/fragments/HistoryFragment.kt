@@ -18,6 +18,8 @@ import com.doodhbhandaarvendor.utils.Constants.Companion.USER_ID
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.toolbar.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class HistoryFragment : Fragment() {
@@ -94,6 +96,7 @@ class HistoryFragment : Fragment() {
                     val  orderModel = snapshot.child(it).getValue(OrderPlaceModel::class.java)
                     pastOrderList.add( orderModel?: OrderPlaceModel())
                 }
+                pastOrderList.sortWith(Collections.reverseOrder())
                 historyAdapter.notifyDataSetChanged()
             }
 

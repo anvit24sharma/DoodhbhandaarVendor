@@ -2,6 +2,7 @@ package com.doodhbhandaarvendor.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,8 @@ import com.doodhbhandaarvendor.utils.Constants.Companion.USER_ID
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.iid.InstanceIdResult
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUpActivity : AppCompatActivity() {
@@ -42,7 +45,6 @@ class SignUpActivity : AppCompatActivity() {
     private fun signInUser() {
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private fun signUpUser() {
@@ -66,7 +68,10 @@ class SignUpActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user: FirebaseUser? = auth.currentUser
                             val userId = user?.uid
-                            val userModel = UserModel(et_name.text.toString(),
+                    var newToken=""
+
+
+                    val userModel = UserModel(et_name.text.toString(),
                                 et_mobile_no.text.toString(),
                                 et_delivery_address.text.toString(),
                                 et_email.text.toString(),

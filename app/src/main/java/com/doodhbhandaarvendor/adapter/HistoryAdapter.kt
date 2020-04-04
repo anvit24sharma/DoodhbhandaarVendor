@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.model.OrderPlaceModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HistoryAdapter(
     private var context: Context?,
@@ -33,7 +35,12 @@ class HistoryAdapter(
         holder.orderNo.text = orders[position].orderId
         holder.amount.text = orders[position].totalCost
         holder.status.text = orders[position].status
-        holder.date.text = orders[position].orderDate
+        val formatter1 = SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy")
+        val date1: Date = formatter1.parse(orders[position].orderDate)
+        val cal = Calendar.getInstance()
+        cal.time = date1
+        val formatedDate = cal[Calendar.DATE].toString() + "/" + (cal[Calendar.MONTH] + 1) + "/" + cal[Calendar.YEAR]
+        holder.date.text =formatedDate
         holder.tvOrderDetails.setOnClickListener {
             mlistener.onOrderDetailsClick(position, it)
         }

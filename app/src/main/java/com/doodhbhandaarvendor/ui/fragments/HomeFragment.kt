@@ -32,6 +32,8 @@ class HomeFragment : Fragment() {
 
         lateinit var productsDR : DatabaseReference
         lateinit var orderDR : DatabaseReference
+        lateinit var userOrdersDR : DatabaseReference
+
     }
 
     override fun onCreateView(
@@ -48,6 +50,7 @@ class HomeFragment : Fragment() {
         progress.visibility =VISIBLE
         productsDR = FirebaseDatabase.getInstance().getReference(Constants.PRODUCTS_TABLE)
         orderDR = FirebaseDatabase.getInstance().getReference(Constants.ORDER_TABLE)
+        userOrdersDR =  FirebaseDatabase.getInstance().getReference(Constants.USERORDERS_TABLE)
         tv_count.text = "0"
         getProducts()
         initRecyclerView()
