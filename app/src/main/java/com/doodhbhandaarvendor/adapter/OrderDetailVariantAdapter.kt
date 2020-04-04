@@ -1,5 +1,6 @@
 package com.doodhbhandaarvendor.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +10,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.model.VariantModel
 
-class OrderDetailVariantAdapter(private val context: Context?, private val products: ArrayList<VariantModel>) : RecyclerView.Adapter<OrderDetailVariantAdapter.PostViewHolder>() {
+class OrderDetailVariantAdapter(
+    private val context: Context?,
+    private val products: ArrayList<VariantModel>,
+    private val unit: String
+) : RecyclerView.Adapter<OrderDetailVariantAdapter.PostViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         return PostViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_quantity_detail, parent, false))
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        holder.variantName.text = products[position].variantName
+        if( products[position].variantName.toDouble() >=1.0 && unit == "Kg")
+            holder.variantName.text = products[position].variantName + " " +unit
+        else if( products[position].variantName.toDouble() <1.0 && unit == "Kg")
+            holder.variantName.text = ""+(products[position].variantName.toDouble()*1000 )+ " " +"gm"
+        else if( products[position].variantName.toDouble() >=1.0 && unit == "Ltr")
+            holder.variantName.text = products[position].variantName + " " +unit
+        else if( products[position].variantName.toDouble() <1.0 && unit == "Ltr")
+            holder.variantName.text = ""+ products[position].variantName.toDouble() * 1000 + " " +"ml"
+
         holder.totalQty.text = products[position].qty.toString()
 
     }

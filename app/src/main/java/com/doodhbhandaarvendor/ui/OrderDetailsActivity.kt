@@ -11,6 +11,7 @@ import com.doodhbhandaarvendor.ui.fragments.HistoryFragment.Companion.pastOrderL
 import kotlinx.android.synthetic.main.activity_order_details.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class OrderDetailsActivity : AppCompatActivity() {
     var orderId = ""
@@ -46,9 +47,12 @@ class OrderDetailsActivity : AppCompatActivity() {
     }
 
         private fun initRecyclerView() {
-
+            val units = ArrayList<String>()
+            orderPlaceModel.products.forEach {
+                units.add(it.productCost.split("/")[1])
+            }
             orderDetailAdapter = orderPlaceModel.products.let {
-                OrderDetailsAdapter(this, it)
+                OrderDetailsAdapter(this, it,units)
             }
 
             rv_order_products.apply {
