@@ -15,11 +15,10 @@
     <TextView
         android:id="@+id/into"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
         android:layout_toRightOf="@+id/qty1"
         android:text="X"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/qty2"

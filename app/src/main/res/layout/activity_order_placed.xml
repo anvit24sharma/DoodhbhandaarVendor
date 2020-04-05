@@ -42,7 +42,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/my_btn"
+        android:background="@color/colorPrimary"
         android:textColor="#ffffff"
         android:text="OK"
         android:textStyle="bold"

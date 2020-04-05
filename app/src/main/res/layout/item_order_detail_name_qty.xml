@@ -22,5 +22,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_productName"
         tools:listitem="@layout/item_quantity_detail" />
+    <view
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/rv_variants"
+        android:background="#b1b1b1"/>
 
 </RelativeLayout>

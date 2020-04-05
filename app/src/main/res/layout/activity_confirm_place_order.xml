@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F7FD">
+    android:background="#fff">
 
     <LinearLayout
         android:id="@+id/ll_calender"
@@ -20,11 +20,12 @@
             android:id="@+id/llDate1"
             android:layout_width="0dp"
             android:layout_height="50dp"
+            android:layout_marginStart="2dp"
             android:background="@drawable/calender_box"
             android:elevation="4dp"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="6dp">
+           >
 
             <TextView
                 android:id="@+id/tvMonth1"
@@ -54,7 +55,7 @@
             android:background="@drawable/calender_box"
             android:elevation="4dp"
             android:orientation="vertical"
-            android:padding="6dp">
+         >
 
             <TextView
                 android:id="@+id/tvMonth2"
@@ -84,7 +85,7 @@
             android:elevation="4dp"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="6dp">
+           >
 
             <TextView
                 android:id="@+id/tvMonth3"
@@ -114,7 +115,7 @@
             android:elevation="4dp"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="6dp">
+            >
 
             <TextView
                 android:id="@+id/tvMonth4"
@@ -144,7 +145,7 @@
             android:layout_weight="1"
             android:background="@drawable/calender_box"
             android:orientation="vertical"
-            android:padding="6dp">
+           >
 
             <TextView
                 android:id="@+id/tvMonth5"
@@ -174,7 +175,7 @@
             android:elevation="4dp"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="6dp">
+           >
 
             <TextView
                 android:id="@+id/tvMonth6"
@@ -204,7 +205,7 @@
             android:elevation="4dp"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="6dp">
+          >
 
             <TextView
                 android:id="@+id/tvMonth7"
@@ -235,17 +236,17 @@
         android:layout_above="@+id/ll_payment_option"
         android:background="#fff"
         android:orientation="horizontal"
-        android:padding="6dp">
+        android:padding="2dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:background="#fff"
-            android:padding="6dp"
+            android:padding="2dp"
             android:text="To Pay"
             android:textColor="#000"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
@@ -256,10 +257,10 @@
             android:layout_marginEnd="4dp"
             android:background="#fff"
             android:gravity="end"
-            android:padding="6dp"
+            android:padding="2dp"
             android:text="Rs.%s"
             android:textColor="#000"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <View
@@ -276,17 +277,17 @@
         android:layout_above="@+id/ll_delivery_address"
         android:background="#fff"
         android:orientation="horizontal"
-        android:padding="6dp">
+        android:padding="2dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:background="#fff"
-            android:padding="6dp"
+            android:padding="4dp"
             android:text="Payment Mode"
             android:textColor="#000"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <RadioGroup
@@ -294,21 +295,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff"
-            android:padding="6dp"
-
-
+            android:padding="4dp"
             >
 
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="6dp"
+                android:padding="4dp"
                 android:text="Cash" />
 
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="6dp"
+                android:padding="4dp"
                 android:text="Online" />
         </RadioGroup>
 
@@ -321,16 +320,19 @@
         android:layout_marginStart="3dp"
         android:layout_marginTop="3dp"
         android:layout_marginEnd="3dp"
-        android:background="#3a3a3a" />
+        android:background="#E8E8E8" />
 
     <LinearLayout
         android:id="@+id/ll_delivery_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btn_place_order"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
         android:background="#fff"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="2dp"
+        >
 
         <ImageView
             android:layout_width="40dp"
@@ -344,7 +346,8 @@
             android:layout_margin="4dp"
             android:background="#fff"
             android:orientation="vertical"
-            android:padding="8dp">
+
+            >
 
 
             <TextView
@@ -353,7 +356,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:background="#fff"
-                android:padding="8dp"
                 android:text="Deliver to"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -364,7 +366,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:background="#fff"
-                android:padding="8dp"
                 android:text="Delivery Address"
                 android:textSize="14sp"
                 android:textStyle="normal" />
@@ -381,8 +382,8 @@
             android:padding="4dp"
             android:text="Change Address"
             android:textColor="#ff7d18"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textSize="13sp"
+             />
 
 
     </LinearLayout>
@@ -392,9 +393,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/my_btn"
+
+        android:background="@color/colorPrimary"
         android:text="@string/place_order"
-        android:textAllCaps="false"
+        android:textAllCaps="true"
         android:textColor="#ffffff"
         android:textSize="16sp" />
 </RelativeLayout>
