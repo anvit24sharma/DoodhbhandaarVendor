@@ -13,8 +13,9 @@ import com.doodhbhandaarvendor.model.OrderPlaceProductModel
 
 
 class OrderDetailsAdapter(
-        private var mContext: Context?,
-        private var product: ArrayList<OrderPlaceProductModel>
+    private var mContext: Context?,
+    private var product: ArrayList<OrderPlaceProductModel>,
+    private var units: ArrayList<String>
 ) : RecyclerView.Adapter<OrderDetailsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,10 +39,11 @@ class OrderDetailsAdapter(
         private lateinit var variantAdapter :OrderDetailVariantAdapter
 
         fun setData(orderModel: OrderPlaceProductModel, position: Int) {
+
             tvProductName.text = orderModel.productName
 
             variantAdapter = orderModel.let {
-                OrderDetailVariantAdapter(mContext, it.variants)
+                OrderDetailVariantAdapter(mContext, it.variants,units[position])
             }
             rvVariants.apply {
                 adapter = variantAdapter

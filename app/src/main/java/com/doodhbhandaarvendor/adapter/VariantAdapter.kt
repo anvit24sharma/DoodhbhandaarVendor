@@ -1,6 +1,7 @@
 package com.doodhbhandaarvendor.adapter
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.doodhbhandaarvendor.model.VariantModel
 
 class VariantAdapter(
     private var mContext: Context?,
+    private var unit :ArrayList<String>,
     private var variants: ArrayList<VariantModel>,
     private var mListener: OnItemClickListener
 ) : RecyclerView.Adapter<VariantAdapter.ViewHolder>() {
@@ -40,8 +42,19 @@ class VariantAdapter(
         private val ibRemove= itemView.findViewById<ImageButton>(R.id.ib_remove)
         private val tvQty= itemView.findViewById<TextView>(R.id.tv_qty)
 
+        @SuppressLint("SetTextI18n")
         fun setData(variant: VariantModel, position: Int) {
-            tvVariantName.text = variant.variantName
+
+            if(unit[position] == "Kg" && variant.variantName.toDouble() <1.0) {
+                tvVariantName.text = (variant.variantName.toDouble()*1000).toString() +" gm"
+            }else if(unit[position] == "Kg" && variant.variantName.toDouble() >=1.0){
+                tvVariantName.text = variant.variantName + " Kg"
+            }else if(unit[position] == "Ltr" && variant.variantName.toDouble() <1.0) {
+                tvVariantName.text = (variant.variantName.toDouble()*1000).toString() +" ml"
+            }else if(unit[position] == "Ltr" && variant.variantName.toDouble() >=1.0){
+                tvVariantName.text = variant.variantName + " Ltr"
+            }
+
             tvQty.text = variant.qty.toString()
 
 

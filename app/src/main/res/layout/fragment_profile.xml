@@ -22,6 +22,7 @@
             />
 
         <TextView
+            android:id="@+id/tvUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -33,6 +34,7 @@
             android:textStyle="normal" />
 
         <TextView
+            android:id="@+id/tv_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -44,6 +46,7 @@
             android:textStyle="normal" />
 
         <TextView
+            android:id="@+id/tvMobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -54,8 +57,20 @@
             android:textSize="16sp"
             android:textStyle="normal" />
 
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:text="Address"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="normal" />
 
         <ImageView
+            android:id="@+id/ivEdit"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/edit"

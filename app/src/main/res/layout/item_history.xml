@@ -3,140 +3,137 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
-    android:background="#ffffff"
-    android:elevation="4dp"
-    android:padding="5dp"
+    android:background="#f0f0f0"
+    android:orientation="vertical"
     android:scrollbars="vertical">
 
-    <TextView
-        android:id="@+id/txt_orderNo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="ORDER NO:"
-        android:textAllCaps="true"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/orderNo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@id/txt_orderNo"
-        android:text="ORDER NO"
-        android:textSize="16sp"
-        android:textStyle="normal" />
-
-    <TextView
-        android:id="@+id/tv_orderDetails"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:layout_below="@id/tv_totalPrice"
-        android:layout_toRightOf="@+id/bracket2"
-        android:gravity="end"
-        android:text="Order Details"
-        android:textColor="#8000a4"
-        android:textSize="14sp"
-        android:textStyle="normal" />
-
-    <TextView
-        android:id="@+id/orderDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txt_orderNo"
-        android:padding="4dp"
-        android:text="Order Date"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="2dp"
-        android:textStyle="italic" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/orderDate"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="#b1b1b1" />
-
-    <TextView
-        android:id="@+id/tv_billAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/view"
-        android:padding="4dp"
-        android:text="Bill Amount:"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tv_totalPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/view"
-        android:layout_toRightOf="@+id/tv_billAmount"
-        android:padding="4dp"
-        android:text="Rs.%s"
-        android:textSize="16sp"
-        android:textStyle="normal"
-        android:textColor="#000000"/>
-
-    <TextView
-        android:id="@+id/tv_productStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_billAmount"
-        android:layout_marginEnd="2dp"
-        android:padding="4dp"
-        android:text="Status"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/bracket1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_totalPrice"
-        android:layout_marginTop="2dp"
-        android:layout_toRightOf="@id/tv_productStatus"
-        android:text="("
-        android:textColor="#32CD32"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+        android:layout_margin="6dp"
+        android:background="#ffffff"
+        android:elevation="4dp"
+        android:padding="5dp">
 
 
-    <TextView
-        android:id="@+id/tv_productStatusDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_totalPrice"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="1dp"
-        android:layout_toRightOf="@id/bracket1"
-        android:textColor="#32CD32"
+        <TextView
+            android:id="@+id/txt_orderNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="ORDER NO:"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textAllCaps="true"
+            android:textSize="16sp" />
 
-        android:text="Date"
-        android:textSize="13sp"
-        android:textStyle="italic" />
+        <TextView
+            android:id="@+id/orderNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/txt_orderNo"
+            android:text="ORDER NO"
+            android:textStyle="normal"
+            android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/bracket2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_totalPrice"
-        android:layout_marginTop="2dp"
-        android:layout_toRightOf="@id/tv_productStatusDate"
-        android:text=")"
-        android:textColor="#32CD32"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tv_orderDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="2dp"
+            android:layout_toRightOf="@+id/orderNo"
+            android:gravity="end"
+            android:padding="4dp"
+            android:text="Order Details"
+            android:textColor="#8000a4"
+            android:textSize="12sp"
+            android:textStyle="normal" />
+        <TextView
+            android:id="@+id/orderDate"
+            android:layout_below="@id/txt_orderNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Order Date"
+            android:padding="4dp"
+            android:textSize="14sp"
+            android:textStyle="italic" />
+        <View
+            android:id="@+id/view"
+            android:layout_below="@+id/orderDate"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#b1b1b1"/>
+        <TextView
+            android:id="@+id/tv_billAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view"
+            android:padding="4dp"
+            android:text="Bill Amount:"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tv_totalPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_billAmount"
+            android:layout_below="@+id/view"
+            android:padding="4dp"
+            android:text="Rs.%s"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/tv_productStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_below="@+id/tv_billAmount"
+            android:text="Status"
+            android:padding="4dp"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/bracket1"
+            android:layout_below="@id/tv_totalPrice"
+            android:layout_toRightOf="@id/tv_productStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="("
+            android:textSize="14sp"
+            android:layout_marginTop="2dp"
+            android:textStyle="bold"/>
+
+
+        <TextView
+            android:id="@+id/tv_productStatusDate"
+            android:layout_toRightOf="@id/bracket1"
+            android:layout_below="@id/tv_totalPrice"
+            android:textStyle="italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="1dp"
+            android:textSize="13sp"
+       />
+        <TextView
+            android:id="@+id/bracket2"
+            android:layout_below="@id/tv_totalPrice"
+            android:layout_toRightOf="@id/tv_productStatusDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=")"
+            android:layout_marginTop="2dp"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+    </RelativeLayout>
 </RelativeLayout>

@@ -1,7 +1,9 @@
 package com.doodhbhandaarvendor.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.auth.LoginActivity.Companion.prefs
@@ -10,6 +12,7 @@ import com.doodhbhandaarvendor.model.OrderPlaceProductModel
 import com.doodhbhandaarvendor.model.VariantModel
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.cartProductList
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.orderDR
+import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.userOrdersDR
 import com.doodhbhandaarvendor.utils.Constants.Companion.ADDRESS
 import com.doodhbhandaarvendor.utils.Constants.Companion.USER_ID
 import kotlinx.android.synthetic.main.activity_confirm_place_order.*
@@ -24,11 +27,12 @@ class OrderPlacedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_place_order)
 
+
         initCalendar()
         initCalendarClicks()
 
         CartActivity.totalOrderCost.observe( this, androidx.lifecycle.Observer {
-            tv_totalPrice.text = "₹" + it.toString()
+            tv_totalPrice.text = "₹$it"
         })
 
         tv_address_name.text = prefs.getString(ADDRESS,"")?:""
@@ -41,24 +45,43 @@ class OrderPlacedActivity : AppCompatActivity() {
             }
             orderPlaceProductModel.add(OrderPlaceProductModel(it.product_name,it.product_cost,variants))
         }
+        var selectedMode =  ""
+
 
         btn_place_order.setOnClickListener {
+            selectedMode = if(rg_payment.checkedRadioButtonId != -1)
+                findViewById<RadioButton>(rg_payment.checkedRadioButtonId).text.toString()
+            else
+                ""
 
-          //  if(scheduleDate!="" &&)
-            val orderId = orderDR.push().key.toString()
+            if(scheduleDate!="" &&  selectedMode!="" ) {
+                val orderId = orderDR.push().key.toString()
+                val orderPlaceModel = OrderPlaceModel(
+                    orderPlaceProductModel,
+                    prefs.getString(USER_ID, "") ?: "",
+                    tv_address_name.text.toString(),
+                    scheduleDate,
+                    selectedMode,
+                    Date().toString(),
+                    "order_pending",
+                    tv_totalPrice.text.toString(),
+                    orderId
+                )
 
-            val orderPlaceModel = OrderPlaceModel(orderPlaceProductModel,
-                prefs.getString(USER_ID,"")?:"",
-                tv_address.text.toString(),
-                scheduleDate,
-                findViewById<RadioButton>(rg_payment.checkedRadioButtonId).text.toString(),
-                Date().toString(),
-                "order_pending",
-                tv_totalPrice.text.toString(),
-                orderId)
+                orderDR.child(orderId).setValue(orderPlaceModel)
 
-            orderDR.child(orderId).setValue(orderPlaceModel)
+                userOrdersDR.child(prefs.getString(USER_ID, "") ?: "")
+                    .child(orderId).setValue(orderId).addOnCompleteListener{
+                        val intent = Intent(this@OrderPlacedActivity, MainActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        startActivity(intent)
+                        finish()
+                    }
 
+            }else{
+                Toast.makeText(this,"Select payment mode",Toast.LENGTH_SHORT).show()
+            }
 
         }
 
@@ -78,7 +101,7 @@ class OrderPlacedActivity : AppCompatActivity() {
             val day = currentDate.date
             val month = currentDate.month + 1
             val year = currentDate.year +1900
-            scheduleDate = "" + day + "/" + month + "/" + year
+            scheduleDate = "$day/$month/$year"
         }
         llDate2.setOnClickListener {
             llDate1.setBackgroundResource(R.drawable.calender_box)
