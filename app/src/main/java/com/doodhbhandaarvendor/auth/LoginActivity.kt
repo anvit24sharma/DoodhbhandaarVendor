@@ -54,7 +54,6 @@ class LoginActivity : AppCompatActivity() {
 
         txt_SignUp.setOnClickListener {
             startActivity((Intent(this, SignUpActivity::class.java)))
-            finish()
         }
         btn_login.setOnClickListener {
             validate()
@@ -134,7 +133,7 @@ class LoginActivity : AppCompatActivity() {
         //if current user is not null than login successfully
         if (currentUser != null) {
             //if email is verified
-            if (prefs.getString(NAME, "") == null ) {
+            if (prefs.getString(NAME, "") == null && prefs.getString(NAME,"") !="") {
                 startActivity(Intent(this@LoginActivity, UserDetailActivity::class.java))
                  finish()
             } else {
@@ -178,34 +177,17 @@ class LoginActivity : AppCompatActivity() {
                     override fun onDataChange(datasnapShot: DataSnapshot) {
                         if (datasnapShot.child(user?.uid!!).exists()) {
                             val editor = prefs.edit()
-                            editor.putString(
-                                Constants.NAME,
-                                datasnapShot.child(user.uid).child("name").getValue().toString()
-                            )
-                            editor.putString(
-                                Constants.PHONE_NUMBER,
-                                datasnapShot.child(user.uid).child("phone_number").getValue().toString()
-                            )
-                            editor.putString(
-                                Constants.EMAIL,
-                                datasnapShot.child(user.uid).child("email").getValue().toString()
-                            )
-                            editor.putString(
-                                Constants.ADDRESS,
-                                datasnapShot.child(user.uid).child("address").getValue().toString()
-                            )
+                            editor.putString(NAME, datasnapShot.child(user.uid).child("name").getValue().toString())
+                            editor.putString(Constants.PHONE_NUMBER, datasnapShot.child(user.uid).child("phone_number").getValue().toString())
+                            editor.putString(Constants.EMAIL, datasnapShot.child(user.uid).child("email").getValue().toString())
+                            editor.putString(Constants.ADDRESS, datasnapShot.child(user.uid).child("address").getValue().toString())
                             editor.putString(Constants.USER_ID, user.uid)
                             editor.apply()
                             startActivity(Intent(applicationContext, MainActivity::class.java))
                             finish()
                         } else {
                             //start user Details Activity
-                            startActivity(
-                                Intent(
-                                    applicationContext,
-                                    UserDetailActivity::class.java
-                                )
-                            )
+                            startActivity(Intent(applicationContext, UserDetailActivity::class.java))
                             finish()
                         }
                     }
@@ -213,11 +195,7 @@ class LoginActivity : AppCompatActivity() {
                 })
 
             } else {
-                Toast.makeText(
-                    this,
-                    "Google sign in failed" + it.exception.toString(),
-                    Toast.LENGTH_LONG
-                ).show()
+                Toast.makeText(this, "Google sign in failed" + it.exception.toString(), Toast.LENGTH_LONG).show()
             }
         }
 

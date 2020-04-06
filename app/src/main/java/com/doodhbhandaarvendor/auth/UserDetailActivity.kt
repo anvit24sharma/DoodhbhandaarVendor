@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_user_detail.*
 class UserDetailActivity : AppCompatActivity() {
     lateinit var user: FirebaseUser
     lateinit var userId :String
-    lateinit var userEmail :String
+    lateinit var userEmail:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,7 @@ class UserDetailActivity : AppCompatActivity() {
 
         et_email.setText(userEmail)
 
-        if(prefs.getString(NAME,"")!=null && from!="ProfileFragment"){
+        if(prefs.getString(NAME,"")!=null && prefs.getString(NAME,"")!="" && from!="ProfileFragment"){
             startActivity(Intent(this,MainActivity::class.java))
             finish()
         }else if(from == "ProfileFragment"){
@@ -47,6 +47,7 @@ class UserDetailActivity : AppCompatActivity() {
         btn_Save.setOnClickListener {
             validateDetails()
         }
+
     }
 
     private fun validateDetails() {
@@ -67,10 +68,10 @@ class UserDetailActivity : AppCompatActivity() {
                     OnCompleteListener {
                         if (it.isSuccessful) {
                             val editor = prefs.edit()
-                            editor.putString(Constants.NAME, userModel.name)
-                            editor.putString(Constants.PHONE_NUMBER, userModel.phone_number)
+                            editor.putString(NAME, userModel.name)
+                            editor.putString(PHONE_NUMBER, userModel.phone_number)
                             editor.putString(Constants.EMAIL, userModel.email)
-                            editor.putString(Constants.ADDRESS, userModel.address)
+                            editor.putString(ADDRESS, userModel.address)
                             editor.putString(Constants.USER_ID, userModel.userId)
                             editor.apply()
                             startActivity(Intent(this, MainActivity::class.java))

@@ -2,7 +2,6 @@ package com.doodhbhandaarvendor.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -19,8 +18,6 @@ import com.doodhbhandaarvendor.utils.Constants.Companion.USER_ID
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.iid.FirebaseInstanceId
-import com.google.firebase.iid.InstanceIdResult
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUpActivity : AppCompatActivity() {
@@ -76,7 +73,7 @@ class SignUpActivity : AppCompatActivity() {
                                 et_delivery_address.text.toString(),
                                 et_email.text.toString(),
                                 userId!!)
-                            usersDR.child(userId).setValue(user).addOnCompleteListener(
+                            usersDR.child(userId).setValue(userModel).addOnCompleteListener(
                                 OnCompleteListener {
                                     if(it.isSuccessful){
                                         val editor = prefs.edit()
