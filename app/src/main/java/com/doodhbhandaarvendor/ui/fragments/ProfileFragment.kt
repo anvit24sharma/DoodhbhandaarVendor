@@ -14,7 +14,6 @@ import com.doodhbhandaarvendor.utils.Constants.Companion.EMAIL
 import com.doodhbhandaarvendor.utils.Constants.Companion.NAME
 import com.doodhbhandaarvendor.utils.Constants.Companion.PHONE_NUMBER
 import kotlinx.android.synthetic.main.fragment_profile.*
-
 class ProfileFragment : Fragment() {
 
 
