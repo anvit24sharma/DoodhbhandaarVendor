@@ -11,7 +11,7 @@
     <string name="order_date">Order Date : %s</string>
     <string name="schedule_date">Schedule Date : %s</string>
     <string name="date_s">( %s )</string>
-    <string name="bill_amount_s">Bill Amount: ₹ %s</string>
+    <string name="bill_amount_s">Bill Amount:₹ %s</string>
     <string name="doodhbhandaar">Doodhbhandaar</string>
 
 

@@ -1,31 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/tv_productName"
-        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:background="#ffffff"
-        android:padding="4dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginStart="6dp"
         android:text="Product Name"
+        android:background="#ffffff"
         android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:ignore="MissingConstraints"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_variants"
+        app:layout_constraintTop_toBottomOf="@id/tv_productName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_below="@+id/tv_productName"
-        tools:listitem="@layout/item_quantity_detail" />
-    <view
+        tools:listitem="@layout/item_quantity_detail"
+        tools:itemCount="2"
+        tools:ignore="MissingConstraints" />
+    <View
+        android:id="@+id/view1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/rv_variants"
-        android:background="#b1b1b1"/>
-
-</RelativeLayout>
+        android:background="#f0f0f0"
+        app:layout_constraintTop_toBottomOf="@+id/rv_variants"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
