@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.doodhbhandaarvendor.R
+import com.doodhbhandaarvendor.R.color
 import com.doodhbhandaarvendor.adapter.ProductAdapter
 import com.doodhbhandaarvendor.model.ProductModel
 import com.doodhbhandaarvendor.model.VariantModel
@@ -86,6 +87,7 @@ class HomeFragment : Fragment() {
                     else {
                         cartProductList.remove(productList[position])
                         btn.text = getString(R.string.add)
+
                     }
 
                     tv_count.text = cartProductList.size.toString()

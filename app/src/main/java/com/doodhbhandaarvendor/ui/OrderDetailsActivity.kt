@@ -1,5 +1,6 @@
 package com.doodhbhandaarvendor.ui
 
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,25 +24,29 @@ class OrderDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_order_details)
 
         orderId = intent.getStringExtra("orderId")?:""
-        pastOrderList.forEach {
-            if(orderId == it.orderId)
-                orderPlaceModel = it
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            pastOrderList.forEach {
+                if(orderId == it.orderId)
+                    orderPlaceModel = it
+            }
         }
         initView()
     }
 
     private fun initView() {
 
-        orderNo.text = orderId
+        tv_orderNo.text = orderId
         val formatter1 = SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy")
         val date1: Date = formatter1.parse(orderPlaceModel.orderDate)
         val cal = Calendar.getInstance()
         cal.time = date1
         val formatedDate = cal[Calendar.DATE].toString() + "/" + (cal[Calendar.MONTH] + 1) + "/" + cal[Calendar.YEAR]
-        orderDate.text = getString(R.string.order_date,formatedDate)
-        scheduleDate.text =  getString(R.string.schedule_date,orderPlaceModel.schedule)
+        tv_orderDate.text = formatedDate
+        tv_scheduleDate.text = orderPlaceModel.schedule
         tv_totalPrice.text = getString(R.string.bill_amount_s,orderPlaceModel.totalCost)
         tv_productStatus.text = orderPlaceModel.status
+        tv_deliverTo.text=orderPlaceModel.address
+        tv_payment.text=orderPlaceModel.paymentMode
 
         initRecyclerView()
     }

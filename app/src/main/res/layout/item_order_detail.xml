@@ -61,7 +61,7 @@
             tools:listitem="@layout/item_order_detail_name_qty" />
     <View
         android:id="@+id/view"
-        android:layout_below="@+id/rv_history"
+        android:layout_below="@+id/rv_detail_product"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_margin="2dp"
