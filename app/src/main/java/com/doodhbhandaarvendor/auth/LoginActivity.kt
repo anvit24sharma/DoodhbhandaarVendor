@@ -22,6 +22,9 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.et_email
+import kotlinx.android.synthetic.main.activity_login.et_password
+import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -69,7 +72,6 @@ class LoginActivity : AppCompatActivity() {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        //Google signin button click.
         btn_google_signIn.setOnClickListener {
             signInGoogle()
         }
@@ -78,7 +80,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun forgotPassword() {
-
         startActivity(Intent(this, ForgotPasswordActivity::class.java))
         finish()
     }
@@ -104,15 +105,14 @@ class LoginActivity : AppCompatActivity() {
             return
         }
         //if password is empty
-        if (et_password.text.toString().isEmpty()) {
+        if (et_password.text.toString().isEmpty() || et_confirm_password.text.toString().isEmpty()) {
             et_password.error = "Please enter password"
             et_password.requestFocus()
             return
         }
-        //if no error then login
-        auth.signInWithEmailAndPassword(et_email.text.toString(), et_email.text.toString())
+
+        auth.signInWithEmailAndPassword(et_email.text.toString(), et_password.text.toString())
             .addOnCompleteListener(this) { task ->
-                //if login is successful
                 if (task.isSuccessful) {
                     val user: FirebaseUser? = auth.currentUser
                     updateUI(user)
@@ -133,15 +133,35 @@ class LoginActivity : AppCompatActivity() {
         //if current user is not null than login successfully
         if (currentUser != null) {
             //if email is verified
-            if (prefs.getString(NAME, "") == null && prefs.getString(NAME,"") !="") {
-                startActivity(Intent(this@LoginActivity, UserDetailActivity::class.java))
-                 finish()
+            if (prefs.getString(NAME,"") =="") {
+                usersDR.addValueEventListener(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+                    override fun onDataChange(datasnapShot: DataSnapshot) {
+                        if (datasnapShot.child(currentUser.uid).exists()) {
+                            val editor = prefs.edit()
+                            editor.putString(NAME, datasnapShot.child(currentUser.uid).child("name").getValue().toString())
+                            editor.putString(Constants.PHONE_NUMBER, datasnapShot.child(currentUser.uid).child("phone_number").getValue().toString())
+                            editor.putString(Constants.EMAIL, datasnapShot.child(currentUser.uid).child("email").getValue().toString())
+                            editor.putString(Constants.ADDRESS, datasnapShot.child(currentUser.uid).child("address").getValue().toString())
+                            editor.putString(Constants.USER_ID, currentUser.uid)
+                            editor.apply()
+                            startActivity(Intent(applicationContext, MainActivity::class.java))
+                            finish()
+                        } else {
+                            startActivity(Intent(applicationContext, UserDetailActivity::class.java))
+                            finish()
+                        }
+                    }
+
+                })
             } else {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
         }
-        }
+    }
 
 
 
