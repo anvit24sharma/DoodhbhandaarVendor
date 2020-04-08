@@ -4,8 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -65,7 +67,41 @@ class CartActivity : AppCompatActivity() {
         private fun initRecyclerView() {
             cartAdapter = HomeFragment.cartProductList.let {
                 CartAdapter(this, it, object : CartAdapter.OnItemClickListener {
-                    override fun onAddClick(position: Int, view: View) {
+                    override fun onCustomClick(
+                        position: Int,
+                        view: View,
+                        btnDaily: Button,
+                        btnWeekly: Button
+                    ) {
+                        view.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.selected_btn)
+                        btnDaily.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
+                        btnWeekly.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
+                        it[position].subscriptionPlan = "Custom"
+                    }
+
+                    override fun onWeeklyClick(
+                        position: Int,
+                        btnCustom: Button,
+                        btnDaily: Button,
+                        view: View
+                    ) {
+                        btnDaily.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
+                        btnCustom.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
+                        view.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.selected_btn)
+                        it[position].subscriptionPlan = "Weekly"
+
+                    }
+
+                    override fun onDailyClick(
+                        position: Int,
+                        btnCustom: Button,
+                        view: View,
+                        btnWeekly: Button
+                    ) {
+                        btnWeekly.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
+                        btnCustom.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
+                        view.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.selected_btn)
+                        it[position].subscriptionPlan = "Daily"
 
                     }
                 })

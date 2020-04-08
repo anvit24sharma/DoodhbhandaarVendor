@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.doodhbhandaarvendor.R
-import com.doodhbhandaarvendor.R.color
 import com.doodhbhandaarvendor.adapter.ProductAdapter
 import com.doodhbhandaarvendor.model.ProductModel
 import com.doodhbhandaarvendor.model.VariantModel
@@ -121,7 +120,7 @@ class HomeFragment : Fragment() {
                        snap.child("product_cost").getValue().toString(),
                        snap.child("product_image_url").getValue().toString(),
                        snap.key.toString(),
-                       variantsList
+                       variantsList,""
                    )
                         productList.add(productModel)
                 }

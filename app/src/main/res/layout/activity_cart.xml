@@ -4,18 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:scrollbars="vertical"
-    android:background="#fff"
-    >
+    android:background="#fff">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/btn_place_order"
+        android:layout_above="@id/btn_confirm_order"
         android:id="@+id/rv_cart"
         tools:itemCount="2"
         tools:listitem="@layout/item_cart_layout"
-        tools:ignore="NotSibling" />
+         />
 
 
 
@@ -25,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="#2873f0"
-        android:text="@string/place_order"
+        android:text="@string/confirm_order"
         android:textAllCaps="false"
         android:textColor="#ffffff"
         android:textSize="16sp" />
