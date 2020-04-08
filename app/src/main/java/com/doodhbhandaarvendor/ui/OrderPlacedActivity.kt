@@ -47,7 +47,6 @@ class OrderPlacedActivity : AppCompatActivity() {
         }
         var selectedMode =  ""
 
-
         btn_place_order.setOnClickListener {
             selectedMode = if(rg_payment.checkedRadioButtonId != -1)
                 findViewById<RadioButton>(rg_payment.checkedRadioButtonId).text.toString()

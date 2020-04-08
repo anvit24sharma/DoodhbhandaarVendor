@@ -34,8 +34,13 @@ class CartActivity : AppCompatActivity() {
         btn_confirm_order.setOnClickListener {
 
             var allItemSelected =true
+            var planSelected = true
             for (productModel in HomeFragment.cartProductList) {
                 var itemSelected = false
+
+                if(productModel.subscriptionPlan ==""){
+                    planSelected = false
+                }
                 productModel.variants.forEach {
                     if(it.qty >0){
                         itemSelected =true
@@ -45,13 +50,15 @@ class CartActivity : AppCompatActivity() {
                     allItemSelected = false
                     break
                 }
-
-
             }
 
             if(totalOrderCost.value == 0.0 || !allItemSelected){
                 Toast.makeText(this,"Select Quantity for each Product",Toast.LENGTH_SHORT).show()
-            }else {
+            }
+            else if(!planSelected){
+                Toast.makeText(this,"Please Select Subscription Plan",Toast.LENGTH_SHORT).show()
+
+            } else{
                 val intent = Intent(this, OrderPlacedActivity::class.java)
                 startActivity(intent)
             }
@@ -67,37 +74,21 @@ class CartActivity : AppCompatActivity() {
         private fun initRecyclerView() {
             cartAdapter = HomeFragment.cartProductList.let {
                 CartAdapter(this, it, object : CartAdapter.OnItemClickListener {
-                    override fun onCustomClick(
-                        position: Int,
-                        view: View,
-                        btnDaily: Button,
-                        btnWeekly: Button
-                    ) {
+                    override fun onCustomClick(position: Int, view: View, btnDaily: Button, btnWeekly: Button) {
                         view.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.selected_btn)
                         btnDaily.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
                         btnWeekly.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
                         it[position].subscriptionPlan = "Custom"
                     }
 
-                    override fun onWeeklyClick(
-                        position: Int,
-                        btnCustom: Button,
-                        btnDaily: Button,
-                        view: View
-                    ) {
+                    override fun onWeeklyClick(position: Int, btnCustom: Button, btnDaily: Button, view: View) {
                         btnDaily.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
                         btnCustom.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
                         view.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.selected_btn)
                         it[position].subscriptionPlan = "Weekly"
-
                     }
 
-                    override fun onDailyClick(
-                        position: Int,
-                        btnCustom: Button,
-                        view: View,
-                        btnWeekly: Button
-                    ) {
+                    override fun onDailyClick(position: Int, btnCustom: Button, view: View, btnWeekly: Button) {
                         btnWeekly.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
                         btnCustom.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
                         view.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.selected_btn)
