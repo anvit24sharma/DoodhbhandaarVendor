@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="#ffffff">
+
+    <TextView
+        android:id="@+id/txt"
+        android:text="Select payment collection date"
+        android:gravity="center"
+        android:textColor="#f57083"
+        android:padding="4dp"
+        android:textSize="18sp"
+        android:layout_margin="10dp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <View
+        android:id="@+id/view1"
+        android:layout_width="280dp"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="4dp"
+        android:background="#000"
+        app:layout_constraintTop_toBottomOf="@id/txt"/>
+    <LinearLayout
+        android:id="@+id/ll_btn12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view1">
+
+        <Button
+            android:layout_margin="10dp"
+            android:id="@+id/btn_daily"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_btn"
+            android:elevation="4dp"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="Every Day"
+            android:textAllCaps="true"
+            android:textColor="#000"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btn_everyWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:elevation="4dp"
+
+            android:background="@drawable/white_btn"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="Every Week"
+            android:textAllCaps="true"
+            android:textColor="#000"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_btn345"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_btn12">
+
+        <Button
+            android:id="@+id/btn_every15Days"
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:elevation="4dp"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/white_btn"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="Every 15 days"
+            android:textAllCaps="true"
+            android:textColor="#000"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_every30Days"
+            android:layout_margin="10dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/white_btn"
+            android:gravity="center"
+            android:elevation="4dp"
+
+            android:padding="2dp"
+            android:text="Every 15 days"
+            android:textAllCaps="true"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_every45Days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:elevation="4dp"
+
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/white_btn"
+            android:padding="2dp"
+            android:text="Every 30 days"
+            android:textAllCaps="true"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
