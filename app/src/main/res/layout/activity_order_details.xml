@@ -9,8 +9,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
-        android:layout_marginStart="8dp">
+        android:layout_marginStart="8dp"
+        android:background="#fff">
 
         <TextView
             android:id="@+id/tv_yourOrder"
@@ -22,6 +22,31 @@
             android:textColor="#000"
             android:textSize="22sp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/edit"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="6dp"
+            android:background="#fff"
+            android:padding="2dp"
+            android:src="@drawable/ic_mode_edit"
+            app:layout_constraintEnd_toStartOf="@id/cancel"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/cancel"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:background="#fff"
+            android:padding="2dp"
+
+            android:src="@drawable/cancel"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
@@ -55,8 +80,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
             android:background="#fff"
-            android:textColor="#000"
             android:text="@string/bill_amount_s"
+            android:textColor="#000"
             android:textSize="16sp"
             android:textStyle="italic"
             app:layout_constraintTop_toBottomOf="@id/rv_order_products" />
