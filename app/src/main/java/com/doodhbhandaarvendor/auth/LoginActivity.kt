@@ -105,7 +105,7 @@ class LoginActivity : AppCompatActivity() {
             return
         }
         //if password is empty
-        if (et_password.text.toString().isEmpty() || et_confirm_password.text.toString().isEmpty()) {
+        if (et_password.text.toString().isEmpty() ) {
             et_password.error = "Please enter password"
             et_password.requestFocus()
             return

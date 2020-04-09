@@ -10,6 +10,7 @@ import com.doodhbhandaarvendor.auth.LoginActivity.Companion.prefs
 import com.doodhbhandaarvendor.model.OrderPlaceModel
 import com.doodhbhandaarvendor.model.OrderPlaceProductModel
 import com.doodhbhandaarvendor.model.VariantModel
+import com.doodhbhandaarvendor.ui.fragments.Addaddress
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.cartProductList
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.orderDR
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.userOrdersDR
@@ -19,15 +20,16 @@ import kotlinx.android.synthetic.main.activity_confirm_place_order.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class OrderPlacedActivity : AppCompatActivity() {
-
+class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner {
+    lateinit var addAddress : Addaddress
     var orderPlaceProductModel :ArrayList<OrderPlaceProductModel> = ArrayList()
     var scheduleDate :String =""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_place_order)
 
-
+        addAddress = Addaddress ()
         initCalendar()
         initCalendarClicks()
 
@@ -81,6 +83,10 @@ class OrderPlacedActivity : AppCompatActivity() {
             }else{
                 Toast.makeText(this,"Select payment mode",Toast.LENGTH_SHORT).show()
             }
+
+        }
+        tv_address_edit.setOnClickListener {
+            addAddress.show(supportFragmentManager, "Example")
 
         }
 
@@ -253,4 +259,11 @@ class OrderPlacedActivity : AppCompatActivity() {
             else -> "WRONG"
         }
     }
+
+    override fun onButtonClicked(string: String?){
+        tv_address_name.setText(string)
+        addAddress.dismiss()
+    }
+
+
 }
