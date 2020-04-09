@@ -239,9 +239,10 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@id/et_special_instruction"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_place_order"
-        tools:itemCount="2" />
-
+        app:layout_constraintVertical_bias="0.0"
+        tools:itemCount="2"
+        tools:layout_editor_absoluteX="3dp"
+        tools:listitem="@layout/item_place_order" />
 
     <LinearLayout
         android:id="@+id/to_pay"

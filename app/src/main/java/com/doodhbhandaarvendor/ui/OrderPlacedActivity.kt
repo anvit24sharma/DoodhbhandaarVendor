@@ -19,21 +19,25 @@ import com.doodhbhandaarvendor.ui.fragments.Addaddress
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.cartProductList
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.orderDR
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.userOrdersDR
+import com.doodhbhandaarvendor.ui.fragments.PaymentCollection
 import com.doodhbhandaarvendor.utils.Constants.Companion.ADDRESS
 import com.doodhbhandaarvendor.utils.Constants.Companion.USER_ID
 import kotlinx.android.synthetic.main.activity_confirm_place_order.*
+import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.item_place_order.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner {
+class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,PaymentCollection.PaymentCollectionListner{
     lateinit var addAddress : Addaddress
+    lateinit var paymentCollection: PaymentCollection
     var orderPlaceProductModel :ArrayList<OrderPlaceProductModel> = ArrayList()
     var scheduleDate :String =""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_place_order)
-
+        paymentCollection = PaymentCollection()
         addAddress = Addaddress ()
         initCalendar()
         initCalendarClicks()
@@ -103,6 +107,8 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner 
        val orderPlaceAdapter = cartProductList.let {
             OrderPlaceAdapter(this, it, object : OrderPlaceAdapter.OnItemClickListener {
                 override fun OnChooseClick(position: Int, view: View, tvPaymentDate: TextView) {
+
+                            paymentCollection.show(supportFragmentManager,"ex")
 
                 }
                 override fun onApplyCouponClick(position: Int, view: View) {
@@ -287,6 +293,11 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner 
     override fun onButtonClicked(string: String?){
         tv_address_name.setText(string)
         addAddress.dismiss()
+    }
+
+    override fun onButtonClicked1(string: String?) {
+        tv_payment_collectionDate.setText(string)
+        paymentCollection.dismiss()
     }
 
 
