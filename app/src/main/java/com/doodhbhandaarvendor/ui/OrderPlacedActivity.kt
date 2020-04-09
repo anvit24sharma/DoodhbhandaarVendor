@@ -33,6 +33,7 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
     lateinit var paymentCollection: PaymentCollection
     var orderPlaceProductModel :ArrayList<OrderPlaceProductModel> = ArrayList()
     var scheduleDate :String =""
+    var tvPaymentCollection: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,9 +108,8 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
        val orderPlaceAdapter = cartProductList.let {
             OrderPlaceAdapter(this, it, object : OrderPlaceAdapter.OnItemClickListener {
                 override fun OnChooseClick(position: Int, view: View, tvPaymentDate: TextView) {
-
-                            paymentCollection.show(supportFragmentManager,"ex")
-
+                    paymentCollection.show(supportFragmentManager,"ex")
+                    tvPaymentCollection = tvPaymentDate
                 }
                 override fun onApplyCouponClick(position: Int, view: View) {
                 }
@@ -296,7 +296,7 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
     }
 
     override fun onButtonClicked1(string: String?) {
-        tv_payment_collectionDate.setText(string)
+        tvPaymentCollection?.setText(string)
         paymentCollection.dismiss()
     }
 

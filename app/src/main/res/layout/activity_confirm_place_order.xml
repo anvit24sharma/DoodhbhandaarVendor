@@ -236,7 +236,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_placed_orders"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/et_special_instruction"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
