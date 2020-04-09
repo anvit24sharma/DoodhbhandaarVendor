@@ -51,60 +51,11 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
         tv_address_name.text = prefs.getString(ADDRESS,"")?:""
 
 
-        var selectedMode =  ""
 
         btn_place_order.setOnClickListener {
 
-            cartProductList.forEach {
-                val variants = ArrayList<VariantModel>()
-                it.variants.forEach {   it1->
-                    if(it1.qty >0)
-                        variants.add(it1)
-                }
-                if(it.paymentCollectionDay !=""){
-                    orderPlaceProductModel.add(OrderPlaceProductModel(it.product_name,it.product_cost,variants,it.subscriptionPlan,"",it.paymentCollectionDay))
-                }else {
-                    paymentCollectDay = false
-                }
-            }
+            placeOrder()
 
-            selectedMode = if(rg_payment.checkedRadioButtonId != -1)
-                findViewById<RadioButton>(rg_payment.checkedRadioButtonId).text.toString()
-            else
-                ""
-            if(!paymentCollectDay) {
-                Toast.makeText(this, "Choose Payment Collection Date",Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            if(scheduleDate!="" &&  selectedMode!="" ) {
-                val orderId = orderDR.push().key.toString()
-                val orderPlaceModel = OrderPlaceModel(
-                    orderPlaceProductModel,
-                    prefs.getString(USER_ID, "") ?: "",
-                    tv_address_name.text.toString(),
-                    scheduleDate,
-                    selectedMode,
-                    Date().toString(),
-                    "order_pending",
-                    tv_totalPrice.text.toString(),
-                    orderId)
-
-                orderDR.child(orderId).setValue(orderPlaceModel)
-
-                userOrdersDR.child(prefs.getString(USER_ID, "") ?: "")
-                    .child(orderId).setValue(orderId).addOnCompleteListener{
-
-                        cartProductList.clear()
-                        val intent = Intent(this@OrderPlacedActivity, MainActivity::class.java)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                        startActivity(intent)
-                        finish()
-                    }
-
-            }else{
-                Toast.makeText(this,"Select payment mode",Toast.LENGTH_SHORT).show()
-            }
 
         }
 
@@ -112,6 +63,60 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
             addAddress.show(supportFragmentManager, "Example")
         }
 
+    }
+
+    private fun placeOrder() {
+        var selectedMode =  ""
+
+        cartProductList.forEach {
+            val variants = ArrayList<VariantModel>()
+            it.variants.forEach {   it1->
+                if(it1.qty >0)
+                    variants.add(it1)
+            }
+            if(it.paymentCollectionDay !=""){
+                orderPlaceProductModel.add(OrderPlaceProductModel(it.product_name,it.product_cost,variants,it.subscriptionPlan,"",it.paymentCollectionDay))
+            }else {
+                paymentCollectDay = false
+            }
+        }
+
+        selectedMode = if(rg_payment.checkedRadioButtonId != -1)
+            findViewById<RadioButton>(rg_payment.checkedRadioButtonId).text.toString()
+        else
+            ""
+        if(!paymentCollectDay) {
+            Toast.makeText(this, "Choose Payment Collection Date",Toast.LENGTH_SHORT).show()
+            return
+        }
+        if(scheduleDate!="" &&  selectedMode!="" ) {
+            val orderId = orderDR.push().key.toString()
+            val orderPlaceModel = OrderPlaceModel(
+                orderPlaceProductModel,
+                prefs.getString(USER_ID, "") ?: "",
+                tv_address_name.text.toString(),
+                scheduleDate,
+                selectedMode,
+                Date().toString(),
+                "order_pending",
+                tv_totalPrice.text.toString(),
+                orderId)
+
+            orderDR.child(orderId).setValue(orderPlaceModel)
+
+            userOrdersDR.child(prefs.getString(USER_ID, "") ?: "")
+                .child(orderId).setValue(orderId).addOnCompleteListener{
+                    cartProductList.clear()
+                    val intent = Intent(this@OrderPlacedActivity, MainActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(intent)
+                    finish()
+                }
+
+        }else{
+            Toast.makeText(this,"Select payment mode",Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initRecyclerView() {
