@@ -2,10 +2,15 @@ package com.doodhbhandaarvendor.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.RadioButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.doodhbhandaarvendor.R
+import com.doodhbhandaarvendor.adapter.OrderPlaceAdapter
 import com.doodhbhandaarvendor.auth.LoginActivity.Companion.prefs
 import com.doodhbhandaarvendor.model.OrderPlaceModel
 import com.doodhbhandaarvendor.model.OrderPlaceProductModel
@@ -32,10 +37,12 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner 
         addAddress = Addaddress ()
         initCalendar()
         initCalendarClicks()
-
+        initRecyclerView()
         CartActivity.totalOrderCost.observe( this, androidx.lifecycle.Observer {
             tv_totalPrice.text = "₹$it"
         })
+
+
 
         tv_address_name.text = prefs.getString(ADDRESS,"")?:""
 
@@ -91,6 +98,24 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner 
         }
 
     }
+
+    private fun initRecyclerView() {
+       val orderPlaceAdapter = cartProductList.let {
+            OrderPlaceAdapter(this, it, object : OrderPlaceAdapter.OnItemClickListener {
+                override fun OnChooseClick(position: Int, view: View, tvPaymentDate: TextView) {
+
+                }
+                override fun onApplyCouponClick(position: Int, view: View) {
+                }
+
+            })
+        }
+        rv_placed_orders.apply {
+            adapter = orderPlaceAdapter
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        }
+    }
+
 
     private fun initCalendarClicks() {
         llDate1.setOnClickListener {
@@ -199,7 +224,6 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner 
             scheduleDate = "" + day + "/" + month + "/" + year
         }
     }
-
 
     private fun initCalendar() {
         val calendar :Calendar = Calendar.getInstance()
