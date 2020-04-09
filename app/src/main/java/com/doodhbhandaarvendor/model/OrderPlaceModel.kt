@@ -32,6 +32,9 @@ class OrderPlaceModel (
 class OrderPlaceProductModel(
     var productName:String="",
     var productCost :String="",
-    var variants :ArrayList<VariantModel> = ArrayList()
+    var variants :ArrayList<VariantModel> = ArrayList(),
+    var subscriptionPlan :String="",
+    var coupon :String="",
+    var paymentCollectionDay :String=""
 ) {}
 

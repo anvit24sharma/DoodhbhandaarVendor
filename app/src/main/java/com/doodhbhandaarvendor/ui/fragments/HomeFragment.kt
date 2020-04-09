@@ -120,7 +120,7 @@ class HomeFragment : Fragment() {
                        snap.child("product_cost").getValue().toString(),
                        snap.child("product_image_url").getValue().toString(),
                        snap.key.toString(),
-                       variantsList,""
+                       variantsList,"","",""
                    )
                         productList.add(productModel)
                 }

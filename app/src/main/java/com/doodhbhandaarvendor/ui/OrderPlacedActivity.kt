@@ -14,6 +14,7 @@ import com.doodhbhandaarvendor.adapter.OrderPlaceAdapter
 import com.doodhbhandaarvendor.auth.LoginActivity.Companion.prefs
 import com.doodhbhandaarvendor.model.OrderPlaceModel
 import com.doodhbhandaarvendor.model.OrderPlaceProductModel
+import com.doodhbhandaarvendor.model.ProductModel
 import com.doodhbhandaarvendor.model.VariantModel
 import com.doodhbhandaarvendor.ui.fragments.Addaddress
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.cartProductList
@@ -23,8 +24,6 @@ import com.doodhbhandaarvendor.ui.fragments.PaymentCollection
 import com.doodhbhandaarvendor.utils.Constants.Companion.ADDRESS
 import com.doodhbhandaarvendor.utils.Constants.Companion.USER_ID
 import kotlinx.android.synthetic.main.activity_confirm_place_order.*
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.item_place_order.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -33,6 +32,7 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
     lateinit var paymentCollection: PaymentCollection
     var orderPlaceProductModel :ArrayList<OrderPlaceProductModel> = ArrayList()
     var scheduleDate :String =""
+    var paymentCollectDay = true
     var tvPaymentCollection: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,30 +43,39 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
         initCalendar()
         initCalendarClicks()
         initRecyclerView()
+
         CartActivity.totalOrderCost.observe( this, androidx.lifecycle.Observer {
             tv_totalPrice.text = "₹$it"
         })
 
-
-
         tv_address_name.text = prefs.getString(ADDRESS,"")?:""
 
-        cartProductList.forEach {
-            val variants = ArrayList<VariantModel>()
-            it.variants.forEach {   it1->
-                if(it1.qty >0)
-                    variants.add(it1)
-            }
-            orderPlaceProductModel.add(OrderPlaceProductModel(it.product_name,it.product_cost,variants))
-        }
+
         var selectedMode =  ""
 
         btn_place_order.setOnClickListener {
+
+            cartProductList.forEach {
+                val variants = ArrayList<VariantModel>()
+                it.variants.forEach {   it1->
+                    if(it1.qty >0)
+                        variants.add(it1)
+                }
+                if(it.paymentCollectionDay !=""){
+                    orderPlaceProductModel.add(OrderPlaceProductModel(it.product_name,it.product_cost,variants,it.subscriptionPlan,"",it.paymentCollectionDay))
+                }else {
+                    paymentCollectDay = false
+                }
+            }
+
             selectedMode = if(rg_payment.checkedRadioButtonId != -1)
                 findViewById<RadioButton>(rg_payment.checkedRadioButtonId).text.toString()
             else
                 ""
-
+            if(!paymentCollectDay) {
+                Toast.makeText(this, "Choose Payment Collection Date",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             if(scheduleDate!="" &&  selectedMode!="" ) {
                 val orderId = orderDR.push().key.toString()
                 val orderPlaceModel = OrderPlaceModel(
@@ -78,13 +87,14 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
                     Date().toString(),
                     "order_pending",
                     tv_totalPrice.text.toString(),
-                    orderId
-                )
+                    orderId)
 
                 orderDR.child(orderId).setValue(orderPlaceModel)
 
                 userOrdersDR.child(prefs.getString(USER_ID, "") ?: "")
                     .child(orderId).setValue(orderId).addOnCompleteListener{
+
+                        cartProductList.clear()
                         val intent = Intent(this@OrderPlacedActivity, MainActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -97,9 +107,9 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
             }
 
         }
+
         tv_address_edit.setOnClickListener {
             addAddress.show(supportFragmentManager, "Example")
-
         }
 
     }
@@ -108,6 +118,9 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
        val orderPlaceAdapter = cartProductList.let {
             OrderPlaceAdapter(this, it, object : OrderPlaceAdapter.OnItemClickListener {
                 override fun OnChooseClick(position: Int, view: View, tvPaymentDate: TextView) {
+                    val args = Bundle()
+                    args.putParcelable("productModel",it[position])
+                    paymentCollection.arguments=args
                     paymentCollection.show(supportFragmentManager,"ex")
                     tvPaymentCollection = tvPaymentDate
                 }
@@ -295,7 +308,8 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
         addAddress.dismiss()
     }
 
-    override fun onButtonClicked1(string: String?) {
+    override fun onButtonClicked1(string: String,productModel: ProductModel) {
+        productModel.paymentCollectionDay = string
         tvPaymentCollection?.setText(string)
         paymentCollection.dismiss()
     }
