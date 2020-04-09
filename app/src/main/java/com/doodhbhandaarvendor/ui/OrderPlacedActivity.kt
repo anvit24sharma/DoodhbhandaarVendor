@@ -16,20 +16,22 @@ import com.doodhbhandaarvendor.model.OrderPlaceModel
 import com.doodhbhandaarvendor.model.OrderPlaceProductModel
 import com.doodhbhandaarvendor.model.ProductModel
 import com.doodhbhandaarvendor.model.VariantModel
-import com.doodhbhandaarvendor.ui.fragments.Addaddress
+import com.doodhbhandaarvendor.ui.fragments.EditAddressBottomSheet
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.cartProductList
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.orderDR
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.userOrdersDR
-import com.doodhbhandaarvendor.ui.fragments.PaymentCollection
+import com.doodhbhandaarvendor.ui.fragments.PaymentCollectionBottomSheet
 import com.doodhbhandaarvendor.utils.Constants.Companion.ADDRESS
 import com.doodhbhandaarvendor.utils.Constants.Companion.USER_ID
 import kotlinx.android.synthetic.main.activity_confirm_place_order.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,PaymentCollection.PaymentCollectionListner{
-    lateinit var addAddress : Addaddress
-    lateinit var paymentCollection: PaymentCollection
+class  OrderPlacedActivity : AppCompatActivity() ,
+    EditAddressBottomSheet.BottomSheetListner,
+    PaymentCollectionBottomSheet.PaymentCollectionListner{
+    lateinit var addAddress : EditAddressBottomSheet
+    lateinit var paymentCollection: PaymentCollectionBottomSheet
     var orderPlaceProductModel :ArrayList<OrderPlaceProductModel> = ArrayList()
     var scheduleDate :String =""
     var paymentCollectDay = true
@@ -38,8 +40,10 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_place_order)
-        paymentCollection = PaymentCollection()
-        addAddress = Addaddress ()
+        paymentCollection =
+            PaymentCollectionBottomSheet()
+        addAddress =
+            EditAddressBottomSheet()
         initCalendar()
         initCalendarClicks()
         initRecyclerView()
@@ -170,7 +174,7 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
             val day = currentDate.date
             val month = currentDate.month + 1
             val year = currentDate.year +1900
-            scheduleDate = "" + day + "/" + month + "/" + year
+            scheduleDate = "$day/$month/$year"
         }
         llDate3.setOnClickListener {
             llDate1.setBackgroundResource(R.drawable.calender_box)
@@ -185,7 +189,7 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
             val day = currentDate.date
             val month = currentDate.month + 1
             val year = currentDate.year +1900
-            scheduleDate = "" + day + "/" + month + "/" + year
+            scheduleDate = "$day/$month/$year"
         }
         llDate4.setOnClickListener {
             llDate1.setBackgroundResource(R.drawable.calender_box)
@@ -200,7 +204,7 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
             val day = currentDate.date
             val month = currentDate.month + 1
             val year = currentDate.year +1900
-            scheduleDate = "" + day + "/" + month + "/" + year
+            scheduleDate = "$day/$month/$year"
         }
         llDate5.setOnClickListener {
             llDate1.setBackgroundResource(R.drawable.calender_box)
@@ -215,7 +219,7 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
             val day = currentDate.date
             val month = currentDate.month + 1
             val year = currentDate.year +1900
-            scheduleDate = "" + day + "/" + month + "/" + year
+            scheduleDate = "$day/$month/$year"
         }
         llDate6.setOnClickListener {
             llDate1.setBackgroundResource(R.drawable.calender_box)
@@ -230,7 +234,7 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
             val day = currentDate.date
             val month = currentDate.month + 1
             val year = currentDate.year +1900
-            scheduleDate = "" + day + "/" + month + "/" + year
+            scheduleDate = "$day/$month/$year"
         }
         llDate7.setOnClickListener {
             llDate1.setBackgroundResource(R.drawable.calender_box)
@@ -245,7 +249,7 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
             val day = currentDate.date
             val month = currentDate.month + 1
             val year = currentDate.year + 1900
-            scheduleDate = "" + day + "/" + month + "/" + year
+            scheduleDate = "$day/$month/$year"
         }
     }
 
@@ -308,14 +312,14 @@ class  OrderPlacedActivity : AppCompatActivity() ,Addaddress.BottomSheetListner,
         }
     }
 
-    override fun onButtonClicked(string: String?){
-        tv_address_name.setText(string)
+    override fun onSaveClicked(string: String?) {
+        tv_address_name.text = string
         addAddress.dismiss()
     }
 
-    override fun onButtonClicked1(string: String,productModel: ProductModel) {
+    override fun onPaymentDaySelected(string: String,productModel: ProductModel) {
         productModel.paymentCollectionDay = string
-        tvPaymentCollection?.setText(string)
+        tvPaymentCollection?.text = string
         paymentCollection.dismiss()
     }
 

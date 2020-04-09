@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import com.doodhbhandaarvendor.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-public class Addaddress extends BottomSheetDialogFragment {
+public class EditAddressBottomSheet extends BottomSheetDialogFragment {
     @Nullable
     Button btnAddress;
     EditText etAddress;
@@ -35,13 +35,13 @@ public class Addaddress extends BottomSheetDialogFragment {
             @Override
             public void onClick(View v) {
                 String address = etAddress.getText().toString();
-                bottomSheetListner.onButtonClicked(address);
+                bottomSheetListner.onSaveClicked(address);
             }
         });
     }
 
     public interface BottomSheetListner{
-        void onButtonClicked(String string);
+        void onSaveClicked(String string);
     }
 
     @Override

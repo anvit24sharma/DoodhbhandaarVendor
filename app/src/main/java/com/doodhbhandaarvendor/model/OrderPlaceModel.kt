@@ -20,7 +20,6 @@ class OrderPlaceModel (
     @SuppressLint("SimpleDateFormat")
     override fun compareTo(other: OrderPlaceModel): Int {
         val formatter = SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy")
-//        val formatter1 = SimpleDateFormat("dd/MM/yyyy")
         val date1: Date = formatter.parse(orderDate)
         val date2: Date = formatter.parse(other.orderDate)
         return date1.compareTo(date2)

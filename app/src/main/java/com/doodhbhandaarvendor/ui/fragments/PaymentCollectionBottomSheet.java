@@ -14,7 +14,7 @@ import com.doodhbhandaarvendor.R;
 import com.doodhbhandaarvendor.model.ProductModel;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-public class PaymentCollection extends BottomSheetDialogFragment {
+public class PaymentCollectionBottomSheet extends BottomSheetDialogFragment {
 
     private Button everyDay,everyWeek,every15Day,every30Day,every45Day;
     PaymentCollectionListner paymentCollectionListner;
@@ -38,41 +38,41 @@ public class PaymentCollection extends BottomSheetDialogFragment {
             @Override
             public void onClick(View v) {
                 String type = "Daily";
-                paymentCollectionListner.onButtonClicked1(type,productModel);
+                paymentCollectionListner.onPaymentDaySelected(type,productModel);
             }
         });
         everyWeek.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String type = "Weekly";
-                paymentCollectionListner.onButtonClicked1(type,productModel);
+                paymentCollectionListner.onPaymentDaySelected(type,productModel);
             }
         });
         every15Day.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String type = "In 15 Day";
-                paymentCollectionListner.onButtonClicked1(type,productModel);
+                paymentCollectionListner.onPaymentDaySelected(type,productModel);
             }
         });
         every30Day.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String type = "In 30 Day";
-                paymentCollectionListner.onButtonClicked1(type,productModel);
+                paymentCollectionListner.onPaymentDaySelected(type,productModel);
             }
         });
         every45Day.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String type = "In 45 Day";
-                paymentCollectionListner.onButtonClicked1(type,productModel);
+                paymentCollectionListner.onPaymentDaySelected(type,productModel);
             }
         });
     }
 
     public interface PaymentCollectionListner{
-        void onButtonClicked1(String string,ProductModel productModel);
+        void onPaymentDaySelected(String string,ProductModel productModel);
     }
     @Override
     public void onAttach(@NonNull Context context) {
