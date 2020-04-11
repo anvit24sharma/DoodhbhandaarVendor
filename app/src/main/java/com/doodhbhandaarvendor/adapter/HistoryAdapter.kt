@@ -1,5 +1,6 @@
 package com.doodhbhandaar.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -27,13 +28,27 @@ class HistoryAdapter(
         )
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(
         holder: OrderViewHolder,
         position: Int
     ) {
 
         holder.orderNo.text = orders[position].orderId
-        holder.amount.text = orders[position].totalCost
+        var totalCost =0.0
+
+        if(orders[position].totalCost =="0.0") {
+            orders[position].products.forEach { product ->
+                product.variants.forEach {
+                    totalCost += product.productCost.split("/")[0].toDouble()
+                        .times(it.variantName.split("/")[0].toDouble())
+                }
+            }
+            holder.amount.text = totalCost.toString()
+        }else{
+            holder.amount.text = orders[position].totalCost + "(Due)"
+
+        }
         holder.status.text = orders[position].status
         val formatter1 = SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy")
         val date1: Date = formatter1.parse(orders[position].orderDate)
