@@ -73,9 +73,10 @@ class OrderPlaceAdapter(
                     28
 
             if(productModel.subscriptionPlan == "Weekly"){
-                costPerDay *= ((lastDate - todayDate) / 7 + 1)
+                costPerDay *= 5
             }else  if(productModel.subscriptionPlan == "Daily"){
-                costPerDay *= ((lastDate - todayDate) + 1)
+                //costPerDay *= ((lastDate - todayDate) + 1)
+                costPerDay *= 30
             }
             tvMonthlyEstimatedCost.text = mContext?.getString(R.string.estimated_total_cost_of_month_s,costPerDay.toString())
 

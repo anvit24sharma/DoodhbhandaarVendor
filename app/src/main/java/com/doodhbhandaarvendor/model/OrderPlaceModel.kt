@@ -10,6 +10,7 @@ class OrderPlaceModel (
         var userId :String ="",
         var address :String="",
         var schedule : String="",
+        var lastOrderDate :String= "",
         var paymentMode :String="",
         var orderDate :String="",
         var status :String="",
@@ -34,6 +35,7 @@ class OrderPlaceProductModel(
     var variants :ArrayList<VariantModel> = ArrayList(),
     var subscriptionPlan :String="",
     var coupon :String="",
-    var paymentCollectionDay :String=""
+    var paymentCollectionDay :String="",
+    var nextDate :String = ""
 ) {}
 

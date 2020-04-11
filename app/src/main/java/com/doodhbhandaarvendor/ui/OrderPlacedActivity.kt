@@ -57,10 +57,7 @@ class  OrderPlacedActivity : AppCompatActivity() ,
 
 
         btn_place_order.setOnClickListener {
-
             placeOrder()
-
-
         }
 
         tv_address_edit.setOnClickListener {
@@ -71,6 +68,10 @@ class  OrderPlacedActivity : AppCompatActivity() ,
 
     private fun placeOrder() {
         var selectedMode =  ""
+        val cal = Calendar.getInstance()
+        cal.add(Calendar.DAY_OF_YEAR,29)
+        val lastScheduleDate =""+ cal.get(Calendar.DAY_OF_MONTH)+"/"+(cal.get(Calendar.MONTH)+1)+"/"+cal.get(Calendar.YEAR)
+
 
         cartProductList.forEach {
             val variants = ArrayList<VariantModel>()
@@ -79,7 +80,7 @@ class  OrderPlacedActivity : AppCompatActivity() ,
                     variants.add(it1)
             }
             if(it.paymentCollectionDay !=""){
-                orderPlaceProductModel.add(OrderPlaceProductModel(it.product_name,it.product_cost,variants,it.subscriptionPlan,"",it.paymentCollectionDay))
+                orderPlaceProductModel.add(OrderPlaceProductModel(it.product_name,it.product_cost,variants,it.subscriptionPlan,"",it.paymentCollectionDay,scheduleDate))
             }else {
                 paymentCollectDay = false
             }
@@ -100,10 +101,11 @@ class  OrderPlacedActivity : AppCompatActivity() ,
                 prefs.getString(USER_ID, "") ?: "",
                 tv_address_name.text.toString(),
                 scheduleDate,
+                lastScheduleDate,
                 selectedMode,
                 Date().toString(),
                 "order_pending",
-                tv_totalPrice.text.toString(),
+                "0.0",
                 orderId)
 
             orderDR.child(orderId).setValue(orderPlaceModel)
