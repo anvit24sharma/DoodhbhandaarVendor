@@ -1,245 +1,334 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffffff">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:background="#fff">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tv_yourOrder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="10dp"
-            android:text="Your  Order"
-            android:textColor="#000"
-            android:textSize="22sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <ImageView
-            android:id="@+id/edit"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="6dp"
-            android:background="#fff"
-            android:padding="2dp"
-            android:src="@drawable/ic_mode_edit"
-            app:layout_constraintEnd_toStartOf="@id/cancel"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/cancel"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="6dp"
-            android:background="#fff"
-            android:padding="2dp"
-
-            android:src="@drawable/cancel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/view1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="6dp"
-            android:background="#f0f0f0"
-            app:layout_constraintTop_toBottomOf="@+id/tv_yourOrder" />
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_order_products"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="6dp"
-            android:background="#fff"
-            android:padding="2dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view1"
-            tools:itemCount="2"
-            tools:listitem="@layout/item_order_detail_name_qty" />
+            android:background="#fff">
 
-        <TextView
-            android:id="@+id/tv_totalPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="10dp"
-            android:background="#fff"
-            android:text="@string/bill_amount_s"
-            android:textColor="#000"
-            android:textSize="16sp"
-            android:textStyle="italic"
-            app:layout_constraintTop_toBottomOf="@id/rv_order_products" />
 
-        <View
-            android:id="@+id/view2"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="#b1b1b1"
-            app:layout_constraintTop_toBottomOf="@+id/tv_totalPrice" />
+            <LinearLayout
+                android:id="@+id/ll_order_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spl">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
-            android:background="#fff"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/view2">
 
+                <TextView
+                    android:id="@+id/tv_OrderDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/naste"
+                    android:text="Order  Details"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="normal" />
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="6dp"
+                    android:background="#f0f0f0" />
+
+
+                <TextView
+                    android:id="@+id/txt_orderDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/clarikagrotesquemedium"
+                    android:text="Order Date"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_orderDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/regular"
+                    android:text="order date"
+
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/txt_deliverTo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/clarikagrotesquemedium"
+                    android:text="Deliver to"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_address_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="27dp"
+                    android:fontFamily="@font/regular"
+                    android:text="Address"
+
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txt_totalPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/clarikagrotesquemedium"
+                    android:text="Total"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_totalPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/regular"
+                    android:text="Price"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txt_payment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/clarikagrotesquemedium"
+                    android:text="Payment"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_payment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:fontFamily="@font/regular"
+                    android:text="Payment"
+                    android:textColor="#000000"
+
+                    android:textSize="16sp"
+                    tools:ignore="MissingConstraints" />
+
+
+                <TextView
+                    android:id="@+id/txt_schDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/clarikagrotesquemedium"
+                    android:text="Scheduled Date"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toBottomOf="@id/orderDate"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/tv_scheduleDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:fontFamily="@font/regular"
+                    android:text="schedule date"
+                    android:textColor="#000000"
+
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txt_productStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/clarikagrotesquemedium"
+                    android:text="Order Status"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_productStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:fontFamily="@font/regular"
+                    android:text="Status"
+
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/txt_orderNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/clarikagrotesquemedium"
+                    android:text="Order Id"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toBottomOf="@id/view3"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/tv_orderNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:fontFamily="@font/regular"
+                    android:text="ORDER NO:"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="130dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:padding="2dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/btn_cancel"
+                android:fontFamily="@font/nova"
+                android:gravity="center"
+                android:text="Cancel  Order"
+                android:textColor="#f40429"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_order_details" />
 
             <TextView
-                android:id="@+id/tv_OrderDetails"
+                android:id="@+id/btn_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="15dp"
-                android:text="Order  Details"
-                android:textColor="#000"
-                android:textSize="22sp" />
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+
+                android:padding="2dp"
+                android:fontFamily="@font/nova"
+                android:gravity="center"
+                android:text="Edit Your Order"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_order_details" />
 
             <View
-                android:id="@+id/view3"
+                android:id="@+id/view0"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="6dp"
-                android:background="#f0f0f0" />
-
-            <TextView
-                android:id="@+id/txt_orderNo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
-                android:text="Order Id"
-                android:textSize="12sp"
-                app:layout_constraintTop_toBottomOf="@id/view3"
-                tools:ignore="MissingConstraints" />
-
-            <TextView
-                android:id="@+id/tv_orderNo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="ORDER NO:"
-                android:textColor="#000000"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/txt_orderDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
-                android:text="Order Date"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_orderDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="order date"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                app:layout_constraintTop_toBottomOf="@id/txt_orderDate"
-                tools:ignore="MissingConstraints" />
-
-            <TextView
-                android:id="@+id/txt_schDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
-                android:text="Scheduled Date"
-                android:textSize="12sp"
-                app:layout_constraintTop_toBottomOf="@id/tv_orderDate"
-                tools:ignore="MissingConstraints" />
-
-            <TextView
-                android:id="@+id/tv_scheduleDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="schedule date"
-                android:textColor="#000000"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/txt_productStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Order Status"
-                android:textSize="12sp" />
+                android:layout_marginBottom="8dp"
+                android:background="#f0f0f0"
+                app:layout_constraintBottom_toTopOf="@id/ll_order_details"
+                app:layout_constraintTop_toBottomOf="@id/ll_your_order" />
+
+            <LinearLayout
+                android:id="@+id/ll_your_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_yourOrder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/naste"
+                    android:text="Your  Order"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="normal" />
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="6dp"
+                    android:background="#f0f0f0" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_order_products"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_order_detail" />
+
+                <View
+                    android:id="@+id/view4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f0f0f0" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_productStatus"
+                android:id="@+id/total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/date_s"
-                android:textColor="#000000"
-                android:textSize="14sp" />
-
-
-            <TextView
-                android:id="@+id/txt_payment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="10dp"
-                android:text="Payment"
-                android:textSize="12sp" />
-
+                android:fontFamily="@font/nova"
+                android:text="Total Bill Amount"
+                android:textColor="#000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_your_order" />
             <TextView
-                android:id="@+id/tv_payment"
+                android:id="@+id/tv_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Payment"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                tools:ignore="MissingConstraints" />
-
-
-            <TextView
-                android:id="@+id/txt_deliverTo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginTop="10dp"
-                android:text="Deliver to"
-                android:textSize="12sp" />
-
+                android:fontFamily="@font/regular"
+                android:text="Rs"
+                android:textColor="#000"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_your_order" />
             <TextView
-                android:id="@+id/tv_deliverTo"
-                android:layout_width="wrap_content"
+                android:id="@+id/spl"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Address"
-                android:textColor="#000000"
-                android:textSize="14sp" />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/nova"
+                android:padding="4dp"
+                android:text="Special Instruction:%s"
+                android:textColor="#f40429"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/total"
 
-</ScrollView>
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

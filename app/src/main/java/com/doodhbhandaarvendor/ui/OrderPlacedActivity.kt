@@ -16,6 +16,8 @@ import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.userOrdersDR
 import com.doodhbhandaarvendor.utils.Constants.Companion.ADDRESS
 import com.doodhbhandaarvendor.utils.Constants.Companion.USER_ID
 import kotlinx.android.synthetic.main.activity_confirm_place_order.*
+import kotlinx.android.synthetic.main.activity_confirm_place_order.tv_totalPrice
+import kotlinx.android.synthetic.main.activity_order_details.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -27,6 +29,7 @@ class OrderPlacedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_place_order)
 
+        supportActionBar?.hide()
 
         initCalendar()
         initCalendarClicks()

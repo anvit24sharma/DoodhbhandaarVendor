@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:scrollbars="vertical"
-    android:background="#fff"
-    >
+    android:background="#f2f0f2"    >
 
 
     <androidx.recyclerview.widget.RecyclerView
