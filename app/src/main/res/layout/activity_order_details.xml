@@ -76,7 +76,7 @@
                     android:id="@+id/txt_deliverTo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/clarikagrotesquemedium"
                     android:text="Deliver to"
                     android:textSize="14sp" />
@@ -95,7 +95,7 @@
                     android:id="@+id/txt_totalPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/clarikagrotesquemedium"
                     android:text="Total"
                     android:textSize="14sp" />
@@ -113,7 +113,7 @@
                     android:id="@+id/txt_payment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/clarikagrotesquemedium"
                     android:text="Payment"
                     android:textSize="14sp" />
@@ -135,12 +135,11 @@
                     android:id="@+id/txt_schDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/clarikagrotesquemedium"
                     android:text="Scheduled Date"
                     android:textSize="14sp"
-                    app:layout_constraintTop_toBottomOf="@id/orderDate"
-                    tools:ignore="MissingConstraints" />
+                     />
 
                 <TextView
                     android:id="@+id/tv_scheduleDate"
@@ -157,7 +156,7 @@
                     android:id="@+id/txt_productStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/clarikagrotesquemedium"
                     android:text="Order Status"
                     android:textSize="14sp" />
@@ -178,7 +177,7 @@
                     android:id="@+id/txt_orderNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/clarikagrotesquemedium"
                     android:text="Order Id"
                     android:textSize="14sp"
