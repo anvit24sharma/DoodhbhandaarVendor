@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity() {
             })
 
 
-
         viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 

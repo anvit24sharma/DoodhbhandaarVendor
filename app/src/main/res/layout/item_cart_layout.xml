@@ -71,8 +71,12 @@
         android:fontFamily="sans-serif-condensed-medium"
         android:gravity="end"
         android:padding="4dp"
+<<<<<<< HEAD
         android:text="Bill Amount:Rs.%s"
 
+=======
+        android:text="Bill Amount:₹ %s"
+>>>>>>> b842d799d444c685686a4d3d3b87b4f2657af4aa
         android:textColor="#000000"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,7 +116,10 @@
             android:layout_weight="1"
             android:background="@drawable/white_btn"
             android:elevation="4dp"
+<<<<<<< HEAD
             android:fontFamily="sans-serif-smallcaps"
+=======
+>>>>>>> b842d799d444c685686a4d3d3b87b4f2657af4aa
             android:gravity="center"
             android:text="Custom"
             android:textColor="#000"
@@ -153,5 +160,9 @@
         android:layout_height="1dp"
         android:background="#000"
         app:layout_constraintTop_toBottomOf="@+id/ll_btn" />
+<<<<<<< HEAD
+=======
+
+>>>>>>> b842d799d444c685686a4d3d3b87b4f2657af4aa
 </androidx.constraintlayout.widget.ConstraintLayout>
 

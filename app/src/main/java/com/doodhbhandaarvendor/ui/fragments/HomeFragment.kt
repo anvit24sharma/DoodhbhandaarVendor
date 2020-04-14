@@ -13,7 +13,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.doodhbhandaarvendor.R
+<<<<<<< HEAD
 import com.doodhbhandaarvendor.R.string
+=======
+>>>>>>> b842d799d444c685686a4d3d3b87b4f2657af4aa
 import com.doodhbhandaarvendor.adapter.ProductAdapter
 import com.doodhbhandaarvendor.model.ProductModel
 import com.doodhbhandaarvendor.model.VariantModel
@@ -122,7 +125,7 @@ class HomeFragment : Fragment() {
                        snap.child("product_cost").getValue().toString(),
                        snap.child("product_image_url").getValue().toString(),
                        snap.key.toString(),
-                       variantsList
+                       variantsList,"","",""
                    )
                         productList.add(productModel)
                 }

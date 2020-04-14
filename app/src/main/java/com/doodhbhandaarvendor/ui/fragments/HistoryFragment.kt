@@ -75,7 +75,7 @@ class HistoryFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 ordersIdList.clear()
                 snapshot.child(prefs.getString(USER_ID,"")?:"").children.forEach {
-                    ordersIdList.add(it.getValue(String::class.java)!!)
+                    ordersIdList.add(it.key!!)
                 }
                 getOrderDetails()
             }

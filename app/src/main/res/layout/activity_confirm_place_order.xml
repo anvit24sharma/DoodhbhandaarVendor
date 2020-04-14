@@ -35,8 +35,8 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="7dp"
-                android:padding="2dp"
                 android:layout_marginTop="4dp"
+                android:padding="2dp"
 
                 android:src="@drawable/ic_location"
                 app:layout_constraintStart_toStartOf="parent"
@@ -290,15 +290,19 @@
         </LinearLayout>
 
     </LinearLayout>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_placed_orders"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
-       app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_calender"
         tools:itemCount="4"
         tools:listitem="@layout/item_confirm_place_order" />
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -437,4 +441,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

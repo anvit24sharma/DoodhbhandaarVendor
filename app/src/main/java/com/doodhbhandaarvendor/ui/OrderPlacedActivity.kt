@@ -2,17 +2,25 @@ package com.doodhbhandaarvendor.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.RadioButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.doodhbhandaarvendor.R
+import com.doodhbhandaarvendor.adapter.OrderPlaceAdapter
 import com.doodhbhandaarvendor.auth.LoginActivity.Companion.prefs
 import com.doodhbhandaarvendor.model.OrderPlaceModel
 import com.doodhbhandaarvendor.model.OrderPlaceProductModel
+import com.doodhbhandaarvendor.model.ProductModel
 import com.doodhbhandaarvendor.model.VariantModel
+import com.doodhbhandaarvendor.ui.fragments.EditAddressBottomSheet
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.cartProductList
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.orderDR
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.userOrdersDR
+import com.doodhbhandaarvendor.ui.fragments.PaymentCollectionBottomSheet
 import com.doodhbhandaarvendor.utils.Constants.Companion.ADDRESS
 import com.doodhbhandaarvendor.utils.Constants.Companion.USER_ID
 import kotlinx.android.synthetic.main.activity_confirm_place_order.*
@@ -21,18 +29,29 @@ import kotlinx.android.synthetic.main.activity_order_details.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class OrderPlacedActivity : AppCompatActivity() {
-
+class  OrderPlacedActivity : AppCompatActivity() ,
+    EditAddressBottomSheet.BottomSheetListner,
+    PaymentCollectionBottomSheet.PaymentCollectionListner{
+    lateinit var addAddress : EditAddressBottomSheet
+    lateinit var paymentCollection: PaymentCollectionBottomSheet
     var orderPlaceProductModel :ArrayList<OrderPlaceProductModel> = ArrayList()
     var scheduleDate :String =""
+    var paymentCollectDay = true
+    var tvPaymentCollection: TextView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_place_order)
 
         supportActionBar?.hide()
 
+        paymentCollection =
+            PaymentCollectionBottomSheet()
+        addAddress =
+            EditAddressBottomSheet()
         initCalendar()
         initCalendarClicks()
+        initRecyclerView()
 
         CartActivity.totalOrderCost.observe( this, androidx.lifecycle.Observer {
             tv_totalPrice.text = "₹$it"
@@ -40,55 +59,98 @@ class OrderPlacedActivity : AppCompatActivity() {
 
         tv_address_name.text = prefs.getString(ADDRESS,"")?:""
 
+
+
+        btn_place_order.setOnClickListener {
+            placeOrder()
+        }
+
+//        tv_address_edit.setOnClickListener {
+//            addAddress.show(supportFragmentManager, "Example")
+//        }
+
+    }
+
+    private fun placeOrder() {
+        var selectedMode =  ""
+        val cal = Calendar.getInstance()
+        cal.add(Calendar.DAY_OF_YEAR,29)
+        val lastScheduleDate =""+ cal.get(Calendar.DAY_OF_MONTH)+"/"+(cal.get(Calendar.MONTH)+1)+"/"+cal.get(Calendar.YEAR)
+
+
         cartProductList.forEach {
             val variants = ArrayList<VariantModel>()
             it.variants.forEach {   it1->
                 if(it1.qty >0)
                     variants.add(it1)
             }
-            orderPlaceProductModel.add(OrderPlaceProductModel(it.product_name,it.product_cost,variants))
-        }
-        var selectedMode =  ""
-
-
-        btn_place_order.setOnClickListener {
-            selectedMode = if(rg_payment.checkedRadioButtonId != -1)
-                findViewById<RadioButton>(rg_payment.checkedRadioButtonId).text.toString()
-            else
-                ""
-
-            if(scheduleDate!="" &&  selectedMode!="" ) {
-                val orderId = orderDR.push().key.toString()
-                val orderPlaceModel = OrderPlaceModel(
-                    orderPlaceProductModel,
-                    prefs.getString(USER_ID, "") ?: "",
-                    tv_address_name.text.toString(),
-                    scheduleDate,
-                    selectedMode,
-                    Date().toString(),
-                    "order_pending",
-                    tv_totalPrice.text.toString(),
-                    orderId
-                )
-
-                orderDR.child(orderId).setValue(orderPlaceModel)
-
-                userOrdersDR.child(prefs.getString(USER_ID, "") ?: "")
-                    .child(orderId).setValue(orderId).addOnCompleteListener{
-                        val intent = Intent(this@OrderPlacedActivity, MainActivity::class.java)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                        startActivity(intent)
-                        finish()
-                    }
-
-            }else{
-                Toast.makeText(this,"Select payment mode",Toast.LENGTH_SHORT).show()
+            if(it.paymentCollectionDay !=""){
+                orderPlaceProductModel.add(OrderPlaceProductModel(it.product_name,it.product_cost,variants,it.subscriptionPlan,"",it.paymentCollectionDay,scheduleDate))
+            }else {
+                paymentCollectDay = false
             }
-
         }
 
+        selectedMode = if(rg_payment.checkedRadioButtonId != -1)
+            findViewById<RadioButton>(rg_payment.checkedRadioButtonId).text.toString()
+        else
+            ""
+        if(!paymentCollectDay) {
+            Toast.makeText(this, "Choose Payment Collection Date",Toast.LENGTH_SHORT).show()
+            return
+        }
+        if(scheduleDate!="" &&  selectedMode!="" ) {
+            val orderId = orderDR.push().key.toString()
+            val orderPlaceModel = OrderPlaceModel(
+                orderPlaceProductModel,
+                prefs.getString(USER_ID, "") ?: "",
+                tv_address_name.text.toString(),
+                scheduleDate,
+                lastScheduleDate,
+                selectedMode,
+                Date().toString(),
+                "order_pending",
+                "0.0",
+                orderId)
+
+            orderDR.child(orderId).setValue(orderPlaceModel)
+
+            userOrdersDR.child(prefs.getString(USER_ID, "") ?: "")
+                .child(orderId).setValue(orderId).addOnCompleteListener{
+                    cartProductList.clear()
+                    val intent = Intent(this@OrderPlacedActivity, MainActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(intent)
+                    finish()
+                }
+
+        }else{
+            Toast.makeText(this,"Select payment mode",Toast.LENGTH_SHORT).show()
+        }
     }
+
+    private fun initRecyclerView() {
+       val orderPlaceAdapter = cartProductList.let {
+            OrderPlaceAdapter(this, it, object : OrderPlaceAdapter.OnItemClickListener {
+                override fun OnChooseClick(position: Int, view: View, tvPaymentDate: TextView) {
+                    val args = Bundle()
+                    args.putParcelable("productModel",it[position])
+                    paymentCollection.arguments=args
+                    paymentCollection.show(supportFragmentManager,"ex")
+                    tvPaymentCollection = tvPaymentDate
+                }
+                override fun onApplyCouponClick(position: Int, view: View) {
+                }
+
+            })
+        }
+        rv_placed_orders.apply {
+            adapter = orderPlaceAdapter
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        }
+    }
+
 
     private fun initCalendarClicks() {
         llDate1.setOnClickListener {
@@ -119,7 +181,7 @@ class OrderPlacedActivity : AppCompatActivity() {
             val day = currentDate.date
             val month = currentDate.month + 1
             val year = currentDate.year +1900
-            scheduleDate = "" + day + "/" + month + "/" + year
+            scheduleDate = "$day/$month/$year"
         }
         llDate3.setOnClickListener {
             llDate1.setBackgroundResource(R.drawable.calender_box)
@@ -134,7 +196,7 @@ class OrderPlacedActivity : AppCompatActivity() {
             val day = currentDate.date
             val month = currentDate.month + 1
             val year = currentDate.year +1900
-            scheduleDate = "" + day + "/" + month + "/" + year
+            scheduleDate = "$day/$month/$year"
         }
         llDate4.setOnClickListener {
             llDate1.setBackgroundResource(R.drawable.calender_box)
@@ -149,7 +211,7 @@ class OrderPlacedActivity : AppCompatActivity() {
             val day = currentDate.date
             val month = currentDate.month + 1
             val year = currentDate.year +1900
-            scheduleDate = "" + day + "/" + month + "/" + year
+            scheduleDate = "$day/$month/$year"
         }
         llDate5.setOnClickListener {
             llDate1.setBackgroundResource(R.drawable.calender_box)
@@ -164,7 +226,7 @@ class OrderPlacedActivity : AppCompatActivity() {
             val day = currentDate.date
             val month = currentDate.month + 1
             val year = currentDate.year +1900
-            scheduleDate = "" + day + "/" + month + "/" + year
+            scheduleDate = "$day/$month/$year"
         }
         llDate6.setOnClickListener {
             llDate1.setBackgroundResource(R.drawable.calender_box)
@@ -179,7 +241,7 @@ class OrderPlacedActivity : AppCompatActivity() {
             val day = currentDate.date
             val month = currentDate.month + 1
             val year = currentDate.year +1900
-            scheduleDate = "" + day + "/" + month + "/" + year
+            scheduleDate = "$day/$month/$year"
         }
         llDate7.setOnClickListener {
             llDate1.setBackgroundResource(R.drawable.calender_box)
@@ -194,10 +256,9 @@ class OrderPlacedActivity : AppCompatActivity() {
             val day = currentDate.date
             val month = currentDate.month + 1
             val year = currentDate.year + 1900
-            scheduleDate = "" + day + "/" + month + "/" + year
+            scheduleDate = "$day/$month/$year"
         }
     }
-
 
     private fun initCalendar() {
         val calendar :Calendar = Calendar.getInstance()
@@ -257,4 +318,17 @@ class OrderPlacedActivity : AppCompatActivity() {
             else -> "WRONG"
         }
     }
+
+    override fun onSaveClicked(string: String?) {
+        tv_address_name.text = string
+        addAddress.dismiss()
+    }
+
+    override fun onPaymentDaySelected(string: String,productModel: ProductModel) {
+        productModel.paymentCollectionDay = string
+        tvPaymentCollection?.text = string
+        paymentCollection.dismiss()
+    }
+
+
 }

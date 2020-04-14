@@ -103,16 +103,14 @@
         <Button
             android:id="@+id/btn_every30Days"
             android:layout_margin="10dp"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/white_btn"
             android:gravity="center"
             android:elevation="4dp"
-
             android:padding="2dp"
-            android:text="Every 15 days"
+            android:text="Every 30 days"
             android:textAllCaps="true"
             android:textColor="#000000"
             android:textSize="14sp" />
@@ -123,12 +121,11 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:elevation="4dp"
-
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@drawable/white_btn"
             android:padding="2dp"
-            android:text="Every 30 days"
+            android:text="Every 45 days"
             android:textAllCaps="true"
             android:textColor="#000000"
             android:textSize="14sp" />
