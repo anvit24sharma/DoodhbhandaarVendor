@@ -40,10 +40,8 @@ class  OrderPlacedActivity : AppCompatActivity() ,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_place_order)
-        paymentCollection =
-            PaymentCollectionBottomSheet()
-        addAddress =
-            EditAddressBottomSheet()
+        paymentCollection = PaymentCollectionBottomSheet()
+        addAddress = EditAddressBottomSheet()
         initCalendar()
         initCalendarClicks()
         initRecyclerView()
