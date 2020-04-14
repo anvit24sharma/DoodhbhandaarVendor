@@ -43,10 +43,8 @@ class  OrderPlacedActivity : AppCompatActivity() ,
 
         supportActionBar?.hide()
 
-        paymentCollection =
-            PaymentCollectionBottomSheet()
-        addAddress =
-            EditAddressBottomSheet()
+        paymentCollection = PaymentCollectionBottomSheet()
+        addAddress = EditAddressBottomSheet()
         initCalendar()
         initCalendarClicks()
         initRecyclerView()
@@ -55,7 +53,7 @@ class  OrderPlacedActivity : AppCompatActivity() ,
             tv_totalPrice.text = "₹$it"
         })
 
-        tv_address_name.text = prefs.getString(ADDRESS,"")?:""
+        tvAddress.text = prefs.getString(ADDRESS,"")?:""
 
 
 
@@ -63,18 +61,18 @@ class  OrderPlacedActivity : AppCompatActivity() ,
             placeOrder()
         }
 
-        tv_address_edit.setOnClickListener {
+        tvChange.setOnClickListener {
             addAddress.show(supportFragmentManager, "Example")
         }
 
     }
 
     private fun placeOrder() {
+        cartProductList.clear()
         var selectedMode =  ""
         val cal = Calendar.getInstance()
         cal.add(Calendar.DAY_OF_YEAR,29)
         val lastScheduleDate =""+ cal.get(Calendar.DAY_OF_MONTH)+"/"+(cal.get(Calendar.MONTH)+1)+"/"+cal.get(Calendar.YEAR)
-
 
         cartProductList.forEach {
             val variants = ArrayList<VariantModel>()
@@ -102,7 +100,7 @@ class  OrderPlacedActivity : AppCompatActivity() ,
             val orderPlaceModel = OrderPlaceModel(
                 orderPlaceProductModel,
                 prefs.getString(USER_ID, "") ?: "",
-                tv_address_name.text.toString(),
+                tvAddress.text.toString(),
                 scheduleDate,
                 lastScheduleDate,
                 selectedMode,
@@ -318,7 +316,7 @@ class  OrderPlacedActivity : AppCompatActivity() ,
     }
 
     override fun onSaveClicked(string: String?) {
-        tv_address_name.text = string
+        tvAddress.text = string
         addAddress.dismiss()
     }
 

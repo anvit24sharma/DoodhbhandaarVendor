@@ -13,16 +13,13 @@
     <string name="date_s">( %s )</string>
     <string name="bill_amount_s">Bill Amount:₹ %s</string>
     <string name="doodhbhandaar">Doodhbhandaar</string>
-<<<<<<< HEAD
     <string name="red">#ec4c4c</string>
-    <string name="rs_s">Rs.%s</string>
+    <string name="rs_s">₹ %s</string>
     <string name="quantity_s">Quantity:%s</string>
-=======
     <string name="total_qty_s">Total QTY | %s</string>
     <string name="cost_per_day_s">Cost per day: ₹%s</string>
     <string name="estimated_total_cost_of_month_s">Estimated total cost of month: ₹%s</string>
     <string name="plan_selected_s">Plan selected: %s</string>
->>>>>>> b842d799d444c685686a4d3d3b87b4f2657af4aa
 
 
 </resources>

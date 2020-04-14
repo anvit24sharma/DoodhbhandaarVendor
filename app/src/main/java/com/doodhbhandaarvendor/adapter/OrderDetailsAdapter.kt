@@ -19,7 +19,7 @@ class OrderDetailsAdapter(
 ) : RecyclerView.Adapter<OrderDetailsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_order_detail_name_qty, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_order_detail, parent, false)
         return ViewHolder(itemView)
     }
 
