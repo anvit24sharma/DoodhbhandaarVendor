@@ -111,7 +111,7 @@
 
 
         <Button
-            android:id="@+id/btn_custom"
+            android:id="@+id/btn_onetime"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -119,7 +119,7 @@
             android:background="@drawable/white_btn"
             android:elevation="4dp"
             android:gravity="center"
-            android:text="Custom"
+            android:text="One Time"
             android:textAllCaps="true"
             android:textColor="#000"
             android:textSize="14sp" />

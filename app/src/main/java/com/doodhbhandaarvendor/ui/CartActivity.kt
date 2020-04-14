@@ -1,5 +1,7 @@
 package com.doodhbhandaarvendor.ui
 
+import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -16,6 +18,7 @@ import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.adapter.CartAdapter
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment
 import kotlinx.android.synthetic.main.activity_cart.*
+import java.util.*
 
 class CartActivity : AppCompatActivity() {
 
@@ -74,23 +77,34 @@ class CartActivity : AppCompatActivity() {
         private fun initRecyclerView() {
             cartAdapter = HomeFragment.cartProductList.let {
                 CartAdapter(this, it, object : CartAdapter.OnItemClickListener {
-                    override fun onCustomClick(position: Int, view: View, btnDaily: Button, btnWeekly: Button) {
+                    override fun onOnetimeClick(position: Int, view: View, btnDaily: Button, btnWeekly: Button) {
                         view.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.selected_btn)
                         btnDaily.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
                         btnWeekly.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
                         it[position].subscriptionPlan = "Custom"
+                        var cal: Calendar
+                        var datePickerDialog : DatePickerDialog
+                        cal = Calendar.getInstance()
+                var mY = cal.get(Calendar.YEAR)
+                var mM = cal.get(Calendar.MONTH)
+                var mD = cal.get(Calendar.DAY_OF_MONTH)
+
+                datePickerDialog = DatePickerDialog(this@CartActivity, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                    Toast.makeText(this@CartActivity, """$dayOfMonth/${month+ 1}/$year""", Toast.LENGTH_LONG).show()
+                }, mY, mM, mD)
+                     datePickerDialog.show()
                     }
 
-                    override fun onWeeklyClick(position: Int, btnCustom: Button, btnDaily: Button, view: View) {
+                    override fun onWeeklyClick(position: Int, btnOnetime: Button, btnDaily: Button, view: View) {
                         btnDaily.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
-                        btnCustom.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
+                        btnOnetime.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
                         view.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.selected_btn)
                         it[position].subscriptionPlan = "Weekly"
                     }
 
-                    override fun onDailyClick(position: Int, btnCustom: Button, view: View, btnWeekly: Button) {
+                    override fun onDailyClick(position: Int, btnOnetime: Button, view: View, btnWeekly: Button) {
                         btnWeekly.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
-                        btnCustom.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
+                        btnOnetime.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
                         view.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.selected_btn)
                         it[position].subscriptionPlan = "Daily"
 

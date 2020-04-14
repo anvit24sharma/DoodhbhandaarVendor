@@ -2,20 +2,27 @@ package com.doodhbhandaarvendor.adapter
 
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.model.ProductModel
 import com.doodhbhandaarvendor.ui.CartActivity.Companion.totalOrderCost
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class CartAdapter(
+
     private var mContext: Context?,
     private var product: ArrayList<ProductModel>,
     private var mListener: OnItemClickListener
@@ -28,6 +35,7 @@ class CartAdapter(
         return ViewHolder(itemView)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.setData(product[position], position)
     }
@@ -42,11 +50,12 @@ class CartAdapter(
         private val tvProductCost = itemView.findViewById<TextView>(R.id.tv_product_cost)
         private val tvProductsQty = itemView.findViewById<TextView>(R.id.tv_totalQty)
         private val rvVariant = itemView.findViewById<RecyclerView>(R.id.rv_variants)
-        private val btnCustom = itemView.findViewById<Button>(R.id.btn_custom)
+        private val btnOnetime = itemView.findViewById<Button>(R.id.btn_onetime)
         private val btnDaily = itemView.findViewById<Button>(R.id.btn_daily)
         private val btnWeekly = itemView.findViewById<Button>(R.id.btn_weekly)
         private lateinit var variantAdapter: VariantAdapter
 
+        @RequiresApi(Build.VERSION_CODES.N)
         @SuppressLint("SetTextI18n")
         fun setData(productModel: ProductModel, position: Int) {
             tvProductName.text = productModel.product_name
@@ -94,17 +103,27 @@ class CartAdapter(
             }
 
 
-            btnCustom.setOnClickListener {
-                mListener.onCustomClick(position, it, btnDaily, btnWeekly)
+            btnOnetime.setOnClickListener {
+//                cal = Calendar.getInstance()
+//                var mY = cal.get(Calendar.YEAR)
+//                var mM = cal.get(Calendar.MONTH)
+//                var mD = cal.get(Calendar.DAY_OF_MONTH)
+//
+//                datePickerDialog = DatePickerDialog(mContext, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+//                    Toast.makeText(mContext, """$dayOfMonth/${month+ 1}/$year""", Toast.LENGTH_LONG).show()
+//                }, mY, mM, mD)
+//                     datePickerDialog.show()
+
+                mListener.onOnetimeClick(position, it, btnDaily, btnWeekly)
             }
 
             btnDaily.setOnClickListener {
-                mListener.onDailyClick(position, btnCustom, it, btnWeekly)
+                mListener.onDailyClick(position, btnOnetime, it, btnWeekly)
 
             }
 
             btnWeekly.setOnClickListener {
-                mListener.onWeeklyClick(position, btnCustom, btnDaily, it)
+                mListener.onWeeklyClick(position, btnOnetime, btnDaily, it)
 
             }
 
@@ -113,9 +132,9 @@ class CartAdapter(
     }
 
     interface OnItemClickListener {
-        fun onCustomClick(position: Int, view: View, btnDaily: Button, btnWeekly: Button)
-        fun onWeeklyClick(position: Int, btnCustom: Button, btnDaily: Button, it: View)
-        fun onDailyClick(position: Int, btnCustom: Button, it: View, btnWeekly: Button)
+        fun onOnetimeClick(position: Int, view: View, btnDaily: Button, btnWeekly: Button)
+        fun onWeeklyClick(position: Int, btnOnetime: Button, btnDaily: Button, it: View)
+        fun onDailyClick(position: Int, btnOntime: Button, it: View, btnWeekly: Button)
     }
 
 }
