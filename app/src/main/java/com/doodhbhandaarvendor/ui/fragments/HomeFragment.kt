@@ -11,7 +11,12 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.doodhbhandaarvendor.R
+<<<<<<< HEAD
+import com.doodhbhandaarvendor.R.string
+=======
+>>>>>>> b842d799d444c685686a4d3d3b87b4f2657af4aa
 import com.doodhbhandaarvendor.adapter.ProductAdapter
 import com.doodhbhandaarvendor.model.ProductModel
 import com.doodhbhandaarvendor.model.VariantModel
@@ -81,11 +86,11 @@ class HomeFragment : Fragment() {
                     }
                     if(!present) {
                         cartProductList.add(productList[position])
-                        btn.text = getString(R.string.remove)
+                        btn.text = getString(string.remove)
                     }
                     else {
                         cartProductList.remove(productList[position])
-                        btn.text = getString(R.string.add)
+//                        btn.text = getString(string.add)
 
                     }
 
@@ -96,7 +101,7 @@ class HomeFragment : Fragment() {
         }
         rv_product.apply {
             adapter = productAdapter
-            layoutManager = GridLayoutManager(context,2)
+            layoutManager = GridLayoutManager(context,2) as RecyclerView.LayoutManager?
         }
     }
 

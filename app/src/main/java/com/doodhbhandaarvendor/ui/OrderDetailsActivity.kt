@@ -10,6 +10,8 @@ import com.doodhbhandaarvendor.adapter.OrderDetailsAdapter
 import com.doodhbhandaarvendor.model.OrderPlaceModel
 import com.doodhbhandaarvendor.ui.fragments.HistoryFragment.Companion.pastOrderList
 import kotlinx.android.synthetic.main.activity_order_details.*
+import kotlinx.android.synthetic.main.activity_order_details.tv_totalPrice
+import kotlinx.android.synthetic.main.item_order_detail.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -43,9 +45,10 @@ class OrderDetailsActivity : AppCompatActivity() {
         val formatedDate = cal[Calendar.DATE].toString() + "/" + (cal[Calendar.MONTH] + 1) + "/" + cal[Calendar.YEAR]
         tv_orderDate.text = formatedDate
         tv_scheduleDate.text = orderPlaceModel.schedule
-        tv_totalPrice.text = getString(R.string.bill_amount_s,orderPlaceModel.totalCost)
+        tv_totalPrice.text =getString(R.string.bill_amount_s,orderPlaceModel.totalCost)
+        tv_total.text=getString(R.string.rs_s,orderPlaceModel.totalCost)
         tv_productStatus.text = orderPlaceModel.status
-        tv_deliverTo.text=orderPlaceModel.address
+        tv_address_name.text=orderPlaceModel.address
         tv_payment.text=orderPlaceModel.paymentMode
 
         initRecyclerView()
