@@ -120,13 +120,18 @@
 
 
         <Button
-            android:id="@+id/btn_custom"
+            android:id="@+id/btn_onetime"
             android:layout_width="50dp"
             android:layout_height="30dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/white_btn"
             android:elevation="4dp"
+            android:gravity="center"
+            android:text="One Time"
+            android:textAllCaps="true"
+            android:textColor="#000"
+            android:textSize="14sp" />
             android:fontFamily="@font/acherusgrotesqueregular"
             android:text="Custom"
             android:textAllCaps="false"
