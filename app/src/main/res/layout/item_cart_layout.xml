@@ -4,87 +4,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
     android:layout_marginStart="4dp"
+    android:layout_marginTop="8dp"
     android:layout_marginEnd="4dp"
-    android:background="#fff"
-    >
-
-
-    <ImageView
-        android:id="@+id/circle_img"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="11dp"
-        android:src="@color/colorPrimary"
-        android:background="#fff"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:background="#fff">
 
 
     <TextView
         android:id="@+id/tv_product_name"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:layout_marginStart="2dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:background="#ffffff"
-        android:fontFamily="sans-serif-condensed"
+        android:fontFamily="@font/nova"
+        android:gravity="center"
+        android:padding="2dp"
         android:text="Product Name"
+        android:textAllCaps="false"
         android:textColor="#000"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@id/circle_img"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="#b1b1b1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_product_name" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_variants"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_product_name"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@id/view1"
         tools:itemCount="3"
         tools:layout_editor_absoluteX="4dp"
         tools:listitem="@layout/item_variants" />
 
+    <TextView
+        android:id="@+id/txt_totalQty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/nova"
+        android:text="Quantity:"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_variants" />
 
     <TextView
         android:id="@+id/tv_totalQty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:gravity="end"
-        android:padding="4dp"
-        android:text="Total Quantity:%s"
+        android:fontFamily="@font/nova"
+        android:layout_marginTop="10dp"
+        android:text="quantity"
+        android:textAllCaps="false"
         android:textColor="#000000"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/txt_totalQty"
         app:layout_constraintTop_toBottomOf="@id/rv_variants" />
 
     <TextView
         android:id="@+id/tv_product_cost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:gravity="end"
-        android:padding="4dp"
-        android:text="@string/bill_amount_s"
-        android:textColor="#000000"
-        android:textSize="14sp"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/nova"
+        android:layout_marginTop="6dp"
+        android:text="Bill Amount:Rs.%s"
+        android:textAllCaps="false"
+        android:textColor="#000"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_variants" />
+        app:layout_constraintTop_toBottomOf="@id/tv_totalQty" />
 
     <TextView
         android:id="@+id/tv_subscription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:background="#fffcf7"
-        android:fontFamily="sans-serif-condensed-light"
-        android:text="Select the subscription Plan"
+        android:fontFamily="@font/nova"
+        android:text="Select the subscription Plan :"
         android:textColor="#f57083"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,9 +109,10 @@
     <LinearLayout
         android:id="@+id/ll_btn"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-
-        android:background="#ffffff"
+        android:layout_height="70dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="#fffcf7"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="4"
@@ -106,42 +122,44 @@
         <Button
             android:id="@+id/btn_custom"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/white_btn"
             android:elevation="4dp"
-            android:fontFamily="sans-serif-smallcaps"
-            android:gravity="center"
+            android:fontFamily="@font/acherusgrotesqueregular"
             android:text="Custom"
-            android:textColor="#000"
+            android:textAllCaps="false"
             android:textSize="12sp" />
 
         <Button
             android:id="@+id/btn_daily"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/white_btn"
             android:elevation="4dp"
+            android:fontFamily="@font/acherusgrotesqueregular"
             android:gravity="center"
             android:text="Daily"
-            android:fontFamily="sans-serif-smallcaps"
+            android:textAllCaps="false"
             android:textColor="#000000"
             android:textSize="12sp" />
 
         <Button
             android:id="@+id/btn_weekly"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/white_btn"
             android:elevation="4dp"
-            android:fontFamily="sans-serif-smallcaps"
+
+            android:fontFamily="@font/acherusgrotesqueregular"
             android:text="Weekly"
+            android:textAllCaps="false"
             android:textColor="#000000"
             android:textSize="12sp" />
 
@@ -150,7 +168,9 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#000"
+        android:layout_marginTop="10dp"
+        android:background="#7e7e7e"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

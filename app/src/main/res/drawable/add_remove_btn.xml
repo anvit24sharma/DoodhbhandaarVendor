@@ -4,6 +4,8 @@
     <!-- you can use any color you want I used here gray color-->
     <stroke android:color="#DCDCDC"
         android:width="1.5dp"/>
+    <corners android:radius="6dp"
+        />
 
 <gradient android:startColor="#ffffff"
     android:centerColor="#f7ebeb"

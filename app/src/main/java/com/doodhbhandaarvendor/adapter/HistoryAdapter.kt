@@ -35,6 +35,8 @@ class HistoryAdapter(
     ) {
 
         holder.orderNo.text = orders[position].orderId
+        holder.schDate.text=orders[position].schedule
+        holder.paymentMode.text=orders[position].paymentMode
         var totalCost =0.0
 
         if(orders[position].totalCost =="0.0") {
@@ -68,15 +70,19 @@ class HistoryAdapter(
     class OrderViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         var orderNo: TextView
+        var schDate:TextView
+        var paymentMode:TextView
         var amount: TextView
         var status: TextView
         var date: TextView
         var tvOrderDetails: TextView
 
         init {
+            schDate=itemView.findViewById(R.id.tv_schDate)
+            paymentMode=itemView.findViewById(R.id.tv_paymentMode)
             orderNo = itemView.findViewById(R.id.orderNo)
             amount = itemView.findViewById(R.id.tv_totalPrice)
-            status = itemView.findViewById(R.id.tv_productStatusDate)
+            status = itemView.findViewById(R.id.tv_productStatus)
             date = itemView.findViewById(R.id.orderDate)
             tvOrderDetails = itemView.findViewById(R.id.tv_orderDetails)
         }

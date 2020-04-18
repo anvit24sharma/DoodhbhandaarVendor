@@ -87,7 +87,7 @@ class HomeFragment : Fragment() {
                     }
                     else {
                         cartProductList.remove(productList[position])
-//                        btn.text = getString(string.add)
+                      btn.text = getString(string.add)
 
                     }
 

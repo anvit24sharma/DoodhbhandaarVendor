@@ -67,7 +67,7 @@ class CartAdapter(
                     object : VariantAdapter.OnItemClickListener {
                         override fun onAddClick(position: Int, view: View) {
                             totalCost += it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble()
-                            tvProductCost.text = "₹$totalCost"
+                            tvProductCost.text = "Price:₹$totalCost"
                             tvProductsQty.text = (totalCost / productModel.product_cost.split("/")[0].toDouble()).toString() + " "+ productModel.product_cost.split("/")[1]
                             totalOrderCost.value = totalOrderCost.value?.plus(it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble())
                             it.variants[position].qty += 1
@@ -79,7 +79,7 @@ class CartAdapter(
                                 it.variants[position].qty -= 1
                                 variantAdapter.notifyDataSetChanged()
                                 totalCost -= it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble()
-                                tvProductCost.text = "₹$totalCost"
+                                tvProductCost.text = "Price:₹$totalCost"
                                 tvProductsQty.text =
                                     (totalCost / productModel.product_cost.split("/")[0].toDouble()).toString() + " " + productModel.product_cost.split("/")[1]
                                 totalOrderCost.value =

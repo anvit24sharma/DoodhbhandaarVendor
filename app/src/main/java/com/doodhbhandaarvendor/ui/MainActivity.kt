@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     internal var prevMenuItem: Int? = null
-     var tokens :ArrayList<String> = ArrayList()
+    var tokens: ArrayList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,32 +32,34 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        menu_bottom[0].isSelected =true
-        menu_bottom.setOnItemSelectedListener {  
+        menu_bottom[0].isSelected = true
+        menu_bottom.setOnItemSelectedListener {
             when (it) {
                 R.id.home -> viewpager.currentItem = 0
                 R.id.history -> viewpager.currentItem = 1
                 R.id.profile -> viewpager.currentItem = 2
             }
         }
-        usersDR.child(prefs.getString(USER_ID,"")?:"").child("tokens")
-            .addValueEventListener(object : ValueEventListener{
+
+        usersDR.child(prefs.getString(USER_ID, "") ?: "").child("tokens")
+            .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
 
                 }
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    snapshot.children.forEach{
+                    snapshot.children.forEach {
                         tokens.add(it.value.toString())
                     }
 
-                    FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
-                            instanceIdResult: InstanceIdResult ->
-                        val newToken= instanceIdResult.token
+                    FirebaseInstanceId.getInstance()
+                        .instanceId.addOnSuccessListener { instanceIdResult: InstanceIdResult ->
+                        val newToken = instanceIdResult.token
                         Log.e("newToken", newToken)
-                        if(!tokens.contains(newToken)) {
+                        if (!tokens.contains(newToken)) {
                             tokens.add(newToken)
-                            usersDR.child(prefs.getString(USER_ID, "") ?: "").child("tokens").setValue(tokens)
+                            usersDR.child(prefs.getString(USER_ID, "") ?: "").child("tokens")
+                                .setValue(tokens)
                         }
                     }
                 }
@@ -66,18 +68,23 @@ class MainActivity : AppCompatActivity() {
 
 
         viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
 
             }
+
             override fun onPageSelected(position: Int) {
                 if (prevMenuItem != null) {
-                    menu_bottom.get(prevMenuItem!!).isSelected =false
+                    menu_bottom.get(prevMenuItem!!).isSelected = false
                 } else {
-                    menu_bottom.get(0).isSelected =false
+                    menu_bottom.get(0).isSelected = false
                 }
                 Log.d("page", "onPageSelected: $position")
-                menu_bottom.get(position).isSelected =true
-                prevMenuItem =  position
+                menu_bottom.get(position).isSelected = true
+                prevMenuItem = position
             }
 
             override fun onPageScrollStateChanged(state: Int) {
@@ -96,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         adapter.addFragment(HistoryFragment())
         adapter.addFragment(ProfileFragment())
         viewPager.adapter = adapter
-        viewPager.offscreenPageLimit =3
+        viewPager.offscreenPageLimit = 3
     }
 
 }
