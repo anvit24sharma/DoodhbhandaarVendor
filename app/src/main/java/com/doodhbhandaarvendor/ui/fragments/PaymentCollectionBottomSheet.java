@@ -21,11 +21,11 @@ public class PaymentCollectionBottomSheet extends BottomSheetDialogFragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.payment_collection_date_bottom_sheet,container,false);
-        everyDay=view.findViewById(R.id.btn_daily);
-        every15Day=view.findViewById(R.id.btn_every15Days);
-        every30Day=view.findViewById(R.id.btn_every30Days);
-        every45Day=view.findViewById(R.id.btn_every45Days);
-        everyWeek=view.findViewById(R.id.btn_everyWeek);
+        everyDay=view.findViewById(R.id.checkBox);
+        every15Day=view.findViewById(R.id.checkBox2);
+        every30Day=view.findViewById(R.id.checkBox3);
+        every45Day=view.findViewById(R.id.checkBox4);
+        everyWeek=view.findViewById(R.id.checkBox5);
         return view;
     }
 

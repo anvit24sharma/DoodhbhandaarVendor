@@ -4,18 +4,20 @@
     android:id="@+id/half_kg"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#ffffff">
+    android:background="#ffffff"
+    android:padding="4dp">
 
     <TextView
         android:id="@+id/tv_half_kg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:fontFamily="sans-serif-light"
+        android:fontFamily="@font/meticularegular"
         android:gravity="center"
         android:text="0.5"
-        android:textColor="#3a3a3a"
+        android:textColor="#000"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

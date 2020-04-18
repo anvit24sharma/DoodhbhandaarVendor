@@ -2,132 +2,83 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:background="#ffffff">
+    android:layout_height="match_parent"
+    android:background="#fff">
+
+
 
     <TextView
         android:id="@+id/txt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
         android:text="Select payment collection date"
-        android:gravity="center"
-        android:textColor="#f57083"
-        android:padding="4dp"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
-        android:layout_margin="10dp"
-        android:textStyle="bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-    <View
-        android:id="@+id/view1"
-        android:layout_width="280dp"
-        android:layout_height="1dp"
+        android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="4dp"
-        android:background="#000"
-        app:layout_constraintTop_toBottomOf="@id/txt"/>
-    <LinearLayout
-        android:id="@+id/ll_btn12"
-        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+<View
+    android:id="@+id/view"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/colorPrimaryDark"
+    app:layout_constraintTop_toBottomOf="@id/txt"/>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:layout_margin="20dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="2"
+        android:text="Everyday"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view1">
+        app:layout_constraintTop_toBottomOf="@id/view" />
 
-        <Button
-            android:layout_margin="10dp"
-            android:id="@+id/btn_daily"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/white_btn"
-            android:elevation="4dp"
-            android:gravity="center"
-            android:padding="2dp"
-            android:text="Every Day"
-            android:textAllCaps="true"
-            android:textColor="#000"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/btn_everyWeek"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:elevation="4dp"
-
-            android:background="@drawable/white_btn"
-            android:gravity="center"
-            android:padding="2dp"
-            android:text="Every Week"
-            android:textAllCaps="true"
-            android:textColor="#000"
-            android:textSize="14sp" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_btn345"
-        android:layout_width="match_parent"
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:gravity="center"
-        android:layout_margin="20dp"
-        android:orientation="horizontal"
-        android:weightSum="3"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+
+        android:text="Every Week"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_btn12">
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
-        <Button
-            android:id="@+id/btn_every15Days"
-            android:layout_width="wrap_content"
-            android:layout_margin="10dp"
-            android:elevation="4dp"
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Every 15 days"
+        android:layout_marginStart="15dp"
 
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/white_btn"
-            android:gravity="center"
-            android:padding="2dp"
-            android:text="Every 15 days"
-            android:textAllCaps="true"
-            android:textColor="#000"
-            android:textSize="14sp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+    <CheckBox
+        android:id="@+id/checkBox4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Every 30 days"
+        android:layout_marginStart="15dp"
 
-        <Button
-            android:id="@+id/btn_every30Days"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/white_btn"
-            android:gravity="center"
-            android:elevation="4dp"
-            android:padding="2dp"
-            android:text="Every 30 days"
-            android:textAllCaps="true"
-            android:textColor="#000000"
-            android:textSize="14sp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
 
-        <Button
-            android:id="@+id/btn_every45Days"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:elevation="4dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@drawable/white_btn"
-            android:padding="2dp"
-            android:text="Every 45 days"
-            android:textAllCaps="true"
-            android:textColor="#000000"
-            android:textSize="14sp" />
-    </LinearLayout>
+    <CheckBox
+        android:id="@+id/checkBox5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+
+        android:text="Every 45 days"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

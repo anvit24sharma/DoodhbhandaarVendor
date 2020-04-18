@@ -2,6 +2,13 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle" android:padding="10dp">
     <!-- you can use any color you want I used here gray color-->
-    <corners android:radius="6dp"/>
-    <solid android:color="#f57083" />
+    <solid android:color="@color/colorPrimary"/>
+    <corners
+        android:radius="4dp"/>
+
+
+
+
+
+
 </shape>

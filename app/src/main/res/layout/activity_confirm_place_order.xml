@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff">
+    android:background="#f0f0f0">
 
     <LinearLayout
         android:id="@+id/delivery_at"
@@ -296,11 +296,11 @@
         android:id="@+id/rv_placed_orders"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginTop="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_calender"
-        tools:itemCount="4"
-        tools:listitem="@layout/item_confirm_place_order" />
+        tools:itemCount="2"
+        tools:listitem="@layout/item_place_order" />
 
 
     <LinearLayout
