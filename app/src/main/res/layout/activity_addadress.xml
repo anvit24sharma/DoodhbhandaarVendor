@@ -2,76 +2,81 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="250dp">
 
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/azoftsans"
-        android:textStyle="bold"
-        android:text="Add delivery location"
-        android:textAllCaps="true"
-        android:textColor="#000"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Add delivery location"
+            android:textAllCaps="false"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:padding="4dp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="#b1b1b1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv" />
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="#f0f0f0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv"
+             />
 
-<!--    <TextView-->
-<!--        android:id="@+id/tv_loc"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:text="Your location"-->
-<!--        android:layout_marginStart="2dp"-->
-<!--        android:textAllCaps="true"-->
-<!--        android:textSize="12sp"-->
-<!--        android:textStyle="bold"-->
-<!--        android:fontFamily="@font/roommedium"-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_loc"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:text="Your location"-->
+    <!--        android:layout_marginStart="2dp"-->
+    <!--        android:textAllCaps="true"-->
+    <!--        android:textSize="12sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        android:fontFamily="@font/roommedium"-->
 
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/view" />-->
+    <!--       app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/view" />-->
 
     <EditText
         android:id="@+id/et_addAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/meticularegular"
-        android:textColor="#000"
-        android:textSize="14sp"
-        android:textStyle="bold"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         android:layout_marginTop="20dp"
-        android:hint="Enter your location"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/meticularegular"
+        android:hint="Enter delivery location"
+        android:textColor="#000"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view" />
+     app:layout_constraintTop_toBottomOf="@id/view"/>
 
     <Button
         android:id="@+id/btn_addAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/plce_order_btn"
         android:fontFamily="@font/acherusgrotesqueregular"
+        android:padding="4dp"
         android:text="Confirm location and Proceed"
         android:textAllCaps="false"
         android:textColor="#fff"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toBottomOf="@id/et_addAddress" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

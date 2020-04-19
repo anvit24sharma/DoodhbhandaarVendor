@@ -2,7 +2,6 @@ package com.doodhbhandaarvendor.adapter
 
 
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Build
 import android.view.LayoutInflater
@@ -10,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -66,7 +64,7 @@ class CartAdapter(
                 unit.add(productModel.product_cost.split("/")[1])
             }
 
-            tvProductCost.text = "₹$totalCost"
+            tvProductCost.text = "Amount: ₹$totalCost"
             tvProductsQty.text =
                 (totalCost / productModel.product_cost.split("/")[0].toDouble()).toString()
             totalOrderCost.value = totalOrderCost.value?.plus(totalCost)
@@ -76,7 +74,7 @@ class CartAdapter(
                     object : VariantAdapter.OnItemClickListener {
                         override fun onAddClick(position: Int, view: View) {
                             totalCost += it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble()
-                            tvProductCost.text = "Price:₹$totalCost"
+                            tvProductCost.text = "Amount: ₹$totalCost"
                             tvProductsQty.text = (totalCost / productModel.product_cost.split("/")[0].toDouble()).toString() + " "+ productModel.product_cost.split("/")[1]
                             totalOrderCost.value = totalOrderCost.value?.plus(it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble())
                             it.variants[position].qty += 1
@@ -88,7 +86,7 @@ class CartAdapter(
                                 it.variants[position].qty -= 1
                                 variantAdapter.notifyDataSetChanged()
                                 totalCost -= it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble()
-                                tvProductCost.text = "Price:₹$totalCost"
+                                tvProductCost.text = "Amount: ₹$totalCost"
                                 tvProductsQty.text =
                                     (totalCost / productModel.product_cost.split("/")[0].toDouble()).toString() + " " + productModel.product_cost.split("/")[1]
                                 totalOrderCost.value =

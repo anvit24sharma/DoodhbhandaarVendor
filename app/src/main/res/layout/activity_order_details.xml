@@ -56,7 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/clarikagrotesquemedium"
+                    android:fontFamily="@font/roommedium"
                     android:text="Order Date"
                     android:textSize="14sp" />
 
@@ -64,7 +64,7 @@
                     android:id="@+id/tv_orderDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/regular"
+                    android:fontFamily="@font/meticularegular"
                     android:text="order date"
 
                     android:textColor="#000000"
@@ -77,7 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/clarikagrotesquemedium"
+                    android:fontFamily="@font/roommedium"
                     android:text="Deliver to"
                     android:textSize="14sp" />
 
@@ -85,19 +85,35 @@
                     android:id="@+id/tv_address_name"
                     android:layout_width="wrap_content"
                     android:layout_height="27dp"
-                    android:fontFamily="@font/regular"
+                    android:fontFamily="@font/meticularegular"
                     android:text="Address"
-
                     android:textColor="#000000"
                     android:textSize="16sp" />
 
+                <TextView
+                    android:id="@+id/txt_totalPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roommedium"
+                    android:text="Total"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_totalPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/meticularegular"
+                    android:text="Price"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/txt_payment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/clarikagrotesquemedium"
+                    android:fontFamily="@font/roommedium"
                     android:text="Payment"
                     android:textSize="14sp" />
 
@@ -105,8 +121,7 @@
                     android:id="@+id/tv_payment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:fontFamily="@font/regular"
+                    android:fontFamily="@font/meticularegular"
                     android:text="Payment"
                     android:textColor="#000000"
 
@@ -119,16 +134,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/clarikagrotesquemedium"
+                    android:fontFamily="@font/roommedium"
                     android:text="Scheduled Date"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                     />
 
                 <TextView
                     android:id="@+id/tv_scheduleDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:fontFamily="@font/regular"
+                    android:fontFamily="@font/meticularegular"
                     android:text="schedule date"
                     android:textColor="#000000"
 
@@ -139,7 +155,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/clarikagrotesquemedium"
+                    android:fontFamily="@font/roommedium"
                     android:text="Order Status"
                     android:textSize="14sp" />
 
@@ -148,7 +164,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:fontFamily="@font/regular"
+                    android:fontFamily="@font/meticularegular"
                     android:text="Status"
 
                     android:textColor="#000000"
@@ -160,7 +176,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/clarikagrotesquemedium"
+                    android:fontFamily="@font/roommedium"
                     android:text="Order Id"
                     android:textSize="14sp"
                     app:layout_constraintTop_toBottomOf="@id/view3"
@@ -171,7 +187,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:fontFamily="@font/regular"
+                    android:fontFamily="@font/meticularegular"
                     android:text="ORDER NO:"
                     android:textColor="#000000"
                     android:textSize="16sp" />
@@ -179,38 +195,49 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/ll_order_details"
+                app:layout_constraintStart_toStartOf="parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:weightSum="2">
+
             <Button
                 android:id="@+id/btn_cancel"
-                android:layout_width="130dp"
-                android:layout_height="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/btn_cancel"
-                android:fontFamily="@font/nova"
-                android:gravity="center"
                 android:padding="2dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/plce_order_btn"
+                android:fontFamily="@font/clarikagrotesquemedium"
+                android:gravity="center"
                 android:text="Cancel  Order"
-                android:textColor="#f40429"
+                android:textColor="#fff"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_order_details" />
+                android:layout_weight="1"
+               />
+                <Button
+                    android:id="@+id/btn_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="2dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/btn_edit_ll"
+                    android:fontFamily="@font/clarikagrotesquemedium"
+                    android:gravity="center"
+                    android:text="Edit Order"
+                    android:textColor="#fff"
+                    android:textSize="12sp"
+                    android:layout_weight="1"
+                    />
 
-            <TextView
-                android:id="@+id/btn_edit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="@font/nova"
-                android:gravity="center"
-                android:padding="2dp"
-                android:text="Edit Your Order"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_order_details" />
+            </LinearLayout>
 
             <View
                 android:id="@+id/view0"
@@ -276,11 +303,7 @@
                     tools:itemCount="2"
                     tools:listitem="@layout/item_order_detail" />
 
-                <View
-                    android:id="@+id/view4"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#f0f0f0" />
+
             </LinearLayout>
 
             <TextView
@@ -289,10 +312,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/nova"
-                android:text="Total Bill Amount"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="Total Bill Amount:"
                 android:textColor="#000"
                 android:textSize="16sp"
+                android:padding="2dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ll_your_order" />
 
@@ -302,11 +326,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:fontFamily="@font/regular"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:text="Rs"
+                android:padding="2dp"
                 android:textColor="#000"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/total"
                 app:layout_constraintTop_toBottomOf="@id/ll_your_order" />
 
             <TextView
@@ -314,9 +339,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:fontFamily="@font/nova"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:padding="4dp"
                 android:text="Special Instruction:%s"
                 android:textColor="#f40429"

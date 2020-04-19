@@ -6,23 +6,24 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="2dp"
     android:layout_marginBottom="10dp"
+    android:background="#fff"
     android:elevation="2dp">
 
     <TextView
         android:id="@+id/tv_productName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="6dp"
         android:layout_marginBottom="6dp"
         android:background="#ffffff"
-        android:fontFamily="@font/clarikagrotesquemedium"
         android:text="Product Name"
         android:textColor="#000000"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        android:fontFamily="sans-serif-condensed"
+        android:padding="4dp"
+        android:textStyle="bold"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -31,8 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_productName"
         android:layout_marginTop="6dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_productName"
-        tools:ignore="MissingConstraints"
         tools:itemCount="2"
         tools:listitem="@layout/item_order_detail_name_qty" />
 
@@ -42,13 +43,13 @@
         android:id="@+id/tv_totalPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/regular"
+        android:layout_marginStart="8dp"
+        android:fontFamily="sans-serif-condensed-medium"
         android:text="@string/rs_s"
-        android:textColor="#000"
+        android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_productName" />
+app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_totalQty" />
 
     <TextView
         android:id="@+id/tv_totalQty"
@@ -56,12 +57,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/soleilight"
-        android:gravity="end"
-        android:textColor="#000"
-        android:textAllCaps="true"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textAllCaps="false"
         android:text="Quantity%s"
-        android:textSize="10sp"
+        android:textColor="#000000"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rv_variants" />
     <TextView
@@ -70,36 +70,36 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:layout_marginTop="4dp"
-        android:fontFamily="@font/nova"
+        android:fontFamily="sans-serif-condensed-light"
         android:padding="2dp"
         android:text="Plan selected:"
-        android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_totalQty"
+        android:textSize="15sp"
+        android:textColor="#000"
+        app:layout_constraintTop_toBottomOf="@id/tv_totalPrice"
         app:layout_constraintStart_toStartOf="parent"/>
     <TextView
         android:id="@+id/tv_planSelected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-
-        android:fontFamily="@font/nova"
+        android:fontFamily="sans-serif-condensed-medium"
         android:padding="2dp"
         android:text="total amount"
         android:textColor="#000"
-        android:textSize="12sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@id/txt_planSelected"
-        app:layout_constraintTop_toBottomOf="@id/tv_totalQty"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_totalPrice"/>
 
     <TextView
         android:id="@+id/txt_paymentCollectionDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
-        android:layout_marginTop="2dp"
-        android:fontFamily="@font/nova"
+        android:fontFamily="sans-serif-condensed-light"
         android:padding="2dp"
+        android:textColor="#000"
         android:text="Payment collection date:"
-        android:textSize="12sp"
+        android:textSize="15sp"
         app:layout_constraintTop_toBottomOf="@id/txt_planSelected"
         app:layout_constraintStart_toStartOf="parent"/>
     <TextView
@@ -107,12 +107,11 @@
         android:id="@+id/tv_paymentCollectionDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/nova"
+        android:fontFamily="sans-serif-condensed-medium"
         android:padding="2dp"
         android:text="total amount"
-        android:layout_marginTop="2dp"
         android:textColor="#000"
-        android:textSize="12sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@id/txt_paymentCollectionDate"
         app:layout_constraintTop_toBottomOf="@id/tv_planSelected"/>
     <TextView
@@ -120,13 +119,13 @@
         android:id="@+id/promo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/nova"
+        android:fontFamily="sans-serif-condensed-medium"
         android:padding="2dp"
         android:text="Apply Promo"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:textColor="#FF0000"
-        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:textColor="#000"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_paymentCollectionDate"/>
     <View
@@ -134,7 +133,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:background="#f0f0f0"
         app:layout_constraintTop_toBottomOf="@+id/promo" />
