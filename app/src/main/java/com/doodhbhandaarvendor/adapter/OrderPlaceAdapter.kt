@@ -56,11 +56,11 @@ class OrderPlaceAdapter(
             productModel.variants.forEach {
                 totalQty += it.variantName.toDouble() * it.qty
             }
-            tvProductsQty.text = mContext?.getString(R.string.total_qty_s,totalQty.toString()+ " " +productModel.product_cost.split("/")[1])
+            tvProductsQty.text = mContext?.getString(R.string.quantity_s,totalQty.toString()+ " " +productModel.product_cost.split("/")[1])
 
             var costPerDay = (productModel.product_cost.split("/")[0].toDouble() * totalQty)
-            tvProductCostPerDay.text = mContext?.getString(R.string.cost_per_day_s,costPerDay.toString())
-            tvSelectedPlan.text=  mContext?.getString(R.string.plan_selected_s,productModel.subscriptionPlan)
+            tvProductCostPerDay.text ="Rs.$costPerDay"
+            tvSelectedPlan.text=  productModel.subscriptionPlan
 
             val cal = Calendar.getInstance()
             val currentMonth = cal.get(Calendar.MONTH)
@@ -78,7 +78,7 @@ class OrderPlaceAdapter(
                 //costPerDay *= ((lastDate - todayDate) + 1)
                 costPerDay *= 30
             }
-            tvMonthlyEstimatedCost.text = mContext?.getString(R.string.estimated_total_cost_of_month_s,costPerDay.toString())
+            tvMonthlyEstimatedCost.text ="Rs.$costPerDay"
 
             tvApplyPromocode.setOnClickListener {
                 mListener.onApplyCouponClick(position,it)

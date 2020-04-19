@@ -188,10 +188,10 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/meticularegular"
-                android:text="status"
-                android:textAllCaps="true"
+                android:text="Status"
+                android:textAllCaps="false"
                 android:textSize="14sp"
-
+                android:textColor="#000"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view2" />
@@ -217,6 +217,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="10dp"
+                android:padding="8dp"
                 android:fontFamily="@font/meticularegular"
                 android:text="Order Details"
                 android:textColor="#f57083"
