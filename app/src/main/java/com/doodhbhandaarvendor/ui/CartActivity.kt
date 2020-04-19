@@ -81,18 +81,17 @@ class CartActivity : AppCompatActivity() {
                         view.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.selected_btn)
                         btnDaily.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
                         btnWeekly.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
-                        it[position].subscriptionPlan = "Custom"
-                        var cal: Calendar
-                        var datePickerDialog : DatePickerDialog
-                        cal = Calendar.getInstance()
-                var mY = cal.get(Calendar.YEAR)
-                var mM = cal.get(Calendar.MONTH)
-                var mD = cal.get(Calendar.DAY_OF_MONTH)
+                        val cal =Calendar.getInstance()
+                        val datePickerDialog : DatePickerDialog
+                        val mY = cal.get(Calendar.YEAR)
+                        val mM = cal.get(Calendar.MONTH)
+                        val mD = cal.get(Calendar.DAY_OF_MONTH)
 
-                datePickerDialog = DatePickerDialog(this@CartActivity, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                    Toast.makeText(this@CartActivity, """$dayOfMonth/${month+ 1}/$year""", Toast.LENGTH_LONG).show()
-                }, mY, mM, mD)
-                     datePickerDialog.show()
+                        datePickerDialog = DatePickerDialog(this@CartActivity, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                            Toast.makeText(this@CartActivity, """$dayOfMonth/${month+ 1}/$year""", Toast.LENGTH_LONG).show()
+                            it[position].subscriptionPlan = "$dayOfMonth/${month+ 1}/$year"
+                        }, mY, mM, mD)
+                        datePickerDialog.show()
                     }
 
                     override fun onWeeklyClick(position: Int, btnOnetime: Button, btnDaily: Button, view: View) {

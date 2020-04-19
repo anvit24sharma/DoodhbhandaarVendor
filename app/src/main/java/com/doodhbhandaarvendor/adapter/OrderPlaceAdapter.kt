@@ -40,7 +40,7 @@ class OrderPlaceAdapter(
 
         private val tvProductName = itemView.findViewById<TextView>(R.id.tv_product_name)
         private val tvProductCostPerDay = itemView.findViewById<TextView>(R.id.tv_cost_perDay)
-        private val tvProductsQty = itemView.findViewById<TextView>(R.id.tv_totalQty)
+        private val tvProductsQty = itemView.findViewById<TextView>(R.id.tv_product_qty)
         private val tvMonthlyEstimatedCost = itemView.findViewById<TextView>(R.id.tv_estimatedCost)
         private val tvSelectedPlan = itemView.findViewById<TextView>(R.id.tv_selectedPlan)
         private val tvApplyPromocode = itemView.findViewById<TextView>(R.id.tv_applyPromoCode)
