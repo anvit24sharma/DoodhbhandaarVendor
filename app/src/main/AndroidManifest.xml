@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.OrderDetailCalenderActivity"></activity>
+        <activity android:name=".ui.CalendarActivity"/>
+        <activity android:name=".ui.OrderDetailCalenderActivity"/>
         <activity android:name=".ui.OrderDetailsActivity" />
         <activity android:name=".auth.UserDetailActivity" />
         <activity android:name=".ui.OrderPlacedActivity" />

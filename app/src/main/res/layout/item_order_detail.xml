@@ -36,15 +36,7 @@
         tools:itemCount="2"
         tools:listitem="@layout/item_order_detail_name_qty" />
 
-    <!--    <View-->
-    <!--        android:id="@+id/view2"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="1dp"-->
-    <!--        android:layout_marginStart="20dp"-->
-    <!--        android:layout_marginTop="10dp"-->
-    <!--        android:layout_marginEnd="20dp"-->
-    <!--        android:background="#f0f0f0"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/rv_variants" />-->
+
 
     <TextView
         android:id="@+id/tv_totalPrice"

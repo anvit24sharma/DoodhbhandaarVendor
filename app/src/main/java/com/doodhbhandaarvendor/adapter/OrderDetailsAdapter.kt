@@ -34,11 +34,25 @@ class OrderDetailsAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvProductName= itemView.findViewById<TextView>(R.id.tv_productName)
         private val rvVariants = itemView.findViewById<RecyclerView>(R.id.rv_variants)
+        private val tvProductQty = itemView.findViewById<TextView>(R.id.tv_totalQty)
+        private val tvTotalPrice = itemView.findViewById<TextView>(R.id.tv_totalPrice)
+        private val tvPlanSelected = itemView.findViewById<TextView>(R.id.tv_planSelected)
+        private val tvPaymentCollectionDate = itemView.findViewById<TextView>(R.id.tv_paymentCollectionDate)
 
         private lateinit var variantAdapter :OrderDetailVariantAdapter
 
         fun setData(orderModel: OrderPlaceProductModel, position: Int) {
             tvProductName.text = orderModel.productName
+            var totalQty = 0.0
+            orderModel.variants.forEach {
+                totalQty += it.variantName.toDouble() * it.qty
+            }
+            val unit = orderModel.productCost.split("/")[1]
+
+            tvProductQty.text = mContext?.getString(R.string.quantity_s, "$totalQty $unit")
+            tvTotalPrice.text = mContext?.getString(R.string.rs_s, (totalQty.times(orderModel.productCost.split("/")[0].toDouble()).toString()))
+            tvPlanSelected.text = orderModel.subscriptionPlan
+            tvPaymentCollectionDate.text = orderModel.paymentCollectionDay
 
             variantAdapter = orderModel.let {
                 OrderDetailVariantAdapter(mContext, it.variants,units[position])

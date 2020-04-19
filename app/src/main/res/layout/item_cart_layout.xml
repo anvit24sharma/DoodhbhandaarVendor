@@ -128,13 +128,10 @@
             android:background="@drawable/white_btn"
             android:elevation="4dp"
             android:gravity="center"
-            android:text="One Time"
+            android:text="Once"
             android:textAllCaps="true"
             android:textColor="#000"
-            android:textSize="14sp" />
             android:fontFamily="@font/acherusgrotesqueregular"
-            android:text="Custom"
-            android:textAllCaps="false"
             android:textSize="12sp" />
 
         <Button

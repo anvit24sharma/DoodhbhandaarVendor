@@ -81,17 +81,19 @@ class CartActivity : AppCompatActivity() {
                         view.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.selected_btn)
                         btnDaily.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
                         btnWeekly.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
-                        val cal =Calendar.getInstance()
-                        val datePickerDialog : DatePickerDialog
-                        val mY = cal.get(Calendar.YEAR)
-                        val mM = cal.get(Calendar.MONTH)
-                        val mD = cal.get(Calendar.DAY_OF_MONTH)
+                        it[position].subscriptionPlan = "Once"
 
-                        datePickerDialog = DatePickerDialog(this@CartActivity, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                            Toast.makeText(this@CartActivity, """$dayOfMonth/${month+ 1}/$year""", Toast.LENGTH_LONG).show()
-                            it[position].subscriptionPlan = "$dayOfMonth/${month+ 1}/$year"
-                        }, mY, mM, mD)
-                        datePickerDialog.show()
+//                        val cal =Calendar.getInstance()
+//                        val datePickerDialog : DatePickerDialog
+//                        val mY = cal.get(Calendar.YEAR)
+//                        val mM = cal.get(Calendar.MONTH)
+//                        val mD = cal.get(Calendar.DAY_OF_MONTH)
+//
+//                        datePickerDialog = DatePickerDialog(this@CartActivity, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+//                            Toast.makeText(this@CartActivity, """$dayOfMonth/${month+ 1}/$year""", Toast.LENGTH_LONG).show()
+//                            it[position].subscriptionPlan = "$dayOfMonth/${month+ 1}/$year"
+//                        }, mY, mM, mD)
+//                        datePickerDialog.show()
                     }
 
                     override fun onWeeklyClick(position: Int, btnOnetime: Button, btnDaily: Button, view: View) {
