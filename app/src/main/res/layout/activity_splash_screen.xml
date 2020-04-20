@@ -20,11 +20,11 @@
         android:src="@drawable/db"
         />
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+android:gravity="center"
         android:text="Doodhbhandaar"
-        android:textSize="40dp"
+        android:textSize="28sp"
         android:layout_marginTop="40dp"
         android:padding="4dp"
         android:textColor="#fff"
@@ -36,7 +36,7 @@
         android:gravity="center"
 
         android:text="Vendor"
-        android:textSize="40dp"
+        android:textSize="28sp"
         android:padding="4dp"
         android:textColor="#fff"
         android:fontFamily="@font/clarikagrotesquemedium"
