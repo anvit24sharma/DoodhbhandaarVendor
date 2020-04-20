@@ -14,12 +14,12 @@ class OrderDetailCalenderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_detail_calender)
-        val materialCalenderView= findViewById<MaterialCalendarView>(R.id.calendarView)
-        materialCalenderView.state().edit().setFirstDayOfWeek(Calendar.MONDAY)
-            .setMinimumDate(CalendarDay.from(2020, 1, 1))
-            .setMaximumDate(CalendarDay.from(2200, 12, 31))
-            .setCalendarDisplayMode(CalendarMode.WEEKS)
-            .commit();
+//        val materialCalenderView= findViewById<MaterialCalendarView>(R.id.calendarView)
+//        materialCalenderView.state().edit().setFirstDayOfWeek(Calendar.MONDAY)
+//            .setMinimumDate(CalendarDay.from(2020, 1, 1))
+//            .setMaximumDate(CalendarDay.from(2200, 12, 31))
+//            .setCalendarDisplayMode(CalendarMode.WEEKS)
+//            .commit();
 
     }
 }

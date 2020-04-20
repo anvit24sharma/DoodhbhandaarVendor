@@ -86,25 +86,6 @@
                     android:layout_height="27dp"
                     android:fontFamily="@font/meticularegular"
                     android:text="Address"
-
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/txt_totalPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/roommedium"
-                    android:text="Total"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tv_totalPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/meticularegular"
-                    android:text="Price"
                     android:textColor="#000000"
                     android:textSize="16sp" />
 
@@ -121,7 +102,6 @@
                     android:id="@+id/tv_payment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:fontFamily="@font/meticularegular"
                     android:text="Payment"
                     android:textColor="#000000"
@@ -249,16 +229,33 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/tv_yourOrder"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/naste"
-                    android:text="Your  Order"
-                    android:textColor="#000"
-                    android:textSize="20sp"
-                    android:textStyle="normal" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_yourOrder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/naste"
+                        android:text="Your  Order"
+                        android:layout_weight="5"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        android:textStyle="normal" />
+
+                    <ImageView
+                        android:id="@+id/iv_calendar"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:padding="4dp"
+                        android:src="@drawable/calender"
+                        />
+                </LinearLayout>
 
 
 
@@ -286,12 +283,13 @@
                 android:padding="2dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ll_your_order" />
+
             <TextView
                 android:id="@+id/tv_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Rs"
                 android:padding="2dp"
@@ -299,6 +297,7 @@
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@id/total"
                 app:layout_constraintTop_toBottomOf="@id/ll_your_order" />
+
             <TextView
                 android:id="@+id/spl"
                 android:layout_width="match_parent"

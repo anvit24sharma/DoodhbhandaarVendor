@@ -36,6 +36,12 @@ class  OrderPlacedActivity : AppCompatActivity() ,
     var scheduleDate :String =""
     var paymentCollectDay = true
     var tvPaymentCollection: TextView? = null
+    var orderPlaceAdapter : OrderPlaceAdapter? = null
+    var currentDate : Date =Date()
+    var day =0
+    var month  =-1
+    var year  =0
+    var selectedColumn = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,17 +51,15 @@ class  OrderPlacedActivity : AppCompatActivity() ,
 
         paymentCollection = PaymentCollectionBottomSheet()
         addAddress = EditAddressBottomSheet()
+        initRecyclerView()
         initCalendar()
         initCalendarClicks()
-        initRecyclerView()
 
         CartActivity.totalOrderCost.observe( this, androidx.lifecycle.Observer {
             tv_totalPrice.text = "₹$it"
         })
 
         tvAddress.text = prefs.getString(ADDRESS,"")?:""
-
-
 
         btn_place_order.setOnClickListener {
             placeOrder()
@@ -68,11 +72,9 @@ class  OrderPlacedActivity : AppCompatActivity() ,
     }
 
     private fun placeOrder() {
-        cartProductList.clear()
         var selectedMode =  ""
-        val cal = Calendar.getInstance()
-        cal.add(Calendar.DAY_OF_YEAR,29)
-        val lastScheduleDate =""+ cal.get(Calendar.DAY_OF_MONTH)+"/"+(cal.get(Calendar.MONTH)+1)+"/"+cal.get(Calendar.YEAR)
+        var lastScheduleDate = scheduleDate
+        orderPlaceProductModel.clear()
 
         cartProductList.forEach {
             val variants = ArrayList<VariantModel>()
@@ -85,6 +87,12 @@ class  OrderPlacedActivity : AppCompatActivity() ,
             }else {
                 paymentCollectDay = false
             }
+            if(it.subscriptionPlan == "Daily" || it.subscriptionPlan =="Weekly"){
+                val cal = Calendar.getInstance()
+                cal.add(Calendar.DAY_OF_YEAR,29+selectedColumn)
+                lastScheduleDate =""+ cal.get(Calendar.DAY_OF_MONTH)+"/"+(cal.get(Calendar.MONTH)+1)+"/"+cal.get(Calendar.YEAR)
+            }
+
         }
 
         selectedMode = if(rg_payment.checkedRadioButtonId != -1)
@@ -127,8 +135,7 @@ class  OrderPlacedActivity : AppCompatActivity() ,
     }
 
     private fun initRecyclerView() {
-       val orderPlaceAdapter = cartProductList.let {
-            OrderPlaceAdapter(this, it, object : OrderPlaceAdapter.OnItemClickListener {
+           orderPlaceAdapter= cartProductList.let { OrderPlaceAdapter(this, it, object : OrderPlaceAdapter.OnItemClickListener {
                 override fun OnChooseClick(position: Int, view: View, tvPaymentDate: TextView) {
                     val args = Bundle()
                     args.putParcelable("productModel",it[position])
@@ -158,11 +165,13 @@ class  OrderPlacedActivity : AppCompatActivity() ,
             llDate6.setBackgroundResource(R.drawable.calender_box)
             llDate7.setBackgroundResource(R.drawable.calender_box)
 
-            val currentDate =  Date()
-            val day = currentDate.date
-            val month = currentDate.month + 1
-            val year = currentDate.year +1900
+            currentDate =  Date(Date().time + 24 * 60 * 60 * 1000)
+            day = currentDate.date
+            month = currentDate.month + 1
+            year = currentDate.year +1900
             scheduleDate = "$day/$month/$year"
+            setSubscriptionOnceDate()
+            selectedColumn =1
         }
         llDate2.setOnClickListener {
             llDate1.setBackgroundResource(R.drawable.calender_box)
@@ -173,11 +182,13 @@ class  OrderPlacedActivity : AppCompatActivity() ,
             llDate6.setBackgroundResource(R.drawable.calender_box)
             llDate7.setBackgroundResource(R.drawable.calender_box)
 
-            val currentDate =  Date(Date().time + 24 * 60 * 60 * 1000)
-            val day = currentDate.date
-            val month = currentDate.month + 1
-            val year = currentDate.year +1900
+            currentDate =  Date(Date().time + 2*24 * 60 * 60 * 1000)
+            day = currentDate.date
+            month = currentDate.month + 1
+            year = currentDate.year +1900
             scheduleDate = "$day/$month/$year"
+            setSubscriptionOnceDate()
+            selectedColumn =2
         }
         llDate3.setOnClickListener {
             llDate1.setBackgroundResource(R.drawable.calender_box)
@@ -188,11 +199,14 @@ class  OrderPlacedActivity : AppCompatActivity() ,
             llDate6.setBackgroundResource(R.drawable.calender_box)
             llDate7.setBackgroundResource(R.drawable.calender_box)
 
-            val currentDate =  Date(Date().time + 2*24 * 60 * 60 * 1000)
-            val day = currentDate.date
-            val month = currentDate.month + 1
-            val year = currentDate.year +1900
+            currentDate =  Date(Date().time + 3*24 * 60 * 60 * 1000)
+            day = currentDate.date
+            month = currentDate.month + 1
+            year = currentDate.year +1900
             scheduleDate = "$day/$month/$year"
+            setSubscriptionOnceDate()
+            selectedColumn =3
+
         }
         llDate4.setOnClickListener {
             llDate1.setBackgroundResource(R.drawable.calender_box)
@@ -203,11 +217,14 @@ class  OrderPlacedActivity : AppCompatActivity() ,
             llDate6.setBackgroundResource(R.drawable.calender_box)
             llDate7.setBackgroundResource(R.drawable.calender_box)
 
-            val currentDate =  Date(Date().time + 3*24 * 60 * 60 * 1000)
-            val day = currentDate.date
-            val month = currentDate.month + 1
-            val year = currentDate.year +1900
+            currentDate =  Date(Date().time + 4*24 * 60 * 60 * 1000)
+            day = currentDate.date
+            month = currentDate.month + 1
+            year = currentDate.year +1900
             scheduleDate = "$day/$month/$year"
+            setSubscriptionOnceDate()
+            selectedColumn =4
+
         }
         llDate5.setOnClickListener {
             llDate1.setBackgroundResource(R.drawable.calender_box)
@@ -218,11 +235,14 @@ class  OrderPlacedActivity : AppCompatActivity() ,
             llDate6.setBackgroundResource(R.drawable.calender_box)
             llDate7.setBackgroundResource(R.drawable.calender_box)
 
-            val currentDate =  Date(Date().time + 4*24 * 60 * 60 * 1000)
-            val day = currentDate.date
-            val month = currentDate.month + 1
-            val year = currentDate.year +1900
+            currentDate =  Date(Date().time + 5*24 * 60 * 60 * 1000)
+            day = currentDate.date
+            month = currentDate.month + 1
+            year = currentDate.year +1900
             scheduleDate = "$day/$month/$year"
+            setSubscriptionOnceDate()
+            selectedColumn =5
+
         }
         llDate6.setOnClickListener {
             llDate1.setBackgroundResource(R.drawable.calender_box)
@@ -233,11 +253,14 @@ class  OrderPlacedActivity : AppCompatActivity() ,
             llDate6.setBackgroundResource(R.drawable.selected_calendar_box)
             llDate7.setBackgroundResource(R.drawable.calender_box)
 
-            val currentDate =  Date(Date().time + 5*24 * 60 * 60 * 1000)
-            val day = currentDate.date
-            val month = currentDate.month + 1
-            val year = currentDate.year +1900
+            currentDate =  Date(Date().time + 6*24 * 60 * 60 * 1000)
+            day = currentDate.date
+            month = currentDate.month + 1
+            year = currentDate.year +1900
             scheduleDate = "$day/$month/$year"
+            setSubscriptionOnceDate()
+            selectedColumn =6
+
         }
         llDate7.setOnClickListener {
             llDate1.setBackgroundResource(R.drawable.calender_box)
@@ -248,25 +271,31 @@ class  OrderPlacedActivity : AppCompatActivity() ,
             llDate6.setBackgroundResource(R.drawable.calender_box)
             llDate7.setBackgroundResource(R.drawable.selected_calendar_box)
 
-            val currentDate =  Date(Date().time + 6*24 * 60 * 60 * 1000)
-            val day = currentDate.date
-            val month = currentDate.month + 1
-            val year = currentDate.year + 1900
+            currentDate =  Date(Date().time + 7*24 * 60 * 60 * 1000)
+            day = currentDate.date
+            month = currentDate.month + 1
+            year = currentDate.year + 1900
             scheduleDate = "$day/$month/$year"
+            setSubscriptionOnceDate()
+            selectedColumn =7
+
         }
     }
 
     private fun initCalendar() {
         val calendar :Calendar = Calendar.getInstance()
 
-        val currentDate =  Date()
+        val currentDate =  Date(Date().time + 24 * 60 * 60 * 1000)
         val day = currentDate.date
         val month = currentDate.month + 1
         val year = currentDate.year +1900
-        scheduleDate = "" + day + "/" + month + "/" + year
+        scheduleDate = "$day/$month/$year"
+        selectedColumn =1
+        setSubscriptionOnceDate()
 
+        calendar.add(Calendar.DAY_OF_YEAR,1)
         tvDate1.text = calendar.get(Calendar.DATE).toString()
-        tvMonth1.text = getMonthName(calendar.get(Calendar.MONTH))
+        tvMonth1.text =  getMonthName(calendar.get(Calendar.MONTH))
         llDate1.setBackgroundResource(R.drawable.selected_calendar_box)
 
         calendar.add(Calendar.DAY_OF_YEAR,1)
@@ -293,6 +322,16 @@ class  OrderPlacedActivity : AppCompatActivity() ,
         tvDate7.text = calendar.get(Calendar.DATE).toString()
         tvMonth7.text = getMonthName(calendar.get(Calendar.MONTH))
 
+
+    }
+
+    private fun setSubscriptionOnceDate() {
+        cartProductList.forEach {
+            if(it.subscriptionPlan != "Daily" && it.subscriptionPlan != "Weekly"){
+                it.subscriptionPlan = scheduleDate
+                orderPlaceAdapter?.notifyDataSetChanged()
+            }
+        }
 
     }
 

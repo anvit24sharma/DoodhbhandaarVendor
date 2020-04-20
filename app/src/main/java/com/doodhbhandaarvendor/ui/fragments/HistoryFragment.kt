@@ -26,12 +26,13 @@ class HistoryFragment : Fragment() {
 
     companion object {
         val pastOrderList = ArrayList<OrderPlaceModel>()
+        lateinit var  userOrdersDR : DatabaseReference
+        lateinit var  ordersDR : DatabaseReference
     }
 
     lateinit var historyAdapter: HistoryAdapter
     val ordersIdList =  ArrayList<String>()
-    lateinit var  userOrdersDR : DatabaseReference
-    lateinit var  ordersDR : DatabaseReference
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
