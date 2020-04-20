@@ -44,10 +44,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:fontFamily="sans-serif-condensed-medium"
         android:text="@string/rs_s"
+        android:fontFamily="sans-serif-condensed-medium"
         android:textColor="#000000"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_totalQty" />
 
@@ -57,11 +57,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
-        android:fontFamily="sans-serif-condensed-medium"
         android:textAllCaps="false"
         android:text="Quantity%s"
+        android:fontFamily="sans-serif-condensed-medium"
         android:textColor="#000000"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_paymentCollectionDate" />
     <TextView
@@ -120,11 +120,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-condensed-medium"
-        android:padding="2dp"
         android:text="Apply Promo"
+        android:textColor="#f57083"
+        android:textSize="14sp"
         android:layout_marginStart="8dp"
-        android:textColor="#000"
-        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_totalPrice"/>
     <View

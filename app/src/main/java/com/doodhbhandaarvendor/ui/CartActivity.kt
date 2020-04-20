@@ -31,7 +31,7 @@ class CartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
 
-        supportActionBar?.title = "Cart"
+        supportActionBar?.title = "Your Cart"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         btn_confirm_order.setOnClickListener {

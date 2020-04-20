@@ -68,6 +68,10 @@ class  OrderPlacedActivity : AppCompatActivity() ,
         tvChange.setOnClickListener {
             addAddress.show(supportFragmentManager, "Example")
         }
+        plc_order.setOnClickListener {
+            startActivity((Intent(this,OrderSuccessFulActivity::class.java)))
+
+        }
 
     }
 

@@ -40,6 +40,7 @@ class CalendarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_summary)
         orderId = intent.getStringExtra("orderId")?:""
+        supportActionBar?.title = "Calendar"
 
         initialiseCalendar()
         selectCalendarDate()
