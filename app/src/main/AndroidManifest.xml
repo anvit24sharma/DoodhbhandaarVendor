@@ -12,7 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.OrderSuccessFulActivity"></activity>
+        <activity android:name=".ui.OrderSuccessFulActivity"/>
+        <activity android:name=".ui.SplashScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity android:name=".ui.CalendarActivity" />
         <activity android:name=".ui.OrderDetailCalenderActivity" />
         <activity android:name=".ui.OrderDetailsActivity" />
@@ -22,13 +30,10 @@
         <activity android:name=".auth.ResetPasswordActivity" />
         <activity android:name=".auth.ForgotPasswordActivity" />
         <activity android:name=".auth.SignUpActivity" />
-        <activity android:name=".auth.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".auth.LoginActivity"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+
+
         <activity android:name=".ui.MainActivity" />
 
         <service
