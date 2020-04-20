@@ -34,6 +34,7 @@ class OrderDetailsAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvProductName= itemView.findViewById<TextView>(R.id.tv_productName)
         private val rvVariants = itemView.findViewById<RecyclerView>(R.id.rv_variants)
+        
 
         private lateinit var variantAdapter :OrderDetailVariantAdapter
 

@@ -45,7 +45,7 @@ class OrderDetailsActivity : AppCompatActivity() {
         val formatedDate = cal[Calendar.DATE].toString() + "/" + (cal[Calendar.MONTH] + 1) + "/" + cal[Calendar.YEAR]
         tv_orderDate.text = formatedDate
         tv_scheduleDate.text = orderPlaceModel.schedule
-        tv_totalPrice.text =getString(R.string.bill_amount_s,orderPlaceModel.totalCost)
+        tv_totalPrice.text =getString(R.string.rs_s,orderPlaceModel.totalCost)
         tv_total.text=getString(R.string.rs_s,orderPlaceModel.totalCost)
         tv_productStatus.text = orderPlaceModel.status
         tv_address_name.text=orderPlaceModel.address
