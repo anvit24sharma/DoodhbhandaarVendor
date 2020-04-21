@@ -1,10 +1,13 @@
 package com.doodhbhandaarvendor.model
 
 import android.annotation.SuppressLint
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
+@Parcelize
 class OrderPlaceModel (
         var products :ArrayList<OrderPlaceProductModel> = ArrayList(),
         var userId :String ="",
@@ -16,7 +19,7 @@ class OrderPlaceModel (
         var status :String="",
         var totalCost :String="",
         var orderId :String =""
-): Comparable<OrderPlaceModel>{
+): Comparable<OrderPlaceModel>,Parcelable{
 
     @SuppressLint("SimpleDateFormat")
     override fun compareTo(other: OrderPlaceModel): Int {
@@ -28,7 +31,7 @@ class OrderPlaceModel (
 
 }
 
-
+@Parcelize
 class OrderPlaceProductModel(
     var productName:String="",
     var productCost :String="",
@@ -37,5 +40,5 @@ class OrderPlaceProductModel(
     var coupon :String="",
     var paymentCollectionDay :String="",
     var nextDate :String = ""
-) {}
+):Parcelable {}
 

@@ -9,13 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.model.ProductModel
+import com.doodhbhandaarvendor.model.VariantModel
 import com.doodhbhandaarvendor.ui.CartActivity.Companion.totalOrderCost
-import java.util.*
+import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.productList
 import kotlin.collections.ArrayList
 
 
@@ -23,7 +26,8 @@ class CartAdapter(
 
     private var mContext: Context?,
     private var product: ArrayList<ProductModel>,
-    private var mListener: OnItemClickListener
+    private var mListener: OnItemClickListener,
+    private var from: String
 ) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
 
@@ -56,12 +60,55 @@ class CartAdapter(
         @RequiresApi(Build.VERSION_CODES.N)
         @SuppressLint("SetTextI18n")
         fun setData(productModel: ProductModel, position: Int) {
+
+            if(from =="orderDetails"){
+                if(productModel.subscriptionPlan != "Daily" && productModel.subscriptionPlan != "Weekly")
+                    itemView.alpha = 0.5f
+
+                val additionalVariants = ArrayList<VariantModel>()
+                productList.forEach {product->
+                    if(product.product_name == productModel.product_name){
+                            product.variants.forEach {variant->
+                                var present =false
+                                productModel.variants.forEach {productModelVariant ->
+                                    if(productModelVariant.variantName == variant.variantName) {
+                                        present =true
+                                    }
+                                }
+                                if(!present){
+                                    additionalVariants.add(variant)
+                                }
+                            }
+                    }
+
+                }
+                productModel.variants.addAll(additionalVariants)
+            }
             tvProductName.text = productModel.product_name
             var totalCost = 0.0
             val unit = ArrayList<String>()
             productModel.variants.forEach {
                 totalCost += productModel.product_cost.split("/")[0].toInt() * it.variantName.toDouble() * it.qty
                 unit.add(productModel.product_cost.split("/")[1])
+            }
+
+
+            when {
+                productModel.subscriptionPlan == "Daily" -> {
+                    btnDaily.background = ContextCompat.getDrawable(mContext!!, R.drawable.selected_btn)
+                    btnOnetime.background = ContextCompat.getDrawable(mContext!!, R.drawable.white_btn)
+                    btnWeekly.background = ContextCompat.getDrawable(mContext!!, R.drawable.white_btn)
+                }
+                productModel.subscriptionPlan == "Weekly" -> {
+                    btnWeekly.background = ContextCompat.getDrawable(mContext!!, R.drawable.selected_btn)
+                    btnOnetime.background = ContextCompat.getDrawable(mContext!!, R.drawable.white_btn)
+                    btnDaily.background = ContextCompat.getDrawable(mContext!!, R.drawable.white_btn)
+                }
+                productModel.subscriptionPlan != "" -> {
+                    btnOnetime.background = ContextCompat.getDrawable(mContext!!, R.drawable.selected_btn)
+                    btnWeekly.background = ContextCompat.getDrawable(mContext!!, R.drawable.white_btn)
+                    btnDaily.background = ContextCompat.getDrawable(mContext!!, R.drawable.white_btn)
+                }
             }
 
             tvProductCost.text = "Amount: ₹$totalCost"
@@ -73,24 +120,37 @@ class CartAdapter(
                 VariantAdapter(mContext, unit, it.variants,
                     object : VariantAdapter.OnItemClickListener {
                         override fun onAddClick(position: Int, view: View) {
-                            totalCost += it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble()
-                            tvProductCost.text = "Amount: ₹$totalCost"
-                            tvProductsQty.text = (totalCost / productModel.product_cost.split("/")[0].toDouble()).toString() + " "+ productModel.product_cost.split("/")[1]
-                            totalOrderCost.value = totalOrderCost.value?.plus(it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble())
-                            it.variants[position].qty += 1
-                            variantAdapter.notifyDataSetChanged()
-                        }
-
-                        override fun onSubtractClick(position: Int, view: View) {
-                            if (it.variants[position].qty != 0) {
-                                it.variants[position].qty -= 1
-                                variantAdapter.notifyDataSetChanged()
-                                totalCost -= it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble()
+                            if(from == "orderDetails" && it.subscriptionPlan !="Daily" && it.subscriptionPlan != "Weekly") {
+                                Toast.makeText(mContext,"Cannot Edit this product", Toast.LENGTH_SHORT).show()
+                            }else {
+                                totalCost += it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble()
                                 tvProductCost.text = "Amount: ₹$totalCost"
                                 tvProductsQty.text =
                                     (totalCost / productModel.product_cost.split("/")[0].toDouble()).toString() + " " + productModel.product_cost.split("/")[1]
                                 totalOrderCost.value =
-                                    totalOrderCost.value?.minus(it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble())
+                                    totalOrderCost.value?.plus(it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble())
+                                it.variants[position].qty += 1
+                                variantAdapter.notifyDataSetChanged()
+                            }
+                        }
+
+                        override fun onSubtractClick(position: Int, view: View) {
+                            if(from == "orderDetails" && it.subscriptionPlan !="Daily" && it.subscriptionPlan != "Weekly"){
+                                Toast.makeText(mContext,"Cannot Edit this product", Toast.LENGTH_SHORT).show()
+
+                            }else {
+                                if (it.variants[position].qty != 0) {
+                                    it.variants[position].qty -= 1
+                                    variantAdapter.notifyDataSetChanged()
+                                    totalCost -= it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble()
+                                    tvProductCost.text = "Amount: ₹$totalCost"
+                                    tvProductsQty.text =
+                                        (totalCost / productModel.product_cost.split("/")[0].toDouble()).toString() + " " + productModel.product_cost.split(
+                                            "/"
+                                        )[1]
+                                    totalOrderCost.value =
+                                        totalOrderCost.value?.minus(it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble())
+                                }
                             }
                         }
                     })

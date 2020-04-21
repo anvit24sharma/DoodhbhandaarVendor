@@ -148,42 +148,28 @@ class CalendarActivity : AppCompatActivity() {
     private fun initOrderView(calendarDay: CalendarDay) {
         val products = ArrayList<OrderPlaceProductModel>()
         products.clear()
+        val formatter = SimpleDateFormat("dd/MM/yyyy")
+        val cal =Calendar.getInstance()
         orderModel.products.forEach {
+            val lastOrderDate: Date = formatter.parse(orderModel.lastOrderDate)
+            cal.time = lastOrderDate
+
             if(it.subscriptionPlan == "Weekly") {
                 weeklyDates.clear()
-                var date = orderModel.lastOrderDate.split("/")[0].toInt()
-                var month = orderModel.lastOrderDate.split("/")[1].toInt()
-                var year = orderModel.lastOrderDate.split("/")[2].toInt()
+                cal.add(Calendar.DATE, -1)
                 for (i in 0..4) {
-                    date -=7
-                    if (date <= 0 && (month == 2 || month == 4 || month == 6 || month == 8 || month == 9 || month == 11)) {
-                        date += 31
-                        month -= 1
-                    } else if (date <= 0 && (month == 5 || month == 7 || month == 10 || month == 12)) {
-                        date += 30
-                        month -= 1
-                    } else if (date <= 0 && (month == 3)) {
-                        date += 28
-                        month -= 1
-                    } else if (date <= 0 && month == 1) {
-                        date += 31
-                        month = 12
-                        year -= 1
-                    }
-                    weeklyDates.add(CalendarDay.from(year,month,date))
+                    weeklyDates.add(CalendarDay.from(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH)+1,cal.get(Calendar.DAY_OF_MONTH)))
+                    cal.add(Calendar.DATE, -7)
                 }
                 weeklyDates.forEach {date ->
                     if(date == calendarDay)
                         products.add(it)
                 }
             }else if(it.subscriptionPlan == "Daily") {
-                val formatter = SimpleDateFormat("dd/MM/yyyy")
-                val date1: Date = formatter.parse(orderModel.schedule)
-                val date2: Date = formatter.parse(orderModel.lastOrderDate)
+                val scheduleDate: Date = formatter.parse(orderModel.schedule)
                 val currentDate = formatter.parse(""+calendarDay.day+"/"+calendarDay.month+"/"+calendarDay.year)
-                if ((currentDate.compareTo(date2) == -1  || currentDate.compareTo(date2) == 0) && (date1.compareTo(currentDate)== -1 || date1.compareTo(currentDate)== -1)) {
+                if ((currentDate.compareTo(lastOrderDate) == -1  || currentDate.compareTo(lastOrderDate) == 0) && (scheduleDate.compareTo(currentDate)== -1 || scheduleDate.compareTo(currentDate)== -1)) {
                     products.add(it)
-
                 }
             }else{
                 val date = it.subscriptionPlan.split("/")[0].toInt()

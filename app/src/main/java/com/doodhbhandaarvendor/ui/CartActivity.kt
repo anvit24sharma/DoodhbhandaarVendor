@@ -1,7 +1,5 @@
 package com.doodhbhandaarvendor.ui
 
-import android.app.DatePickerDialog
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -16,9 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.adapter.CartAdapter
+import com.doodhbhandaarvendor.model.OrderPlaceModel
+import com.doodhbhandaarvendor.model.OrderPlaceProductModel
+import com.doodhbhandaarvendor.model.ProductModel
+import com.doodhbhandaarvendor.ui.fragments.HistoryFragment.Companion.ordersDR
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment
 import kotlinx.android.synthetic.main.activity_cart.*
-import java.util.*
+import kotlin.collections.ArrayList
 
 class CartActivity : AppCompatActivity() {
 
@@ -26,55 +28,117 @@ class CartActivity : AppCompatActivity() {
          var totalOrderCost: MutableLiveData<Double> = MutableLiveData()
     }
     lateinit var cartAdapter :CartAdapter
+    var orderModel =OrderPlaceModel()
+    var from =""
+    val productModelList = ArrayList<ProductModel>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
 
+        orderModel = intent.getParcelableExtra("order")?:orderModel
+        from = intent.getStringExtra("from")?:""
+
         supportActionBar?.title = "Cart"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        btn_confirm_order.setOnClickListener {
-
-            var allItemSelected =true
-            var planSelected = true
-            for (productModel in HomeFragment.cartProductList) {
-                var itemSelected = false
-
-                if(productModel.subscriptionPlan ==""){
-                    planSelected = false
-                }
-                productModel.variants.forEach {
-                    if(it.qty >0){
-                        itemSelected =true
-                    }
-                }
-                if(!itemSelected) {
-                    allItemSelected = false
-                    break
-                }
-            }
-
-            if(totalOrderCost.value == 0.0 || !allItemSelected){
-                Toast.makeText(this,"Select Quantity for each Product",Toast.LENGTH_SHORT).show()
-            }
-            else if(!planSelected){
-                Toast.makeText(this,"Please Select Subscription Plan",Toast.LENGTH_SHORT).show()
-
-            } else{
-                val intent = Intent(this, OrderPlacedActivity::class.java)
-                startActivity(intent)
-            }
-        }
+        initView()
+        initClicks()
         totalOrderCost.value = 0.0
         initRecyclerView()
 
         totalOrderCost.observe( this, Observer {
-            btn_confirm_order.text = getString(R.string.confirm_order, it.toString())
+            if(from == "orderDetails") {
+                btn_confirm_order.text = getString(R.string.update_order_s, it.toString())
+            }else{
+                btn_confirm_order.text = getString(R.string.confirm_order, it.toString())
+            }
         })
     }
 
-        private fun initRecyclerView() {
+    private fun initView() {
+        if(from == "orderDetails"){
+            btn_confirm_order.text = "Update Order"
+            title = "Update Order"
+        }
+    }
+
+    private fun initClicks() {
+        btn_confirm_order.setOnClickListener {
+            if(from == "orderDetails") {
+                updateOrder()
+            }else {
+                confirmOrder()
+            }
+        }
+    }
+
+    private fun updateOrder() {
+
+        var c=0
+        productModelList.forEach {
+            ordersDR.child(orderModel.orderId).child("products").child(c.toString()).child("variants").setValue(it.variants)
+            c++
+        }
+
+    }
+
+    private fun confirmOrder() {
+        var allItemSelected =true
+        var planSelected = true
+        for (productModel in HomeFragment.cartProductList) {
+            var itemSelected = false
+
+            if(productModel.subscriptionPlan ==""){
+                planSelected = false
+            }
+            productModel.variants.forEach {
+                if(it.qty >0){
+                    itemSelected =true
+                }
+            }
+            if(!itemSelected) {
+                allItemSelected = false
+                break
+            }
+        }
+
+        if(totalOrderCost.value == 0.0 || !allItemSelected){
+            Toast.makeText(this,"Select Quantity for each Product",Toast.LENGTH_SHORT).show()
+        }
+        else if(!planSelected){
+            Toast.makeText(this,"Please Select Subscription Plan",Toast.LENGTH_SHORT).show()
+
+        } else{
+            val intent = Intent(this, OrderPlacedActivity::class.java)
+            startActivity(intent)
+        }
+
+    }
+
+    private fun initRecyclerView() {
+        if(from == "orderDetails") {
+
+            orderModel.products.forEach{
+                productModelList.add(ProductModel(it.productName,it.productCost,"","",it.variants,it.subscriptionPlan,it.paymentCollectionDay,""))
+            }
+            cartAdapter = productModelList.let {
+                CartAdapter(this, it, object : CartAdapter.OnItemClickListener {
+                    override fun onOnetimeClick(position: Int, view: View, btnDaily: Button, btnWeekly: Button) {
+                       Toast.makeText(this@CartActivity,"Cannot Edit Subscription Plan",Toast.LENGTH_SHORT).show()
+                    }
+
+                    override fun onWeeklyClick(position: Int, btnOnetime: Button, btnDaily: Button, view: View) {
+                        Toast.makeText(this@CartActivity,"Cannot Edit Subscription Plan",Toast.LENGTH_SHORT).show()
+                    }
+
+                    override fun onDailyClick(position: Int, btnOnetime: Button, view: View, btnWeekly: Button) {
+                        Toast.makeText(this@CartActivity,"Cannot Edit Subscription Plan",Toast.LENGTH_SHORT).show()
+
+                    }
+                },from)
+            }
+        }else{
             cartAdapter = HomeFragment.cartProductList.let {
                 CartAdapter(this, it, object : CartAdapter.OnItemClickListener {
                     override fun onOnetimeClick(position: Int, view: View, btnDaily: Button, btnWeekly: Button) {
@@ -95,14 +159,12 @@ class CartActivity : AppCompatActivity() {
 //                        }, mY, mM, mD)
 //                        datePickerDialog.show()
                     }
-
-                    override fun onWeeklyClick(position: Int, btnOnetime: Button, btnDaily: Button, view: View) {
+                    override fun onWeeklyClick(position: Int, btnOnetime: Button, btnDaily: Button, view: View ){
                         btnDaily.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
                         btnOnetime.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
                         view.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.selected_btn)
                         it[position].subscriptionPlan = "Weekly"
                     }
-
                     override fun onDailyClick(position: Int, btnOnetime: Button, view: View, btnWeekly: Button) {
                         btnWeekly.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
                         btnOnetime.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.white_btn)
@@ -110,8 +172,9 @@ class CartActivity : AppCompatActivity() {
                         it[position].subscriptionPlan = "Daily"
 
                     }
-                })
+                },from)
             }
+        }
             rv_cart.apply {
                 adapter = cartAdapter
                 layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
