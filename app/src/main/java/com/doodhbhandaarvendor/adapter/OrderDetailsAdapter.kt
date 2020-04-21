@@ -50,7 +50,7 @@ class OrderDetailsAdapter(
             val unit = orderModel.productCost.split("/")[1]
 
             tvProductQty.text = mContext?.getString(R.string.quantity_s, "$totalQty $unit")
-            tvTotalPrice.text = mContext?.getString(R.string.rs_s, (totalQty.times(orderModel.productCost.split("/")[0].toDouble()).toString()))
+            tvTotalPrice.text = mContext?.getString(R.string.price_s, (totalQty.times(orderModel.productCost.split("/")[0].toDouble()).toString()))
             tvPlanSelected.text = orderModel.subscriptionPlan
             tvPaymentCollectionDate.text = orderModel.paymentCollectionDay
 

@@ -1,5 +1,6 @@
 package com.doodhbhandaarvendor.ui.fragments
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.doodhbhandaarvendor.utils.Constants.Companion.NAME
 import com.doodhbhandaarvendor.utils.Constants.Companion.PHONE_NUMBER
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_profile.*
+
 class ProfileFragment : Fragment() {
 
 
@@ -29,26 +31,41 @@ class ProfileFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        tvUserName.text = prefs.getString(NAME,"")
-        tvMobile.text = prefs.getString(PHONE_NUMBER,"")
-        tv_email.text = prefs.getString(EMAIL,"")
-        tvAddress.text = prefs.getString(ADDRESS,"")
+        tvUserName.text = prefs.getString(NAME, "")
+        tvMobile.text = prefs.getString(PHONE_NUMBER, "")
+        tv_email.text = prefs.getString(EMAIL, "")
+        tvAddress.text = prefs.getString(ADDRESS, "")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         ivEdit.setOnClickListener {
-            val intent = Intent(context,UserDetailActivity::class.java)
-            intent.putExtra("from","ProfileFragment")
+            val intent = Intent(context, UserDetailActivity::class.java)
+            intent.putExtra("from", "ProfileFragment")
             startActivity(intent)
         }
 
         txt_logOut.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            activity?.finish()
-            startActivity(Intent(context,LoginActivity::class.java))
-            prefs.edit().clear().apply()
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Logout")
+
+            builder.setMessage("Are you want to logout the app?")
+            builder.setPositiveButton("YES")
+            { dialog, which ->
+
+                FirebaseAuth.getInstance().signOut()
+                activity?.finish()
+                startActivity(Intent(context,LoginActivity::class.java))
+                prefs.edit().clear().apply()
+            }
+            builder.setNegativeButton("NO")
+            { dialog, which ->
+                dialog.dismiss()
+            }
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+
 
         }
     }

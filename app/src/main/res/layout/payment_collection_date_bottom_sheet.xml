@@ -33,7 +33,7 @@
 
         <Button
             android:id="@+id/checkBox"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="50dp"
             android:layout_marginTop="40dp"
             android:layout_weight="1"
@@ -51,7 +51,7 @@
 
         <Button
             android:id="@+id/checkBox2"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="50dp"
             android:layout_marginTop="40dp"
             android:layout_weight="1"
@@ -59,7 +59,7 @@
             android:elevation="4dp"
             android:fontFamily="@font/acherusgrotesqueregular"
             android:gravity="center"
-            android:text="Every Week"
+            android:text="Every 15 days"
             android:textAllCaps="false"
             android:textColor="#000000"
             android:textSize="14sp"
@@ -72,7 +72,7 @@
 
         <Button
             android:id="@+id/checkBox3"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="50dp"
             android:layout_marginTop="30dp"
             android:layout_weight="1"
@@ -80,7 +80,7 @@
             android:elevation="4dp"
             android:fontFamily="@font/acherusgrotesqueregular"
             android:gravity="center"
-            android:text="Every 15  days"
+            android:text="Every 30 days"
             android:textAllCaps="false"
             android:textColor="#000000"
             android:textSize="14sp"
@@ -92,7 +92,7 @@
 
         <Button
             android:id="@+id/checkBox4"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="50dp"
             android:layout_marginTop="30dp"
             android:layout_weight="1"
@@ -100,7 +100,7 @@
             android:elevation="4dp"
             android:fontFamily="@font/acherusgrotesqueregular"
             android:gravity="center"
-            android:text="Every 30 days"
+            android:text="Every 45 days"
             android:textAllCaps="false"
             android:textColor="#000000"
             android:textSize="14sp"
@@ -122,7 +122,7 @@
             android:elevation="4dp"
             android:fontFamily="@font/acherusgrotesqueregular"
             android:gravity="center"
-            android:text="Every 45 days"
+            android:text="Every Week"
             android:textAllCaps="false"
             android:textColor="#000000"
             android:textSize="14sp"

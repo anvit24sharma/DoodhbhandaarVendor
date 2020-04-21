@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#fff">
+    android:background="#fff"
+    android:layout_marginTop="4dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -15,7 +16,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="240dp">
+            android:layout_height="220dp"
+           >
 
             <TextView
                 android:id="@+id/tv_product_name"
@@ -36,25 +38,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="@string/quantity_s"
                 android:textColor="#000000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_payment_collectionDate" />
 
-            <TextView
-                android:id="@+id/tv_totalPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="9dp"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="@string/rs_s"
-                android:textColor="#000"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_product_qty" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_totalPrice"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="9dp"-->
+<!--                android:fontFamily="sans-serif-condensed-medium"-->
+<!--                android:text="@string/rs_s"-->
+<!--                android:textColor="#000"-->
+<!--                android:textSize="16sp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/tv_product_qty" />-->
 
             <View
                 android:id="@+id/view1"
@@ -165,7 +167,7 @@
                 android:textColor="#f57083"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_totalPrice" />
+                app:layout_constraintTop_toBottomOf="@id/tv_product_qty" />
 
             <TextView
 
@@ -198,13 +200,13 @@
 
             <Button
                 android:id="@+id/btn_choose"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/arrow"
                 android:fontFamily="sans-serif-smallcaps"
                 android:gravity="center"
-                android:padding="10dp"
+                android:padding="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_selectedPlan" />
         </androidx.constraintlayout.widget.ConstraintLayout>

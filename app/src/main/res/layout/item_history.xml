@@ -9,7 +9,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="290dp"
         android:layout_margin="10dp"
         android:elevation="2dp"
         android:padding="2dp"
@@ -29,7 +29,7 @@
                 android:fontFamily="@font/clarikagrotesquemedium"
                 android:text="Order number"
                 android:textColor="#000"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,7 +41,7 @@
                 android:fontFamily="@font/clarikagrotesquemedium"
                 android:text="orderNo"
                 android:textColor="#000"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_orderNo" />
 
@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/roommedium"
                 android:padding="2dp"
                 android:text="total amount"
@@ -81,7 +81,7 @@
                 android:text="total amount"
                 android:textAllCaps="true"
                 android:textColor="#000"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_totalPrice" />
 
@@ -109,7 +109,7 @@
                 android:text="24/7/2020"
                 android:textAllCaps="true"
                 android:textColor="#000"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_schDate" />
 
@@ -137,7 +137,7 @@
                 android:text="23/3/2020"
                 android:textAllCaps="true"
                 android:textColor="#000"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_orderDate" />
 
@@ -165,7 +165,7 @@
                 android:text="Cash"
                 android:textAllCaps="true"
                 android:textColor="#000"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_paymentMode" />
 
@@ -174,7 +174,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="5dp"
                 android:background="#7e7e7e"
@@ -186,7 +186,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
                 android:fontFamily="@font/meticularegular"
                 android:text="Status"
                 android:textAllCaps="false"
@@ -194,7 +193,8 @@
                 android:textColor="#000"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view2" />
+                app:layout_constraintTop_toBottomOf="@id/view2"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
                 android:id="@+id/tv_productStatusDate"
@@ -215,16 +215,28 @@
                 android:id="@+id/tv_orderDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:layout_marginEnd="10dp"
                 android:padding="8dp"
                 android:fontFamily="@font/meticularegular"
                 android:text="Order Details"
                 android:textColor="#f57083"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 android:textStyle="normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view2" />
+            <TextView
+                android:id="@+id/tv_repeatOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:padding="8dp"
+                android:fontFamily="@font/roommedium"
+                android:text="Repeat"
+                android:textColor="#000"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
