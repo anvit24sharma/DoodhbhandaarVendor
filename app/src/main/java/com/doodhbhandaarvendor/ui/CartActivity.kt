@@ -40,7 +40,7 @@ class CartActivity : AppCompatActivity() {
         orderModel = intent.getParcelableExtra("order")?:orderModel
         from = intent.getStringExtra("from")?:""
 
-        supportActionBar?.title = "Cart"
+        supportActionBar?.title = "Your Cart"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         initView()
         initClicks()
@@ -59,7 +59,7 @@ class CartActivity : AppCompatActivity() {
     private fun initView() {
         if(from == "orderDetails"){
             btn_confirm_order.text = "Update Order"
-            title = "Update Order"
+            supportActionBar?.title = "Update Order"
         }
     }
 

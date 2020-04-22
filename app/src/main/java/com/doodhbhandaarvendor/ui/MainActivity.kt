@@ -1,8 +1,14 @@
 package com.doodhbhandaarvendor.ui
 
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.telephony.TelephonyManager
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.view.get
 import androidx.viewpager.widget.ViewPager
 import com.doodhbhandaarvendor.R
@@ -25,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     internal var prevMenuItem: Int? = null
     var tokens: ArrayList<String> = ArrayList()
+     val PERMISSIONS = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,30 +48,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        usersDR.child(prefs.getString(USER_ID, "") ?: "").child("tokens")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(p0: DatabaseError) {
-
-                }
-
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    snapshot.children.forEach {
-                        tokens.add(it.value.toString())
-                    }
-
-                    FirebaseInstanceId.getInstance()
-                        .instanceId.addOnSuccessListener { instanceIdResult: InstanceIdResult ->
-                        val newToken = instanceIdResult.token
-                        Log.e("newToken", newToken)
-                        if (!tokens.contains(newToken)) {
-                            tokens.add(newToken)
-                            usersDR.child(prefs.getString(USER_ID, "") ?: "").child("tokens")
-                                .setValue(tokens)
-                        }
-                    }
-                }
-
-            })
+        updateDeviceToken()
 
 
         viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -94,6 +78,16 @@ class MainActivity : AppCompatActivity() {
         setupViewPager(viewpager)
 
     }
+
+    private fun updateDeviceToken() {
+        FirebaseInstanceId.getInstance()
+            .instanceId.addOnSuccessListener { instanceIdResult: InstanceIdResult ->
+            val newToken = instanceIdResult.token
+            usersDR.child(prefs.getString(USER_ID, "") ?: "").child("tokens").child(instanceIdResult.id).setValue(newToken)
+
+            }
+    }
+
 
 
     private fun setupViewPager(viewPager: ViewPager) {
