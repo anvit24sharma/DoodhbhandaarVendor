@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.model.ProductModel
 
@@ -48,6 +49,15 @@ class ProductAdapter(
         fun setData(productModel: ProductModel, position: Int) {
             tvProductName.text = productModel.product_name
             tvPricePerKg.text = productModel.product_cost
+
+            if(productModel.selected)
+                btnAdd.text = "Remove"
+            else
+                btnAdd.text = "Add to Cart"
+
+            if(productModel.product_image_url !="") {
+                Glide.with(mContext!!).load(productModel.product_image_url).centerCrop().into(imgProduct)
+            }
 
             btnAdd.setOnClickListener {
                 mListener.onAddClick(position,it)

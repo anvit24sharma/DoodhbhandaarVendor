@@ -48,9 +48,10 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        cartProductList.clear()
         progress.visibility = VISIBLE
         productsDR = FirebaseDatabase.getInstance().getReference(Constants.PRODUCTS_TABLE)
         orderDR = FirebaseDatabase.getInstance().getReference(Constants.ORDER_TABLE)
@@ -59,6 +60,7 @@ class HomeFragment : Fragment() {
         getProducts()
         initRecyclerView()
         initClicks()
+
     }
 
     private fun initClicks() {
@@ -72,27 +74,37 @@ class HomeFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        tv_count.text = cartProductList.size.toString()
+
+        productList.forEach {product ->
+            var present  =false
+            cartProductList.forEach {cartProduct->
+                if(cartProduct.product_name == product.product_name){
+                    present = true
+                }
+            }
+            if(!present) {
+                product.selected = false
+            }
+        }
+
+        productAdapter.notifyDataSetChanged()
+    }
     private fun initRecyclerView() {
         productAdapter = productList.let {
             ProductAdapter(context, it, object : ProductAdapter.OnItemClickListener {
                 override fun onAddClick(position: Int, view: View) {
-                    var present: Boolean = false
-                    val btn = view as Button
 
-                    cartProductList.forEach {
-                        if (productList[position].productId == it.productId)
-                            present = true
-                    }
-                    if (!present) {
+                    if(!it[position].selected) {
                         cartProductList.add(productList[position])
-                        btn.text = getString(string.remove)
-
-                    } else {
+                    }else{
                         cartProductList.remove(productList[position])
-                        btn.text = getString(string.add)
-
                     }
+                    it[position].selected = !it[position].selected
 
+                    productAdapter.notifyDataSetChanged()
                     tv_count.text = cartProductList.size.toString()
 
                 }

@@ -12,5 +12,6 @@ data class ProductModel (
     var variants : ArrayList<VariantModel>,
     var subscriptionPlan :String="",
     var paymentCollectionDay : String="",
-    var couponName :String=""
+    var couponName :String="",
+    var selected :Boolean = false
 ): Parcelable

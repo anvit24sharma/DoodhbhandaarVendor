@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.telephony.TelephonyManager
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.get
@@ -30,8 +31,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     internal var prevMenuItem: Int? = null
-    var tokens: ArrayList<String> = ArrayList()
-     val PERMISSIONS = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,6 +98,7 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = adapter
         viewPager.offscreenPageLimit = 3
     }
+
 
 }
 

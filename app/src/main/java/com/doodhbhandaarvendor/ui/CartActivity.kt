@@ -136,6 +136,11 @@ class CartActivity : AppCompatActivity() {
                         Toast.makeText(this@CartActivity,"Cannot Edit Subscription Plan",Toast.LENGTH_SHORT).show()
 
                     }
+
+                    override fun onCancelClick(position: Int, view: View) {
+                        it.removeAt(position)
+                        cartAdapter.notifyDataSetChanged()
+                    }
                 },from)
             }
         }else{
@@ -171,6 +176,11 @@ class CartActivity : AppCompatActivity() {
                         view.background = ContextCompat.getDrawable(this@CartActivity, R.drawable.selected_btn)
                         it[position].subscriptionPlan = "Daily"
 
+                    }
+
+                    override fun onCancelClick(position: Int, view: View) {
+                        it.removeAt(position)
+                        cartAdapter.notifyDataSetChanged()
                     }
                 },from)
             }

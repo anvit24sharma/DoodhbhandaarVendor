@@ -84,6 +84,9 @@ class OrderPlaceAdapter(
                 mListener.onApplyCouponClick(position,it)
             }
 
+            if(productModel.paymentCollectionDay !="")
+                tvPaymentDate.text = productModel.paymentCollectionDay
+
             btnChoosePaymentDay.setOnClickListener {
                 mListener.OnChooseClick(position,it,tvPaymentDate)
             }

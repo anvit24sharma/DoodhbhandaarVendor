@@ -224,6 +224,7 @@
                 android:textStyle="normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view2" />
+
             <TextView
                 android:id="@+id/tv_repeatOrder"
                 android:layout_width="wrap_content"
@@ -231,6 +232,7 @@
                 android:layout_marginEnd="10dp"
                 android:padding="8dp"
                 android:fontFamily="@font/roommedium"
+                android:visibility="gone"
                 android:text="Repeat"
                 android:textColor="#000"
                 android:textSize="16sp"

@@ -18,7 +18,8 @@ class OrderPlaceModel (
         var orderDate :String="",
         var status :String="",
         var totalCost :String="",
-        var orderId :String =""
+        var orderId :String ="",
+        var specialInstruction :String =""
 ): Comparable<OrderPlaceModel>,Parcelable{
 
     @SuppressLint("SimpleDateFormat")

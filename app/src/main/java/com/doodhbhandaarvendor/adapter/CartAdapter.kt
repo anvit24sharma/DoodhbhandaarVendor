@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -55,6 +56,8 @@ class CartAdapter(
         private val btnOnetime = itemView.findViewById<Button>(R.id.btn_onetime)
         private val btnDaily = itemView.findViewById<Button>(R.id.btn_daily)
         private val btnWeekly = itemView.findViewById<Button>(R.id.btn_weekly)
+        private val ivCancel = itemView.findViewById<ImageView>(R.id.ivCancel)
+
         private lateinit var variantAdapter: VariantAdapter
 
         @RequiresApi(Build.VERSION_CODES.N)
@@ -116,45 +119,50 @@ class CartAdapter(
                 (totalCost / productModel.product_cost.split("/")[0].toDouble()).toString()
             totalOrderCost.value = totalOrderCost.value?.plus(totalCost)
 
-            variantAdapter = productModel.let {
-                VariantAdapter(mContext, unit, it.variants,
+
+            val availableVariants = ArrayList<VariantModel>()
+            productModel.variants.forEach {
+                if(it.available)
+                    availableVariants.add(it)
+            }
+            variantAdapter = VariantAdapter(mContext, unit, availableVariants,
                     object : VariantAdapter.OnItemClickListener {
                         override fun onAddClick(position: Int, view: View) {
-                            if(from == "orderDetails" && it.subscriptionPlan !="Daily" && it.subscriptionPlan != "Weekly") {
+                            if(from == "orderDetails" && productModel.subscriptionPlan !="Daily" && productModel.subscriptionPlan != "Weekly") {
                                 Toast.makeText(mContext,"Cannot Edit this product", Toast.LENGTH_SHORT).show()
                             }else {
-                                totalCost += it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble()
+                                totalCost += productModel.product_cost.split("/")[0].toInt() * productModel.variants[position].variantName.toDouble()
                                 tvProductCost.text = "Amount: ₹$totalCost"
                                 tvProductsQty.text =
                                     (totalCost / productModel.product_cost.split("/")[0].toDouble()).toString() + " " + productModel.product_cost.split("/")[1]
                                 totalOrderCost.value =
-                                    totalOrderCost.value?.plus(it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble())
-                                it.variants[position].qty += 1
+                                    totalOrderCost.value?.plus(productModel.product_cost.split("/")[0].toInt() * productModel.variants[position].variantName.toDouble())
+                                productModel.variants[position].qty += 1
                                 variantAdapter.notifyDataSetChanged()
                             }
                         }
 
                         override fun onSubtractClick(position: Int, view: View) {
-                            if(from == "orderDetails" && it.subscriptionPlan !="Daily" && it.subscriptionPlan != "Weekly"){
+                            if(from == "orderDetails" && productModel.subscriptionPlan !="Daily" && productModel.subscriptionPlan != "Weekly"){
                                 Toast.makeText(mContext,"Cannot Edit this product", Toast.LENGTH_SHORT).show()
 
                             }else {
-                                if (it.variants[position].qty != 0) {
-                                    it.variants[position].qty -= 1
+                                if (productModel.variants[position].qty != 0) {
+                                    productModel.variants[position].qty -= 1
                                     variantAdapter.notifyDataSetChanged()
-                                    totalCost -= it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble()
+                                    totalCost -= productModel.product_cost.split("/")[0].toInt() * productModel.variants[position].variantName.toDouble()
                                     tvProductCost.text = "Amount: ₹$totalCost"
                                     tvProductsQty.text =
                                         (totalCost / productModel.product_cost.split("/")[0].toDouble()).toString() + " " + productModel.product_cost.split(
                                             "/"
                                         )[1]
                                     totalOrderCost.value =
-                                        totalOrderCost.value?.minus(it.product_cost.split("/")[0].toInt() * it.variants[position].variantName.toDouble())
+                                        totalOrderCost.value?.minus(productModel.product_cost.split("/")[0].toInt() * productModel.variants[position].variantName.toDouble())
                                 }
                             }
                         }
                     })
-            }
+
             rvVariant.apply {
                 adapter = variantAdapter
                 layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -185,6 +193,10 @@ class CartAdapter(
 
             }
 
+            ivCancel.setOnClickListener {
+                mListener.onCancelClick(position,it)
+            }
+
 
         }
     }
@@ -193,6 +205,8 @@ class CartAdapter(
         fun onOnetimeClick(position: Int, view: View, btnDaily: Button, btnWeekly: Button)
         fun onWeeklyClick(position: Int, btnOnetime: Button, btnDaily: Button, it: View)
         fun onDailyClick(position: Int, btnOntime: Button, it: View, btnWeekly: Button)
+        fun onCancelClick(position: Int, view: View)
+
     }
 
 }

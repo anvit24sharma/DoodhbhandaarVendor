@@ -27,7 +27,7 @@
                 android:layout_marginTop="15dp"
                 android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/spl">
+                app:layout_constraintTop_toBottomOf="@id/tvSplIns">
 
 
                 <TextView
@@ -299,7 +299,7 @@
                 app:layout_constraintTop_toBottomOf="@id/ll_your_order" />
 
             <TextView
-                android:id="@+id/spl"
+                android:id="@+id/tvSplIns"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"

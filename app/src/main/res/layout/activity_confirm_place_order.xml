@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:background="#f0f0f0">
 
+
+
     <LinearLayout
         android:id="@+id/delivery_at"
         android:layout_width="match_parent"
@@ -37,7 +39,6 @@
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="4dp"
                 android:padding="2dp"
-
                 android:src="@drawable/ic_location"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -92,7 +93,6 @@
             android:layout_marginStart="2dp"
             android:layout_weight="1"
             android:layout_marginTop="6dp"
-
             android:background="@drawable/calender_box"
             android:elevation="4dp"
             android:orientation="vertical"
@@ -342,15 +342,16 @@
         android:layout_marginBottom="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_calender"
+        app:layout_constraintBottom_toTopOf="@id/et_specialInstructions"
         tools:itemCount="2"
         tools:listitem="@layout/item_place_order" />
 
     <EditText
-        android:id="@+id/tv_specialInstructions"
+        android:id="@+id/et_specialInstructions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@id/rv_placed_orders"
+        app:layout_constraintBottom_toTopOf="@id/llBottom"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="8dp"
@@ -359,14 +360,9 @@
         android:maxLines="5"
         android:textColorHint="#ff0000"
         android:hint="Add special instructions(optional)"/>
-<!--    <View-->
-<!--        android:layout_width="260dp"-->
-<!--        android:layout_height="1dp"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/tv_specialInstructions"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:background="#ff0000"/>-->
+
     <LinearLayout
+        android:id="@+id/llBottom"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="#ffffff"
@@ -397,7 +393,6 @@
                     android:background="#fff"
                     android:fontFamily="@font/roommedium"
                     android:text="Payment Using"
-
                     android:textColor="#7e7e7e"
                     android:textSize="14sp"
                     />

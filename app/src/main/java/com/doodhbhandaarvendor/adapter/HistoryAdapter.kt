@@ -51,7 +51,32 @@ class HistoryAdapter(
             holder.amount.text = orders[position].totalCost + "(Due)"
 
         }
-        holder.status.text = orders[position].status
+        when (orders[position].status) {
+            "order_accepted" -> {
+                holder.status.text = "Accepted"
+            }
+            "order_delivered" -> {
+                holder.status.text = "Delivered"
+                holder.tvRepeat .visibility = View.VISIBLE
+
+            }
+            "order_rejected" -> {
+                holder.status.text = "Order Rejected"
+            }
+            "user_canceled" -> {
+                holder.status.text = "User Canceled"
+            }
+            "admin_canceled" -> {
+                holder.status.text = "Admin Canceled"
+            }
+            else -> {
+                holder.status.text = "Pending"
+            }
+        }
+
+
+
+
         val formatter1 = SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy")
         val date1: Date = formatter1.parse(orders[position].orderDate)
         val cal = Calendar.getInstance()
@@ -60,6 +85,10 @@ class HistoryAdapter(
         holder.date.text =formatedDate
         holder.tvOrderDetails.setOnClickListener {
             mlistener.onOrderDetailsClick(position, it)
+        }
+
+        holder.tvRepeat.setOnClickListener{
+            mlistener.onRepeatOrderClick(position,it)
         }
     }
 
@@ -70,12 +99,13 @@ class HistoryAdapter(
     class OrderViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         var orderNo: TextView
-        var schDate:TextView
+        var schDate: TextView
         var paymentMode:TextView
         var amount: TextView
         var status: TextView
         var date: TextView
         var tvOrderDetails: TextView
+        var tvRepeat :TextView
 
         init {
             schDate=itemView.findViewById(R.id.tv_schDate)
@@ -85,11 +115,13 @@ class HistoryAdapter(
             status = itemView.findViewById(R.id.tv_productStatus)
             date = itemView.findViewById(R.id.orderDate)
             tvOrderDetails = itemView.findViewById(R.id.tv_orderDetails)
+            tvRepeat = itemView.findViewById(R.id.tv_repeatOrder)
         }
     }
 
     interface onItemClickListener {
         fun onOrderDetailsClick(position: Int, view: View?)
+        fun onRepeatOrderClick(position: Int, view: View?)
     }
 
 

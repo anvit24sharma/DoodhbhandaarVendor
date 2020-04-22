@@ -69,7 +69,7 @@ class OrderDetailsActivity : AppCompatActivity() {
         tv_productStatus.text = orderPlaceModel.status
         tv_address_name.text=orderPlaceModel.address
         tv_payment.text=orderPlaceModel.paymentMode
-
+        tvSplIns.text = orderPlaceModel.specialInstruction
 
     }
 

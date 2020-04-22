@@ -1,5 +1,6 @@
 package com.doodhbhandaarvendor.ui
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -42,12 +43,31 @@ class  OrderPlacedActivity : AppCompatActivity() ,
     var month  =-1
     var year  =0
     var selectedColumn = 0
+    var repeatOrderModel : OrderPlaceModel = OrderPlaceModel()
+    var from =""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_place_order)
 
         supportActionBar?.hide()
+
+        repeatOrderModel = intent.getParcelableExtra("order")?:repeatOrderModel
+        from = intent.getStringExtra("from")?:""
+
+
+        if(from == "History") {
+            cartProductList.clear()
+            var totalCost =0.0
+            repeatOrderModel.products.forEach {
+                cartProductList.add(ProductModel(it.productName,it.productCost,"","",it.variants,it.subscriptionPlan,it.paymentCollectionDay,it.coupon))
+                 it.variants.forEach { variant->
+                    totalCost +=  it.productCost.split("/")[0].toDouble() * (variant.variantName.toDouble().times(variant.qty))
+                 }
+
+            }
+            CartActivity.totalOrderCost.value = totalCost
+        }
 
         paymentCollection = PaymentCollectionBottomSheet()
         addAddress = EditAddressBottomSheet()
@@ -61,21 +81,23 @@ class  OrderPlacedActivity : AppCompatActivity() ,
 
         tvAddress.text = prefs.getString(ADDRESS,"")?:""
 
-        btn_place_order.setOnClickListener {
+        plc_order.setOnClickListener {
             placeOrder()
         }
 
         tvChange.setOnClickListener {
             addAddress.show(supportFragmentManager, "Example")
         }
-        plc_order.setOnClickListener {
-            startActivity((Intent(this,OrderSuccessFulActivity::class.java)))
-
-        }
 
     }
 
     private fun placeOrder() {
+
+        val progressDialog :ProgressDialog  = ProgressDialog(this)
+        progressDialog.setTitle("Sending order Request...")
+        progressDialog.setCanceledOnTouchOutside(false)
+        progressDialog.show()
+
         var selectedMode =  ""
         var lastScheduleDate = scheduleDate
         orderPlaceProductModel.clear()
@@ -96,7 +118,6 @@ class  OrderPlacedActivity : AppCompatActivity() ,
                 cal.add(Calendar.DAY_OF_YEAR,29+selectedColumn)
                 lastScheduleDate =""+ cal.get(Calendar.DAY_OF_MONTH)+"/"+(cal.get(Calendar.MONTH)+1)+"/"+cal.get(Calendar.YEAR)
             }
-
         }
 
         selectedMode = if(rg_payment.checkedRadioButtonId != -1)
@@ -105,53 +126,51 @@ class  OrderPlacedActivity : AppCompatActivity() ,
             ""
         if(!paymentCollectDay) {
             Toast.makeText(this, "Choose Payment Collection Date",Toast.LENGTH_SHORT).show()
+            progressDialog.dismiss()
             return
         }
         if(scheduleDate!="" &&  selectedMode!="" ) {
             val orderId = orderDR.push().key.toString()
-            val orderPlaceModel = OrderPlaceModel(
-                orderPlaceProductModel,
-                prefs.getString(USER_ID, "") ?: "",
-                tvAddress.text.toString(),
-                scheduleDate,
-                lastScheduleDate,
-                selectedMode,
-                Date().toString(),
-                "order_pending",
-                "0.0",
-                orderId)
+
+            val orderPlaceModel = OrderPlaceModel(orderPlaceProductModel, prefs.getString(USER_ID, "") ?: "", tvAddress.text.toString(),
+                    scheduleDate, lastScheduleDate, selectedMode, Date().toString(), "order_pending", "0.0", orderId, et_specialInstructions.text.toString())
 
             orderDR.child(orderId).setValue(orderPlaceModel)
 
             userOrdersDR.child(prefs.getString(USER_ID, "") ?: "")
                 .child(orderId).setValue(orderId).addOnCompleteListener{
                     cartProductList.clear()
-                    val intent = Intent(this@OrderPlacedActivity, MainActivity::class.java)
+                    val intent = Intent(this@OrderPlacedActivity, OrderSuccessFulActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(intent)
+                    progressDialog.dismiss()
                     finish()
                 }
 
         }else{
+            progressDialog.dismiss()
             Toast.makeText(this,"Select payment mode",Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun initRecyclerView() {
-           orderPlaceAdapter= cartProductList.let { OrderPlaceAdapter(this, it, object : OrderPlaceAdapter.OnItemClickListener {
-                override fun OnChooseClick(position: Int, view: View, tvPaymentDate: TextView) {
-                    val args = Bundle()
-                    args.putParcelable("productModel",it[position])
-                    paymentCollection.arguments=args
-                    paymentCollection.show(supportFragmentManager,"ex")
-                    tvPaymentCollection = tvPaymentDate
-                }
-                override fun onApplyCouponClick(position: Int, view: View) {
-                }
 
-            })
-        }
+            orderPlaceAdapter = cartProductList.let {
+                OrderPlaceAdapter(this, it, object : OrderPlaceAdapter.OnItemClickListener {
+                    override fun OnChooseClick(position: Int, view: View, tvPaymentDate: TextView) {
+                        val args = Bundle()
+                        args.putParcelable("productModel", it[position])
+                        paymentCollection.arguments = args
+                        paymentCollection.show(supportFragmentManager, "ex")
+                        tvPaymentCollection = tvPaymentDate
+                    }
+
+                    override fun onApplyCouponClick(position: Int, view: View) {
+                    }
+
+                })
+            }
         rv_placed_orders.apply {
             adapter = orderPlaceAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)

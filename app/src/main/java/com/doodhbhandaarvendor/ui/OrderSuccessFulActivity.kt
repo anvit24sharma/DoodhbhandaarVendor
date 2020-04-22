@@ -15,8 +15,8 @@ class OrderSuccessFulActivity : AppCompatActivity() {
         setContentView(R.layout.activity_order_success_ful)
         supportActionBar?.hide()
         btn_ok.setOnClickListener {
-            startActivity((Intent(this,HomeFragment::class.java)))
-
+            startActivity((Intent(this,MainActivity::class.java)))
+            finish()
         }
     }
 }

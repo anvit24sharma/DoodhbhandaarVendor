@@ -14,6 +14,7 @@ import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.auth.LoginActivity.Companion.prefs
 import com.doodhbhandaarvendor.model.OrderPlaceModel
 import com.doodhbhandaarvendor.ui.OrderDetailsActivity
+import com.doodhbhandaarvendor.ui.OrderPlacedActivity
 import com.doodhbhandaarvendor.utils.Constants.Companion.USER_ID
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -56,6 +57,13 @@ class HistoryFragment : Fragment() {
             override fun onOrderDetailsClick(position: Int, view: View?) {
                 val intent = Intent(context,OrderDetailsActivity::class.java)
                 intent.putExtra("orderId",pastOrderList[position].orderId)
+                startActivity(intent)
+            }
+
+            override fun onRepeatOrderClick(position: Int, view: View?) {
+                val intent = Intent(context,OrderPlacedActivity::class.java)
+                intent.putExtra("order",pastOrderList[position])
+                intent.putExtra("from","History")
                 startActivity(intent)
             }
         })
