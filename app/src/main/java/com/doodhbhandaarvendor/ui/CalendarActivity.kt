@@ -27,12 +27,12 @@ class CalendarActivity : AppCompatActivity() {
     var lastOrderDate = ""
     var isDaily =false
     var isWeekly =false
-    var dates :ArrayList<CalendarDay> = ArrayList<CalendarDay>()
-    var weeklyDates :ArrayList<CalendarDay> = ArrayList<CalendarDay>()
+    var dates :ArrayList<CalendarDay> = ArrayList()
+    var weeklyDates :ArrayList<CalendarDay> = ArrayList()
     val units = ArrayList<String>()
-    var dueDates :ArrayList<CalendarDay> = ArrayList<CalendarDay>()
-    var deliveredDates :ArrayList<CalendarDay> = ArrayList<CalendarDay>()
-    var cancelledDates :ArrayList<CalendarDay> = ArrayList<CalendarDay>()
+    var dueDates :ArrayList<CalendarDay> = ArrayList()
+    var deliveredDates :ArrayList<CalendarDay> = ArrayList()
+    var cancelledDates :ArrayList<CalendarDay> = ArrayList()
     var  orderModel : OrderPlaceModel = OrderPlaceModel()
     lateinit var orderDetailAdapter : OrderDetailsAdapter
 
@@ -63,6 +63,7 @@ class CalendarActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 orderModel = snapshot.getValue(OrderPlaceModel::class.java)!!
                 lastOrderDate = orderModel.lastOrderDate.toString()
+
                 orderModel.products.forEach {
                     if (it.subscriptionPlan == "Daily") {
                         isDaily = true
@@ -70,49 +71,25 @@ class CalendarActivity : AppCompatActivity() {
                         isWeekly = true
                     }
                 }
-                var date = lastOrderDate.split("/")[0].toInt()
-                var month = lastOrderDate.split("/")[1].toInt()
-                var year = lastOrderDate.split("/")[2].toInt()
+
+                val formatter = SimpleDateFormat("dd/MM/yyyy")
+                val cal =Calendar.getInstance()
+                val lastOrderDate: Date = formatter.parse(orderModel.lastOrderDate)
+                cal.time = lastOrderDate
+
                 if (isDaily) {
                     for (i in 0..29) {
-                        dates.add(CalendarDay.from(year,month,date))
-                        date -=1
-                        if (date == 0 && (month == 2 || month == 4 || month == 6 || month == 8 || month == 9 || month == 11)) {
-                            date = 31
-                            month -= 1
-                        } else if (date == 0 && (month == 5 || month == 7 || month == 10 || month == 12)) {
-                            date = 30
-                            month -= 1
-                        } else if (date == 0 && (month == 3)) {
-                            date = 28
-                            month -= 1
-                        } else if (date == 0 && month == 1) {
-                            date = 31
-                            month = 12
-                            year -= 1
-                        }
+                        dates.add(CalendarDay.from(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH)+1,cal.get(Calendar.DAY_OF_MONTH)))
+                        cal.add(Calendar.DATE, -1)
                     }
                 }else if(!isDaily && isWeekly){
+                    cal.add(Calendar.DATE, -1)
                     for (i in 0..4) {
-                        dates.add(CalendarDay.from(year,month,date))
-                        date -=7
-                        if (date <= 0 && (month == 2 || month == 4 || month == 6 || month == 8 || month == 9 || month == 11)) {
-                            date += 31
-                            month -= 1
-                        } else if (date <= 0 && (month == 5 || month == 7 || month == 10 || month == 12)) {
-                            date += 30
-                            month -= 1
-                        } else if (date <= 0 && (month == 3)) {
-                            date += 28
-                            month -= 1
-                        } else if (date <= 0 && month == 1) {
-                            date += 31
-                            month = 12
-                            year -= 1
-                        }
+                        dates.add(CalendarDay.from(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH)+1,cal.get(Calendar.DAY_OF_MONTH)))
+                        cal.add(Calendar.DATE, -7)
                     }
                 }else if(!isDaily && !isWeekly){
-                    dates.add(CalendarDay.from(year,month,date))
+                    dates.add(CalendarDay.from(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH)+1,cal.get(Calendar.DAY_OF_MONTH)))
                 }
 
                 calendarView.addDecorator(CircleDecorator(this@CalendarActivity, R.drawable.select_color_blue, dates))
@@ -167,11 +144,10 @@ class CalendarActivity : AppCompatActivity() {
                         products.add(it)
                 }
             }else if(it.subscriptionPlan == "Daily") {
-                val scheduleDate: Date = formatter.parse(orderModel.schedule)
-                val currentDate = formatter.parse(""+calendarDay.day+"/"+calendarDay.month+"/"+calendarDay.year)
-                if ((currentDate.compareTo(lastOrderDate) == -1  || currentDate.compareTo(lastOrderDate) == 0) && (scheduleDate.compareTo(currentDate)== -1 || scheduleDate.compareTo(currentDate)== -1)) {
+//                val scheduleDate: Date = formatter.parse(orderModel.schedule)
+//                val currentDate = formatter.parse(""+calendarDay.day+"/"+calendarDay.month+"/"+calendarDay.year)
+//                if ((currentDate.compareTo(lastOrderDate) == -1  || currentDate.compareTo(lastOrderDate) == 0) && (scheduleDate.compareTo(currentDate)== -1 || scheduleDate.compareTo(currentDate)== -1)) {
                     products.add(it)
-                }
             }else{
                 val date = it.subscriptionPlan.split("/")[0].toInt()
                 val month = it.subscriptionPlan.split("/")[1].toInt()
