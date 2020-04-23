@@ -1,11 +1,16 @@
 package com.doodhbhandaarvendor.auth
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
+import android.util.Patterns.*
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.ui.MainActivity
@@ -62,7 +67,18 @@ class LoginActivity : AppCompatActivity() {
             validate()
         }
         txt_forgot_password.setOnClickListener {
-            forgotPassword()
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Forgot Password")
+            val view = layoutInflater.inflate(R.layout.dialog_forgot_password, null)
+            val useremail = view.findViewById<EditText>(R.id.et_userEmail)
+            builder.setView(view)
+            builder.setPositiveButton("Reset", DialogInterface.OnClickListener { _, _ ->
+                forgotPassword(useremail)
+            })
+            builder.setNegativeButton("Close", DialogInterface.OnClickListener { _, _ ->
+                builder.show()
+            })
+
         }
 
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -79,10 +95,20 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun forgotPassword() {
-        startActivity(Intent(this, ForgotPasswordActivity::class.java))
-        finish()
+    private fun forgotPassword(useremail: EditText) {
+        if (useremail.text.toString().isEmpty()) {
+            return
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(useremail.text.toString()).matches()) {
+            return
+        }
+        auth.sendPasswordResetEmail(useremail.text.toString()).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Toast.makeText(this, "Email sent", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
+
 
     //Google signin.
     private fun signInGoogle() {
@@ -99,13 +125,13 @@ class LoginActivity : AppCompatActivity() {
             return
         }
         //enteremail is not valid
-        if (!Patterns.EMAIL_ADDRESS.matcher(et_email.text.toString()).matches()) {
+        if (!EMAIL_ADDRESS.matcher(et_email.text.toString()).matches()) {
             et_email.error = "Please enter valid email"
             et_email.requestFocus()
             return
         }
         //if password is empty
-        if (et_password.text.toString().isEmpty() ) {
+        if (et_password.text.toString().isEmpty()) {
             et_password.error = "Please enter password"
             et_password.requestFocus()
             return
@@ -133,24 +159,42 @@ class LoginActivity : AppCompatActivity() {
         //if current user is not null than login successfully
         if (currentUser != null) {
             //if email is verified
-            if (prefs.getString(NAME,"") =="") {
+            if (prefs.getString(NAME, "") == "") {
                 usersDR.addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
 
                     }
+
                     override fun onDataChange(datasnapShot: DataSnapshot) {
                         if (datasnapShot.child(currentUser.uid).exists()) {
                             val editor = prefs.edit()
-                            editor.putString(NAME, datasnapShot.child(currentUser.uid).child("name").getValue().toString())
-                            editor.putString(Constants.PHONE_NUMBER, datasnapShot.child(currentUser.uid).child("phone_number").getValue().toString())
-                            editor.putString(Constants.EMAIL, datasnapShot.child(currentUser.uid).child("email").getValue().toString())
-                            editor.putString(Constants.ADDRESS, datasnapShot.child(currentUser.uid).child("address").getValue().toString())
+                            editor.putString(
+                                NAME,
+                                datasnapShot.child(currentUser.uid).child("name").getValue().toString()
+                            )
+                            editor.putString(
+                                Constants.PHONE_NUMBER,
+                                datasnapShot.child(currentUser.uid).child("phone_number").getValue().toString()
+                            )
+                            editor.putString(
+                                Constants.EMAIL,
+                                datasnapShot.child(currentUser.uid).child("email").getValue().toString()
+                            )
+                            editor.putString(
+                                Constants.ADDRESS,
+                                datasnapShot.child(currentUser.uid).child("address").getValue().toString()
+                            )
                             editor.putString(Constants.USER_ID, currentUser.uid)
                             editor.apply()
                             startActivity(Intent(applicationContext, MainActivity::class.java))
                             finish()
                         } else {
-                            startActivity(Intent(applicationContext, UserDetailActivity::class.java))
+                            startActivity(
+                                Intent(
+                                    applicationContext,
+                                    UserDetailActivity::class.java
+                                )
+                            )
                             finish()
                         }
                     }
@@ -162,7 +206,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
 
 
     //the selected google account is retrieved and sen to firebase for authentication
@@ -197,17 +240,34 @@ class LoginActivity : AppCompatActivity() {
                     override fun onDataChange(datasnapShot: DataSnapshot) {
                         if (datasnapShot.child(user?.uid!!).exists()) {
                             val editor = prefs.edit()
-                            editor.putString(NAME, datasnapShot.child(user.uid).child("name").getValue().toString())
-                            editor.putString(Constants.PHONE_NUMBER, datasnapShot.child(user.uid).child("phone_number").getValue().toString())
-                            editor.putString(Constants.EMAIL, datasnapShot.child(user.uid).child("email").getValue().toString())
-                            editor.putString(Constants.ADDRESS, datasnapShot.child(user.uid).child("address").getValue().toString())
+                            editor.putString(
+                                NAME,
+                                datasnapShot.child(user.uid).child("name").getValue().toString()
+                            )
+                            editor.putString(
+                                Constants.PHONE_NUMBER,
+                                datasnapShot.child(user.uid).child("phone_number").getValue().toString()
+                            )
+                            editor.putString(
+                                Constants.EMAIL,
+                                datasnapShot.child(user.uid).child("email").getValue().toString()
+                            )
+                            editor.putString(
+                                Constants.ADDRESS,
+                                datasnapShot.child(user.uid).child("address").getValue().toString()
+                            )
                             editor.putString(Constants.USER_ID, user.uid)
                             editor.apply()
                             startActivity(Intent(applicationContext, MainActivity::class.java))
                             finish()
                         } else {
                             //start user Details Activity
-                            startActivity(Intent(applicationContext, UserDetailActivity::class.java))
+                            startActivity(
+                                Intent(
+                                    applicationContext,
+                                    UserDetailActivity::class.java
+                                )
+                            )
                             finish()
                         }
                     }
@@ -215,7 +275,11 @@ class LoginActivity : AppCompatActivity() {
                 })
 
             } else {
-                Toast.makeText(this, "Google sign in failed" + it.exception.toString(), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this,
+                    "Google sign in failed" + it.exception.toString(),
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
 
