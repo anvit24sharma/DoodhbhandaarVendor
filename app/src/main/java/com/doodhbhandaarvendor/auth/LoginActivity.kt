@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
         btn_login.setOnClickListener {
             validate()
         }
-        txt_forgot_password.setOnClickListener {
+        text_forgot_password.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Forgot Password")
             val view = layoutInflater.inflate(R.layout.dialog_forgot_password, null)
@@ -97,9 +97,13 @@ class LoginActivity : AppCompatActivity() {
 
     private fun forgotPassword(useremail: EditText) {
         if (useremail.text.toString().isEmpty()) {
+            useremail.error = "Please enter email"
+            useremail.requestFocus()
             return
         }
-        if (!Patterns.EMAIL_ADDRESS.matcher(useremail.text.toString()).matches()) {
+        if (!EMAIL_ADDRESS.matcher(useremail.text.toString()).matches()) {
+            useremail.error = "Please enter valid email"
+            useremail.requestFocus()
             return
         }
         auth.sendPasswordResetEmail(useremail.text.toString()).addOnCompleteListener { task ->

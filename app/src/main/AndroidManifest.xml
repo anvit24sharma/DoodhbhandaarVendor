@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.OrderSuccessFulActivity"/>
+        <activity android:name=".ui.OrderSuccessFulActivity" />
         <activity android:name=".ui.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,11 +28,8 @@
         <activity android:name=".auth.UserDetailActivity" />
         <activity android:name=".ui.OrderPlacedActivity" />
         <activity android:name=".ui.CartActivity" />
-        <activity android:name=".auth.ResetPasswordActivity" />
-        <activity android:name=".auth.ForgotPasswordActivity" />
         <activity android:name=".auth.SignUpActivity" />
-        <activity android:name=".auth.LoginActivity"/>
-
+        <activity android:name=".auth.LoginActivity" />
 
 
         <activity android:name=".ui.MainActivity" />
