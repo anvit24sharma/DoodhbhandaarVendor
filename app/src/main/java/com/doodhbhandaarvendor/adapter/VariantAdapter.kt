@@ -45,6 +45,9 @@ class VariantAdapter(
         @SuppressLint("SetTextI18n")
         fun setData(variant: VariantModel, position: Int) {
 
+            if(!variant.available){
+                itemView.alpha = 0.5f
+            }
             if(unit[position] == "Kg" && variant.variantName.toDouble() <1.0) {
                 tvVariantName.text = (variant.variantName.toDouble()*1000).toString() +" gm"
             }else if(unit[position] == "Kg" && variant.variantName.toDouble() >=1.0){

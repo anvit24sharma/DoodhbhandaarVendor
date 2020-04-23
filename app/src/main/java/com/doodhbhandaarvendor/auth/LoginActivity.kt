@@ -81,7 +81,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun forgotPassword() {
         startActivity(Intent(this, ForgotPasswordActivity::class.java))
-        finish()
     }
 
     //Google signin.

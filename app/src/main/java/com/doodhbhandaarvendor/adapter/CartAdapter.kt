@@ -120,25 +120,29 @@ class CartAdapter(
             totalOrderCost.value = totalOrderCost.value?.plus(totalCost)
 
 
-            val availableVariants = ArrayList<VariantModel>()
-            productModel.variants.forEach {
-                if(it.available)
-                    availableVariants.add(it)
-            }
-            variantAdapter = VariantAdapter(mContext, unit, availableVariants,
+
+            variantAdapter = VariantAdapter(mContext, unit, productModel.variants,
                     object : VariantAdapter.OnItemClickListener {
                         override fun onAddClick(position: Int, view: View) {
+
                             if(from == "orderDetails" && productModel.subscriptionPlan !="Daily" && productModel.subscriptionPlan != "Weekly") {
                                 Toast.makeText(mContext,"Cannot Edit this product", Toast.LENGTH_SHORT).show()
                             }else {
-                                totalCost += productModel.product_cost.split("/")[0].toInt() * productModel.variants[position].variantName.toDouble()
-                                tvProductCost.text = "Amount: ₹$totalCost"
-                                tvProductsQty.text =
-                                    (totalCost / productModel.product_cost.split("/")[0].toDouble()).toString() + " " + productModel.product_cost.split("/")[1]
-                                totalOrderCost.value =
-                                    totalOrderCost.value?.plus(productModel.product_cost.split("/")[0].toInt() * productModel.variants[position].variantName.toDouble())
-                                productModel.variants[position].qty += 1
-                                variantAdapter.notifyDataSetChanged()
+
+                                if (productModel.variants[position].available) {
+                                    totalCost += productModel.product_cost.split("/")[0].toInt() * productModel.variants[position].variantName.toDouble()
+                                    tvProductCost.text = "Amount: ₹$totalCost"
+                                    tvProductsQty.text =
+                                        (totalCost / productModel.product_cost.split("/")[0].toDouble()).toString() + " " + productModel.product_cost.split(
+                                            "/"
+                                        )[1]
+                                    totalOrderCost.value =
+                                        totalOrderCost.value?.plus(productModel.product_cost.split("/")[0].toInt() * productModel.variants[position].variantName.toDouble())
+                                    productModel.variants[position].qty += 1
+                                    variantAdapter.notifyDataSetChanged()
+                                }else{
+                                    Toast.makeText(mContext,"This variant is unavailable",Toast.LENGTH_SHORT).show()
+                                }
                             }
                         }
 
@@ -147,17 +151,26 @@ class CartAdapter(
                                 Toast.makeText(mContext,"Cannot Edit this product", Toast.LENGTH_SHORT).show()
 
                             }else {
-                                if (productModel.variants[position].qty != 0) {
-                                    productModel.variants[position].qty -= 1
-                                    variantAdapter.notifyDataSetChanged()
-                                    totalCost -= productModel.product_cost.split("/")[0].toInt() * productModel.variants[position].variantName.toDouble()
-                                    tvProductCost.text = "Amount: ₹$totalCost"
-                                    tvProductsQty.text =
-                                        (totalCost / productModel.product_cost.split("/")[0].toDouble()).toString() + " " + productModel.product_cost.split(
-                                            "/"
-                                        )[1]
-                                    totalOrderCost.value =
-                                        totalOrderCost.value?.minus(productModel.product_cost.split("/")[0].toInt() * productModel.variants[position].variantName.toDouble())
+                                if (productModel.variants[position].available) {
+
+                                    if (productModel.variants[position].qty != 0) {
+                                        productModel.variants[position].qty -= 1
+                                        variantAdapter.notifyDataSetChanged()
+                                        totalCost -= productModel.product_cost.split("/")[0].toInt() * productModel.variants[position].variantName.toDouble()
+                                        tvProductCost.text = "Amount: ₹$totalCost"
+                                        tvProductsQty.text =
+                                            (totalCost / productModel.product_cost.split("/")[0].toDouble()).toString() + " " + productModel.product_cost.split(
+                                                "/"
+                                            )[1]
+                                        totalOrderCost.value =
+                                            totalOrderCost.value?.minus(
+                                                productModel.product_cost.split(
+                                                    "/"
+                                                )[0].toInt() * productModel.variants[position].variantName.toDouble()
+                                            )
+                                    }else{
+                                        Toast.makeText(mContext,"This variant is unavailable",Toast.LENGTH_SHORT).show()
+                                    }
                                 }
                             }
                         }
