@@ -3,6 +3,7 @@ package com.doodhbhandaarvendor.ui
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.RadioButton
 import android.widget.TextView
@@ -13,10 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.adapter.OrderPlaceAdapter
 import com.doodhbhandaarvendor.auth.LoginActivity.Companion.prefs
-import com.doodhbhandaarvendor.model.OrderPlaceModel
-import com.doodhbhandaarvendor.model.OrderPlaceProductModel
-import com.doodhbhandaarvendor.model.ProductModel
-import com.doodhbhandaarvendor.model.VariantModel
+import com.doodhbhandaarvendor.model.*
+import com.doodhbhandaarvendor.notification.SendNotification.Companion.sendNotification
+import com.doodhbhandaarvendor.remote.ApiCallInterface
+import com.doodhbhandaarvendor.ui.MainActivity.Companion.BASE_URL
+import com.doodhbhandaarvendor.ui.MainActivity.Companion.tokenList
 import com.doodhbhandaarvendor.ui.fragments.EditAddressBottomSheet
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.cartProductList
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment.Companion.orderDR
@@ -25,6 +27,12 @@ import com.doodhbhandaarvendor.ui.fragments.PaymentCollectionBottomSheet
 import com.doodhbhandaarvendor.utils.Constants.Companion.ADDRESS
 import com.doodhbhandaarvendor.utils.Constants.Companion.USER_ID
 import kotlinx.android.synthetic.main.activity_confirm_place_order.*
+import okhttp3.OkHttpClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -146,6 +154,8 @@ class  OrderPlacedActivity : AppCompatActivity() ,
                     startActivity(intent)
                     progressDialog.dismiss()
                     finish()
+                    sendNotification("New Order Placed")
+
                 }
 
         }else{
@@ -153,6 +163,9 @@ class  OrderPlacedActivity : AppCompatActivity() ,
             Toast.makeText(this,"Select payment mode",Toast.LENGTH_SHORT).show()
         }
     }
+
+
+
 
     private fun initRecyclerView() {
 

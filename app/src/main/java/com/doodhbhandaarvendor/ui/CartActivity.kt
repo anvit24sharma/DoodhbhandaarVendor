@@ -2,6 +2,7 @@ package com.doodhbhandaarvendor.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -14,12 +15,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.adapter.CartAdapter
-import com.doodhbhandaarvendor.model.OrderPlaceModel
-import com.doodhbhandaarvendor.model.OrderPlaceProductModel
-import com.doodhbhandaarvendor.model.ProductModel
+import com.doodhbhandaarvendor.auth.LoginActivity.Companion.prefs
+import com.doodhbhandaarvendor.model.*
+import com.doodhbhandaarvendor.notification.SendNotification.Companion.sendNotification
+import com.doodhbhandaarvendor.remote.ApiCallInterface
+import com.doodhbhandaarvendor.ui.OrderDetailsActivity.Companion.orderPlaceModel
 import com.doodhbhandaarvendor.ui.fragments.HistoryFragment.Companion.ordersDR
 import com.doodhbhandaarvendor.ui.fragments.HomeFragment
+import com.doodhbhandaarvendor.utils.Constants.Companion.NAME
 import kotlinx.android.synthetic.main.activity_cart.*
+import okhttp3.OkHttpClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.collections.ArrayList
 
 class CartActivity : AppCompatActivity() {
@@ -73,13 +83,48 @@ class CartActivity : AppCompatActivity() {
         }
     }
 
+
     private fun updateOrder() {
 
         var c=0
-        productModelList.forEach {
-            ordersDR.child(orderModel.orderId).child("products").child(c.toString()).child("variants").setValue(it.variants)
+        val moreThanOneVariants = ArrayList<VariantModel>()
+        var allItemSelected =true
+
+
+        for (productModel in productModelList) {
+            var itemSelected = false
+
+            productModel.variants.forEach {
+                if(it.qty >0){
+                    itemSelected =true
+                }
+            }
+            if(!itemSelected) {
+                allItemSelected = false
+                break
+            }
+        }
+
+        if(!allItemSelected){
+            Toast.makeText(this,"Select Quantity for each Product",Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        productModelList.forEach{ product->
+            orderPlaceModel.products[c].variants.clear()
+            moreThanOneVariants.clear()
+            product.variants.forEach{ variant->
+                if(variant.qty>0){
+                    moreThanOneVariants.add(variant)
+                }
+            }
+            orderPlaceModel.products[c].variants.addAll(moreThanOneVariants)
+            ordersDR.child(orderModel.orderId).child("products").child(c.toString()).child("variants").setValue(moreThanOneVariants)
             c++
         }
+        Toast.makeText(this,"Order Updated",Toast.LENGTH_SHORT).show()
+        sendNotification("Order Updated by "+prefs.getString(NAME,""))
+        finish()
 
     }
 

@@ -6,6 +6,7 @@ import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,11 +14,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.doodhbhandaarvendor.R
 import com.doodhbhandaarvendor.adapter.OrderDetailsAdapter
+import com.doodhbhandaarvendor.auth.LoginActivity
+import com.doodhbhandaarvendor.model.NotificationData
+import com.doodhbhandaarvendor.model.NotificationModel
+import com.doodhbhandaarvendor.model.NotificationResponse
 import com.doodhbhandaarvendor.model.OrderPlaceModel
+import com.doodhbhandaarvendor.notification.SendNotification.Companion.sendNotification
+import com.doodhbhandaarvendor.remote.ApiCallInterface
 import com.doodhbhandaarvendor.ui.fragments.HistoryFragment.Companion.ordersDR
 import com.doodhbhandaarvendor.ui.fragments.HistoryFragment.Companion.pastOrderList
 import com.doodhbhandaarvendor.ui.fragments.HistoryFragment.Companion.userOrdersDR
+import com.doodhbhandaarvendor.utils.Constants
 import kotlinx.android.synthetic.main.activity_order_details.*
+import okhttp3.OkHttpClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -25,7 +39,9 @@ import kotlin.collections.ArrayList
 
 class OrderDetailsActivity : AppCompatActivity() {
     var orderId = ""
-    var orderPlaceModel : OrderPlaceModel = OrderPlaceModel()
+    companion object {
+        var orderPlaceModel: OrderPlaceModel = OrderPlaceModel()
+    }
     lateinit var orderDetailAdapter : OrderDetailsAdapter
     var totalBillDue = 0.0
 
@@ -35,18 +51,21 @@ class OrderDetailsActivity : AppCompatActivity() {
         supportActionBar?.title = "Order Summary"
 
         orderId = intent.getStringExtra("orderId")?:""
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            pastOrderList.forEach {
-                if(orderId == it.orderId)
+        pastOrderList.forEach {
+            if(orderId == it.orderId)
                     orderPlaceModel = it
-            }
         }
+
         initView()
         initClicks()
         initRecyclerView()
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        orderDetailAdapter.notifyDataSetChanged()
+    }
     @SuppressLint("SimpleDateFormat")
     private fun initView() {
 
@@ -97,6 +116,8 @@ class OrderDetailsActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+
+
     private fun cancelOrder() {
         val cal =Calendar.getInstance()
         val datePickerDialog : DatePickerDialog
@@ -125,6 +146,8 @@ class OrderDetailsActivity : AppCompatActivity() {
                 }
                 userOrdersDR.child(orderPlaceModel.userId).child(orderId).child("""${cal.get(Calendar.DAY_OF_MONTH)}-${cal.get(Calendar.MONTH)+1}-${cal.get(Calendar.YEAR)}""").setValue("user_canceled")
                 ordersDR.child(orderId).child("schedule").setValue("""${dayOfMonth+1}/${month + 1}/$year""")
+
+                sendNotification("Order Canceled for some days by " + LoginActivity.prefs.getString(Constants.NAME,""))
 
             }
         }, mY, mM, mD)
