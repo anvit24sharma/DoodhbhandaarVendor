@@ -43,7 +43,6 @@ class  OrderPlacedActivity : AppCompatActivity() ,
     lateinit var paymentCollection: PaymentCollectionBottomSheet
     var orderPlaceProductModel :ArrayList<OrderPlaceProductModel> = ArrayList()
     var scheduleDate :String =""
-    var paymentCollectDay = true
     var tvPaymentCollection: TextView? = null
     var orderPlaceAdapter : OrderPlaceAdapter? = null
     var currentDate : Date =Date()
@@ -100,7 +99,7 @@ class  OrderPlacedActivity : AppCompatActivity() ,
     }
 
     private fun placeOrder() {
-
+        var paymentCollectDay = true
         val progressDialog :ProgressDialog  = ProgressDialog(this)
         progressDialog.setTitle("Sending order Request...")
         progressDialog.setCanceledOnTouchOutside(false)
